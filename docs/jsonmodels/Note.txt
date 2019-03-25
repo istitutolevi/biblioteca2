@@ -1,0 +1,5 @@
+I modelli per inserimento e modifica sono uguali.
+Cambia solo che nella modifica l' ID devi passarmelo.
+
+Per la cancellazzione, bisogna lavorare tramite ID
+
