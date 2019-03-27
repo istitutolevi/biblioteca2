@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>BiblioLevi ricerca libri</title>
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="..\css\reset-style.css">
+    <link rel="stylesheet" href="..\css\common.css">
+    <script src="../js/jquery.js"></script>
+    <script src="../js/autoComplete.js"></script>
+  </head>
+
+  <body>
+    <a href="../../../../../../../xampp/htdocs/BiblioLevi/search.html"><i style="color: #0894A1; border: 3px solid #0894A1; border-radius: 50%" class="backbutton fas fa-long-arrow-alt-left"></i></a>
+    <div class="wrapper" style="border: 2px solid #0894A1;  box-shadow: 5px 5px 10px 0px #055B63;">
+      <p class="inputdesc" style="color: #0894A1">Id</p><input type="text" class="input" name="Id"><br>
+      <p class="inputdesc" style="color: #0894A1">ISBN</p><input type="text" class="input" name="ISBN"><br>
+      <p class="inputdesc" style="color: #0894A1">Codice</p><input type="text" class="input" name="Codice"><br>
+      <p class="inputdesc" style="color: #0894A1">Titolo</p><input type="text" class="input" name="Titolo"><br>
+      <p class="inputdesc" style="color: #0894A1">Autore</p><input type="text" class="input" id="iAutore" name="Autore" list="Autore"><datalist id="Autore"></datalist><br>
+      <p class="inputdesc" style="color: #0894A1">Genere</p><input type="text" class="input" id="iGenere" name="Genere" list="Genere"><datalist id="Genere"></datalist><br>
+      <p class="inputdesc" style="color: #0894A1">Anno Pubblicazione</p><input type="text" class="input" name="AnnoPubblicazione"><br>
+      <p class="inputdesc" style="color: #0894A1">Casa Editrice</p><input type="text" class="input" id="iCasaEditrice" name="IdCasaEditrice" list="CasaEditrice"><datalist id="CasaEditrice"></datalist><br>
+      <p class="inputdesc" style="color: #0894A1">Scaffale</p><input type="text" class="input" name="CollocazioneScaffale"><br>
+      <p class="inputdesc" style="color: #0894A1">Armadio</p><input type="text" class="input" name="CollocazioneArmadio"><br>
+      <button style="border: 2px solid #0894A1; color: #0894A1" class="submitsearch" type="submit" name="librisubmit">Ricerca</button>
+    </div>
+  </body>
+
+</html>
