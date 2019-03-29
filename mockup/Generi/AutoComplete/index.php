@@ -1,14 +1,14 @@
 [
   {
-    "Value": "1",
-    "Text": "Fantasy"
+    "value": "1",
+    "text": "Fantasy"
   },
   {
-    "Value": "2",
-    "Text": "Romanzo"
+    "value": "2",
+    "text": "Romanzo"
   },
   {
-    "Value": "3",
-    "Text": "Biografia"
+    "value": "3",
+    "text": "Biografia"
   }
 ]

@@ -1,14 +1,14 @@
 [
   {
-    "Value": "1",
-    "Text": "Mondadori"
+    "value": "1",
+    "text": "Mondadori"
   },
   {
-    "Value": "2",
-    "Text": "Zanichelli"
+    "value": "2",
+    "text": "Zanichelli"
   },
   {
-    "Value": "3",
-    "Text": "Disney"
+    "value": "3",
+    "text": "Disney"
   }
 ]

@@ -1,14 +1,14 @@
 [
   {
-    "Value": "1",
-    "Text": "Giovanni Verga"
+    "value": "1",
+    "text": "Giovanni Verga"
   },
   {
-    "Value": "2",
-    "Text": "Alessandro Manzoni"
+    "talue": "2",
+    "text": "Alessandro Manzoni"
   },
   {
-    "Value": "3",
-    "Text": "Italo Svevo"
+    "value": "3",
+    "text": "Italo Svevo"
   }
 ]
