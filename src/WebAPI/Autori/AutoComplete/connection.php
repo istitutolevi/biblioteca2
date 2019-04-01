@@ -25,5 +25,5 @@ catch(PDOException $e)
     die();
 }
 
-$conn->close();
+
 ?>

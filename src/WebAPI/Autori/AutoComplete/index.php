@@ -15,13 +15,17 @@
 */
 <?php
 
-include'Common/connection.php';
-$part= $_GET["text"];
+include 'connection.php';
+$partName= "manz";
 
-$query= "SELECT autori.Id, autori.Nome, autori.Cognome FROM autori WHERE";
 
-$stmt = $db->prepare($query);
-$stmt->execute();
-$element = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $query = "SELECT Id, Nome, Cognome FROM Autori WHERE Cognome + ' ' + Nome LIKE :part LIMIT 50";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':part', $partName, PDO::PARAM_STR);
+    $stmt->execute();
+    $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 ?>
