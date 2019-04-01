@@ -4,7 +4,7 @@
     "text": "Giovanni Verga"
   },
   {
-    "talue": "2",
+    "value": "2",
     "text": "Alessandro Manzoni"
   },
   {

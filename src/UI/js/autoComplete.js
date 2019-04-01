@@ -4,18 +4,27 @@ $(document).ready(
         $("#iAutore").keyup(
             function(){
                 var val = $("#iAutore").val();
-
-                if (val != "") {
                     $.ajax(
                         {
                             type:"GET",
-                            url:"../api/Autori/AutoComplete/?text=" + encodeURI(val),
+                            url:"../../../mockup/Autori/AutoComplete/?text=" + encodeURI(val),
                             dataType:"json",
                             success: function(data){
-                                $("#Autore").html("");
+                                var opzioni = new Array();
                                 for(var i in data){
-                                    $("#Autore").append("<option value=\""+ data[i].value +"\">"+ data[i].text +"</option>");
+                                    var opzione = {};
+                                    opzione.value = data[i].value;
+                                    opzione.label = data[i].text;
+                                    opzioni.push(opzione);
                                 }
+                                $('#iAutore').autocomplete({
+                                    source: opzioni,
+                                    select: function (event, ui) {
+                                        $("#iAutore").val(ui.item.value); // display the selected text
+                                        $("#iAutoreHidden").val(ui.item.label); // save selected id to hidden input
+                                    }
+                                });
+
                             },
                             error: function(jqXHR, textStatus, errorThrown){
                                 alert(jqXHR +" "+ textStatus +" "+ errorThrown);
@@ -23,70 +32,6 @@ $(document).ready(
                         }
 
                     );
-                }
-                else {
-                    $("#Autore").html("");
-                }
-
-            }
-        );
-
-        $("#iGenere").keyup(
-            function(){
-                var val = $("#iGenere").val();
-
-                if (val != "") {
-                    $.ajax(
-                        {
-                            type:"GET",
-                            url:"../api/Generi/AutoComplete/?text=" + encodeURI(val),
-                            dataType:"json",
-                            success: function(data){
-                                $("#Genere").html("");
-                                for(var i in data){
-                                    $("#Genere").append("<option value=\""+ data[i].value +"\">"+ data[i].text +"</option>");
-                                }
-                            },
-                            error: function(jqXHR, textStatus, errorThrown){
-                                alert(jqXHR +" "+ textStatus +" "+ errorThrown);
-                            }
-                        }
-
-                    );
-                }
-                else {
-                    $("#Genere").html("");
-                }
-
-            }
-        );
-
-        $("#iCasaEditrice").keyup(
-            function(){
-                var val = $("#iCasaEditrice").val();
-
-                if (val != "") {
-                    $.ajax(
-                        {
-                            type:"GET",
-                            url:"../api/CaseEditrici/AutoComplete/?text=" + encodeURI(val),
-                            dataType:"json",
-                            success: function(data){
-                                $("#CasaEditrice").html("");
-                                for(var i in data){
-                                    $("#CasaEditrice").append("<option value=\""+ data[i].value +"\">"+ data[i].text +"</option>");
-                                }
-                            },
-                            error: function(jqXHR, textStatus, errorThrown){
-                                alert(jqXHR +" "+ textStatus +" "+ errorThrown);
-                            }
-                        }
-
-                    );
-                }
-                else {
-                    $("#CasaEditrice").html("");
-                }
 
             }
         );
