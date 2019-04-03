@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="..\css\common.css">
     <script src="../js/jquery.js"></script>
     <script src="../js/autoComplete.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
 
   <body>
@@ -19,12 +21,15 @@
       <p class="inputdesc" style="color: #0894A1">ISBN</p><input type="text" class="input" name="ISBN"><br>
       <p class="inputdesc" style="color: #0894A1">Codice</p><input type="text" class="input" name="Codice"><br>
       <p class="inputdesc" style="color: #0894A1">Titolo</p><input type="text" class="input" name="Titolo"><br>
-      <p class="inputdesc" style="color: #0894A1">Autore</p><input type="text" class="input" id="iAutore" name="Autore" list="Autore"><datalist id="Autore"></datalist><br>
-      <p class="inputdesc" style="color: #0894A1">Genere</p><input type="text" class="input" id="iGenere" name="Genere" list="Genere"><datalist id="Genere"></datalist><br>
+      <p class="inputdesc" style="color: #0894A1">Autore</p><input type="text" placeholder="Cognome Nome" class="input" id="iAutore" name="Autore"><br>
+      <p class="inputdesc" style="color: #0894A1">Genere</p><input type="text" class="input" id="iGenere" name="Genere"><br>
       <p class="inputdesc" style="color: #0894A1">Anno Pubblicazione</p><input type="text" class="input" name="AnnoPubblicazione"><br>
-      <p class="inputdesc" style="color: #0894A1">Casa Editrice</p><input type="text" class="input" id="iCasaEditrice" name="IdCasaEditrice" list="CasaEditrice"><datalist id="CasaEditrice"></datalist><br>
+      <p class="inputdesc" style="color: #0894A1">Casa Editrice</p><input type="text" class="input" id="iCasaEditrice" name="IdCasaEditrice"><br>
       <p class="inputdesc" style="color: #0894A1">Scaffale</p><input type="text" class="input" name="CollocazioneScaffale"><br>
       <p class="inputdesc" style="color: #0894A1">Armadio</p><input type="text" class="input" name="CollocazioneArmadio"><br>
+      <input type="text" style="show: hidden" id="IAutoreHidden">
+      <input type="text" style="show: hidden" id="IGenereHidden">
+      <input type="text" style="show: hidden" id="ICasaEditriceHidden">
       <button style="border: 2px solid #0894A1; color: #0894A1" class="submitsearch" type="submit" name="librisubmit">Ricerca</button>
     </div>
   </body>
