@@ -1,14 +1,10 @@
-[
-  {
-    "value": "1",
-    "text": "Giovanni Verga"
-  },
-  {
-    "value": "2",
-    "text": "Alessandro Manzoni"
-  },
-  {
-    "value": "3",
-    "text": "Italo Svevo"
-  }
-]
+[{"value":147,"text":"Nicky Begin"},
+{"value":456,"text":"Chuck Cline"},
+{"value":720,"text":"Aubrie Gilvear"},
+{"value":903,"text":"Jay Behrens"},
+{"value":720,"text":"Odo Dignall"},
+{"value":897,"text":"Jaquith Kellie"},
+{"value":966,"text":"Florinda Volks"},
+{"value":445,"text":"Lonny Attwool"},
+{"value":411,"text":"Holly Melvin"},
+{"value":675,"text":"Lyndell Lambarth"}]

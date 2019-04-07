@@ -1,14 +1,10 @@
-[
-  {
-    "value": "1",
-    "text": "Fantasy"
-  },
-  {
-    "value": "2",
-    "text": "Romanzo"
-  },
-  {
-    "value": "3",
-    "text": "Biografia"
-  }
-]
+[{"value":1,"text":"Didascalica"},
+{"value":2,"text":"storico"},
+{"value":3,"text":"urban fantasy"},
+{"value":4,"text":"Oratoria giudiziaria"},
+{"value":5,"text":"romanzo dell'orrore"},
+{"value":6,"text":"Treno"},
+{"value":7,"text":"Scolio"},
+{"value":8,"text":"romanzo d'appendice"},
+{"value":9,"text":"Divulgativa"},
+{"value":10,"text":"Romanzo"}]

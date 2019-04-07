@@ -16,6 +16,7 @@
 
   <body>
     <a href="search.html"><i style="color: #0894A1; border: 3px solid #0894A1; border-radius: 50%" class="backbutton fas fa-long-arrow-alt-left"></i></a>
+    <h2 style="color: #0894A1">BiblioLevi</h2><h3 style="color: #0894A1">Ricerca Libri</h3>
     <div class="wrapper" style="border: 2px solid #0894A1;  box-shadow: 5px 5px 10px 0px #055B63;">
       <p class="inputdesc" style="color: #0894A1">Id</p><input type="text" class="input" name="Id"><br>
       <p class="inputdesc" style="color: #0894A1">ISBN</p><input type="text" class="input" name="ISBN"><br>
@@ -23,14 +24,14 @@
       <p class="inputdesc" style="color: #0894A1">Titolo</p><input type="text" class="input" name="Titolo"><br>
       <p class="inputdesc" style="color: #0894A1">Autore</p><input type="text" placeholder="Cognome Nome" class="input" id="iAutore" name="Autore"><br>
       <p class="inputdesc" style="color: #0894A1">Genere</p><input type="text" class="input" id="iGenere" name="Genere"><br>
-      <p class="inputdesc" style="color: #0894A1">Anno Pubblicazione</p><input type="text" class="input" name="AnnoPubblicazione"><br>
+      <p class="inputdesc" style="color: #0894A1">Anno Pubblicazione da / a:</p><input type="date" class="input" name="AnnoPubblicazioneDa" style="width: 45%; float: left"><input type="date" class="input" name="AnnoPubblicazioneA" style="width: 45%; float: right"><br>
       <p class="inputdesc" style="color: #0894A1">Casa Editrice</p><input type="text" class="input" id="iCasaEditrice" name="IdCasaEditrice"><br>
       <p class="inputdesc" style="color: #0894A1">Scaffale</p><input type="text" class="input" name="CollocazioneScaffale"><br>
       <p class="inputdesc" style="color: #0894A1">Armadio</p><input type="text" class="input" name="CollocazioneArmadio"><br>
-      <input type="text" style="show: hidden" id="IAutoreHidden">
-      <input type="text" style="show: hidden" id="IGenereHidden">
-      <input type="text" style="show: hidden" id="ICasaEditriceHidden">
-      <button style="border: 2px solid #0894A1; color: #0894A1" class="submitsearch" type="submit" name="librisubmit">Ricerca</button>
+      <input type="text" style="display: none" id="iAutoreHidden">
+      <input type="text" style="display: none" id="iGenereHidden">
+      <input type="text" style="display: none" id="iCasaEditriceHidden">
+      <button id="librisubmit" style="border: 2px solid #0894A1; color: #0894A1" class="submitsearch" type="submit" name="librisubmit">Ricerca</button>
     </div>
   </body>
 
