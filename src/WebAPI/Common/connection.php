@@ -6,7 +6,6 @@
  * Time: 09:48
  */
 
-
 $servername = "localhost";
 $username = "root";
 $password = "";
