@@ -13,4 +13,4 @@ $jA= "{
     $decode = json_decode($jA);
 
     echo $decode->Autore->Nome;
-    //$autore = new autore();
+    //$casaEditrice = new casaEditrice();
