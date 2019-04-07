@@ -10,17 +10,18 @@
     <link rel="stylesheet" href="..\css\common.css">
     <script src="../js/jquery.js"></script>
     <script src="../js/autoComplete.js"></script>
+    <script src="../js/submit.js"></script>
   </head>
 
   <body>
     <a href="search.html"><i style="color: #47AB6C; border: 3px solid #47AB6C; border-radius: 50%" class="backbutton fas fa-long-arrow-alt-left"></i></a>
     <h2 style="color: #47AB6C">BiblioLevi</h2><h3 style="color: #47AB6C">Ricerca Autori</h3>
     <div class="wrapper" style="border: 2px solid #47AB6C;  box-shadow: 5px 5px 10px 0px #2E6E45;">
-      <p class="inputdesc" style="color: #47AB6C">Id</p><input type="text" class="input" name="Id"><br>
-      <p class="inputdesc" style="color: #47AB6C">Nome</p><input type="text" class="input" name="Nome"><br>
-      <p class="inputdesc" style="color: #47AB6C">Cognome</p><input type="text" class="input" name="Cognome"><br>
-      <p class="inputdesc" style="color: #47AB6C">Data nascita da / a:</p><input type="date" class="input" name="DataNascitaDa" style="width: 45%; float: left"><input type="date" class="input" name="DataNascitaA" style="width: 45%; float: right"><br>
-      <p class="inputdesc" style="color: #47AB6C">Data morte da / a:</p><input type="date" class="input" name="DataMorteDa" style="width: 45%; float: left"><input type="date" class="input" name="DataMorteA" style="width: 45%; float: right"><br>
+      <p class="inputdesc" style="color: #47AB6C">Id</p><input type="text" class="input" id="AutoreId"><br>
+      <p class="inputdesc" style="color: #47AB6C">Nome</p><input type="text" class="input" id="AutoreNome"><br>
+      <p class="inputdesc" style="color: #47AB6C">Cognome</p><input type="text" class="input" id="AutoreCognome"><br>
+      <p class="inputdesc" style="color: #47AB6C">Data nascita da / a:</p><input type="date" class="input" id="AutoreNascitaDa" style="width: 45%; float: left"><input type="date" class="input" id="AutoreNascitaA" style="width: 45%; float: right"><br>
+      <p class="inputdesc" style="color: #47AB6C">Data morte da / a:</p><input type="date" class="input" id="AutoreMorteDa" style="width: 45%; float: left"><input type="date" class="input" id="AutoreMorteA" style="width: 45%; float: right"><br>
       <button id="autorisubmit" style="border: 2px solid #47AB6C; color: #47AB6C" class="submitsearch" type="submit" name="autorisubmit">Ricerca</button>
     </div>
   </body>

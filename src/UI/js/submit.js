@@ -1,34 +1,55 @@
 $(document).ready(
   function(){
-    function post(path, params, method) {
-    method = method || "post"; // Set method to post by default if not specified.
 
-    // The rest of this code assumes you are not using a library.
-    // It can be made less wordy if you use one.
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", path);
+    $("#librisubmit").click(
+      function(){
+        var Libro = {};
+        Libro.Id = $("#LibroId").val();
+        Libro.Isbn = $("#LibroISBN").val();
+        Libro.Codice = $("#LibroCodice").val();
+        Libro.Titolo = $("#LibroTitolo").val();
+        Libro.Autore = $("#LibroAutoreHidden").val();
+        Libro.Genere = $("#LibroGenereHidden").val();
+        Libro.AnnoDa = $("#LibroAnnoDa").val();
+        Libro.AnnoA = $("#LibroAnnoA").val();
+        Libro.CasaEditrice = $("#LibroCasaEditriceHidden").val();
+        Libro.Scaffale = $("#LibroScaffale").val();
+        Libro.Armadio = $("#LibroArmadio").val();
+        console.log(Libro);
+      }
+    );
 
-    for(var key in params) {
-        if(params.hasOwnProperty(key)) {
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "hidden");
-            hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", params[key]);
+    $("#autorisubmit").click(
+      function(){
+        var Autore = {};
+        Autore.Id = $("#AutoreId").val();
+        Autore.Nome = $("#AutoreNome").val();
+        Autore.Cognome = $("#AutoreCognome").val();
+        Autore.NascitaDa = $("#AutoreNascitaDa").val();
+        Autore.NascitaA = $("#AutoreNascitaA").val();
+        Autore.MorteDa = $("#AutoreMorteDa").val();
+        Autore.MorteA = $("#AutoreMorteA").val();
+        console.log(Autore);
+      }
+    );
 
-            form.appendChild(hiddenField);
-        }
-    }
+    $("#generisubmit").click(
+      function(){
+        var Genere = {};
+        Genere.Id = $("#GenereId").val();
+        console.log(Genere);
+      }
+    );
 
-    document.body.appendChild(form);
-    form.submit();
-  }
+    $("#casesubmit").click(
+      function(){
+        var Casa = {};
+        Casa.Id = $("#CasaId").val();
+        Casa.Nome = $("#CasaNome").val();
+        Casa.Luogo = $("#CasaLuogo").val();
+        console.log(Casa);
+      }
+    );
 
-  $("#AutoriSubmit").click(
-    function(){
-      var postvalues = {};
-      post('/contact/', {name: 'Johnny Bravo'});
-    }
-  );
   }
 );

@@ -1,9 +1,9 @@
 $(document).ready(
     function(){
 
-        $("#iAutore").keyup(
+        $("#LibroAutore").keyup(
             function(){
-                var val = $("#iAutore").val();
+                var val = $("#LibroAutore").val();
                 console.clear();
                     $.ajax(
                         {
@@ -18,16 +18,16 @@ $(document).ready(
                                     opzione.value = data[i].value;
                                     opzioni.push(opzione);
                                 }
-                                $('#iAutore').autocomplete({
+                                $('#LibroAutore').autocomplete({
                                     source: opzioni,
                                     select: function (event, ui) {
-                                        $("#iAutore").val(ui.item.label);
-                                        $("#iAutoreHidden").val(ui.item.value);
+                                        $("#LibroAutore").val(ui.item.label);
+                                        $("#LibroAutoreHidden").val(ui.item.value);
                                         return false;
                                     },
                                     focus: function(event, ui) {
                                       event.preventDefault();
-                                      $("#iAutore").val(ui.item.label);
+                                      $("#LibroAutore").val(ui.item.label);
                                     }
                                 });
 
@@ -40,9 +40,9 @@ $(document).ready(
             }
         );
 
-        $("#iGenere").keyup(
+        $("#LibroGenere").keyup(
             function(){
-                var val = $("#iGenere").val();
+                var val = $("#LibroGenere").val();
                 console.clear();
                     $.ajax(
                         {
@@ -57,16 +57,16 @@ $(document).ready(
                                     opzione.value = data[i].value;
                                     opzioni.push(opzione);
                                 }
-                                $('#iGenere').autocomplete({
+                                $('#LibroGenere').autocomplete({
                                     source: opzioni,
                                     select: function (event, ui) {
-                                        $("#iGenere").val(ui.item.label);
-                                        $("#iGenereHidden").val(ui.item.value);
+                                        $("#LibroGenere").val(ui.item.label);
+                                        $("#LibroGenereHidden").val(ui.item.value);
                                         return false;
                                     },
                                     focus: function(event, ui) {
                                       event.preventDefault();
-                                      $("#iGenere").val(ui.item.label);
+                                      $("#LibroGenere").val(ui.item.label);
                                     }
                                 });
 
@@ -79,9 +79,9 @@ $(document).ready(
             }
         );
 
-        $("#iCasaEditrice").keyup(
+        $("#LibroCasaEditrice").keyup(
             function(){
-                var val = $("#iCasaEditrice").val();
+                var val = $("#LibroCasaEditrice").val();
                 console.clear();
                     $.ajax(
                         {
@@ -96,16 +96,16 @@ $(document).ready(
                                     opzione.value = data[i].value;
                                     opzioni.push(opzione);
                                 }
-                                $('#iCasaEditrice').autocomplete({
+                                $('#LibroCasaEditrice').autocomplete({
                                     source: opzioni,
                                     select: function (event, ui) {
-                                        $("#iCasaEditrice").val(ui.item.label);
-                                        $("#iCasaEditriceHidden").val(ui.item.value);
+                                        $("#LibroCasaEditrice").val(ui.item.label);
+                                        $("#LibroCasaEditriceHidden").val(ui.item.value);
                                         return false;
                                     },
                                     focus: function(event, ui) {
                                       event.preventDefault();
-                                      $("#iCasaEditrice").val(ui.item.label);
+                                      $("#LibroCasaEditrice").val(ui.item.label);
                                     }
                                 });
 
