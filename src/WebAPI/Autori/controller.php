@@ -55,23 +55,61 @@ function Create($jsonAutore, $connector)
 
 }
 
-function Read()
+function Read($jsonAutore, $connector)
 {
+    $decode = json_decode($jsonAutore);
+
+
+    $autore = new autore($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascita,$decode->Autore->DataDiMorte );
+    $query ="SELECT * FROM Autori WHERE Nome=:nome && Cognome=:cognome && DataNascita=:dataN && DataMorte=:dataM";
+
+    $stmt = $connector->prepare($query);
+
+    $stmt->bindParam(':nome',$autore->Nome,PDO::PARAM_STR);
+    $stmt->bindParam(':cognome',$autore->Cognome,PDO::PARAM_STR);
+    $stmt->bindParam(':dataN',$autore->DataNascita,PDO::PARAM_STR);
+    $stmt->bindParam(':dataM',$autore->DataMorte,PDO::PARAM_STR);
+    $stmt->execute();
+
+
+    if($stmt->execute()){
+        echo "Update true";
+        return true;
+    }
+
+    echo "Update false";
+    return false;
 
 
 
 }
 
-function Update()
+function Update($jsonAutore, $connector)
 {
 
-
-
+   //non so come farlo
 }
 
 function Delete($id , $connector)
 {
+    $query ="DELETE FROM autori WHERE Id=:id";
 
+    $stmt = $connector->prepare($query);
+
+    $stmt->bindParam(':id',$id);
+
+    $stmt->execute();
+
+
+    if($stmt->execute()){
+
+
+        echo "Remove true";
+        return true;
+    }
+
+    echo "Remove false";
+    return false;
 
 
 }
