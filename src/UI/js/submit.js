@@ -15,6 +15,17 @@ $(document).ready(
         libro.CasaEditrice = $("#LibroCasaEditriceHidden").val();
         libro.Scaffale = $("#LibroScaffale").val();
         libro.Armadio = $("#LibroArmadio").val();
+        $.ajax({
+          type: "GET",
+          url: "../../../mockup/Libri.php",
+          data: {libro:libro},
+          dataType: "json",
+          success: function(data){
+            $.each(data,function(index,element){
+
+            });
+          }
+        });
         console.log(libro);
       }
     );
