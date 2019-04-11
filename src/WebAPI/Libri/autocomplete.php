@@ -6,7 +6,7 @@ $partName= $_GET["value"];
 
 
 
-    $query = "SELECT Id AS value, Nome as text FROM Autori WHERE Nome LIKE :part LIMIT 10";
+    $query = "SELECT Id AS value, Nome as text FROM Autori WHERE Nome LIKE :part LIMIT 50";
     $stmt = $conn->prepare($query);
 
 

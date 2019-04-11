@@ -22,7 +22,7 @@ function Create($jsonAutore, $connector)
     $decode = json_decode($jsonAutore);
 
 
-    $autore = new casaEditrice($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascita,$decode->Autore->DataDiMorte );
+    $autore = new autore($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascita,$decode->Autore->DataDiMorte );
     $query ="INSERT INTO AUTORI (Nome,Cognome,DataNascita,DataMorte) VALUE (:nome,:cognome,:dataN,:dataM)";
 
     $stmt = $connector->prepare($query);
@@ -31,7 +31,7 @@ function Create($jsonAutore, $connector)
     $stmt->bindParam(':cognome',$autore->Cognome,PDO::PARAM_STR);
     $stmt->bindParam(':dataN',$autore->DataNascita,PDO::PARAM_STR);
     $stmt->bindParam(':dataM',$autore->DataMorte,PDO::PARAM_STR);
-    $stmt->execute();
+
 
 
     if($stmt->execute()){
@@ -60,7 +60,7 @@ function Read($jsonAutore, $connector)
     $decode = json_decode($jsonAutore);
 
 
-    $autore = new casaEditrice($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascita,$decode->Autore->DataDiMorte );
+    $autore = new libro($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascita,$decode->Autore->DataDiMorte );
     $query ="SELECT * FROM Autori WHERE Nome=:nome && Cognome=:cognome && DataNascita=:dataN && DataMorte=:dataM";
 
     $stmt = $connector->prepare($query);
