@@ -6,7 +6,7 @@
  * Time: 17:09
  */
 
-class autore
+class viewAutore
 {
     public $Id;
     public $Nome;
@@ -21,8 +21,8 @@ class autore
         $this-> Nome = $nome;
         $this-> Cognome = $cognome;
         $this-> DataNascita = $dataNascita;
-        $this-> DataMorte= $dataMorte;
 
+        $this-> DataMorte= $dataMorte;
 
 
     }
