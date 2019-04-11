@@ -3,51 +3,62 @@ $(document).ready(
 
     $("#librisubmit").click(
       function(){
-        var Libro = {};
-        Libro.Id = $("#LibroId").val();
-        Libro.Isbn = $("#LibroISBN").val();
-        Libro.Codice = $("#LibroCodice").val();
-        Libro.Titolo = $("#LibroTitolo").val();
-        Libro.Autore = $("#LibroAutoreHidden").val();
-        Libro.Genere = $("#LibroGenereHidden").val();
-        Libro.AnnoDa = $("#LibroAnnoDa").val();
-        Libro.AnnoA = $("#LibroAnnoA").val();
-        Libro.CasaEditrice = $("#LibroCasaEditriceHidden").val();
-        Libro.Scaffale = $("#LibroScaffale").val();
-        Libro.Armadio = $("#LibroArmadio").val();
-        console.log(Libro);
+        var libro = {};
+        libro.Id = $("#LibroId").val();
+        libro.Isbn = $("#LibroISBN").val();
+        libro.Codice = $("#LibroCodice").val();
+        libro.Titolo = $("#LibroTitolo").val();
+        libro.Autore = $("#LibroAutoreHidden").val();
+        libro.Genere = $("#LibroGenereHidden").val();
+        libro.AnnoDa = $("#LibroAnnoDa").val();
+        libro.AnnoA = $("#LibroAnnoA").val();
+        libro.CasaEditrice = $("#LibroCasaEditriceHidden").val();
+        libro.Scaffale = $("#LibroScaffale").val();
+        libro.Armadio = $("#LibroArmadio").val();
+        $.ajax({
+          type: "GET",
+          url: "../../../mockup/Libri.php",
+          data: {libro:libro},
+          dataType: "json",
+          success: function(data){
+            $.each(data,function(index,element){
+
+            });
+          }
+        });
+        console.log(libro);
       }
     );
 
     $("#autorisubmit").click(
       function(){
-        var Autore = {};
-        Autore.Id = $("#AutoreId").val();
-        Autore.Nome = $("#AutoreNome").val();
-        Autore.Cognome = $("#AutoreCognome").val();
-        Autore.NascitaDa = $("#AutoreNascitaDa").val();
-        Autore.NascitaA = $("#AutoreNascitaA").val();
-        Autore.MorteDa = $("#AutoreMorteDa").val();
-        Autore.MorteA = $("#AutoreMorteA").val();
-        console.log(Autore);
+        var autore = {};
+        autore.Id = $("#AutoreId").val();
+        autore.Nome = $("#AutoreNome").val();
+        autore.Cognome = $("#AutoreCognome").val();
+        autore.NascitaDa = $("#AutoreNascitaDa").val();
+        autore.NascitaA = $("#AutoreNascitaA").val();
+        autore.MorteDa = $("#AutoreMorteDa").val();
+        autore.MorteA = $("#AutoreMorteA").val();
+        console.log(autore);
       }
     );
 
     $("#generisubmit").click(
       function(){
-        var Genere = {};
-        Genere.Id = $("#GenereId").val();
-        console.log(Genere);
+        var genere = {};
+        genere.Id = $("#GenereId").val();
+        console.log(genere);
       }
     );
 
     $("#casesubmit").click(
       function(){
-        var Casa = {};
-        Casa.Id = $("#CasaId").val();
-        Casa.Nome = $("#CasaNome").val();
-        Casa.Luogo = $("#CasaLuogo").val();
-        console.log(Casa);
+        var casa = {};
+        casa.Id = $("#CasaId").val();
+        casa.Nome = $("#CasaNome").val();
+        casa.Luogo = $("#CasaLuogo").val();
+        console.log(casa);
       }
     );
 

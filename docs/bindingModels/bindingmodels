@@ -1,0 +1,29 @@
+nome classe = libro
+libro.Id = id del libro
+libro.Isbn = isbn del libro
+libro.Codice = codice del libro
+libro.Titolo = titolo del libro
+libro.Autore = id dell autore del libro
+libro.Genere = id del genere del libro
+libro.AnnoDa = data pubblicazione da
+libro.AnnoA = data pubblicazione a
+libro.CasaEditrice = id casa editrice del libro
+libro.Scaffale = scaffale
+libro.Armadio = armadio
+
+nome classe = autore
+autore.Id = id dell autore
+autore.Nome = nome dell autore
+autore.Cognome = cognome dell autore
+autore.NascitaDa = data di nascita da
+autore.NascitaA = data di nascita a
+autore.MorteDa = data di morte da
+autore.MorteA = data di morte a
+
+nome classe = genere
+genere.Id = id del genere
+
+nome classe = casa
+casa.Id = id della casa editrice
+casa.Nome = nome della casa editrice
+casa.Luogo = luogo della casa editrice
