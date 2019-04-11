@@ -1,0 +1,84 @@
+CREATE TABLE `autori` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(45) DEFAULT NULL,
+  `Cognome` varchar(45) DEFAULT NULL,
+  `DataNascita` datetime DEFAULT NULL,
+  `DataMorte` datetime DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `caseeditrici` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(45) DEFAULT NULL,
+  `LuogoSede` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `generi` (
+  `Id` varchar(30) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `libri` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Titolo` varchar(200) NOT NULL,
+  `ISBN` varchar(21) DEFAULT NULL,
+  `Codice` int(3) DEFAULT NULL,
+  `IdCasaEditrice` int(11) DEFAULT NULL,
+  `AnnoPubblicazione` int(11) DEFAULT NULL,
+  `CollocazioneLuogo` tinyint(1) DEFAULT NULL,
+  `CollocazioneArmadio` int(3) DEFAULT NULL,
+  `CollocazioneScaffale` int(3) DEFAULT NULL,
+  `Stato` varchar(1) NOT NULL,
+  `IdUtentePrestito` int(11) DEFAULT NULL,
+  `DataInizioPrestito` datetime DEFAULT NULL,
+  `DataFinePrestitoPrevista` datetime DEFAULT NULL,
+  `IdGenere` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `FK_UtentePrestito` (`IdUtentePrestito`),
+  KEY `FK_Genere` (`IdGenere`),
+  KEY `FK_CasaEditrice` (`IdCasaEditrice`),
+  CONSTRAINT `FK_CasaEditrice` FOREIGN KEY (`IdCasaEditrice`) REFERENCES `caseeditrici` (`Id`),
+  CONSTRAINT `FK_Genere` FOREIGN KEY (`IdGenere`) REFERENCES `generi` (`Id`),
+  CONSTRAINT `FK_UtentePrestito` FOREIGN KEY (`IdUtentePrestito`) REFERENCES `utenti` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `libriautori` (
+  `IdLibro` int(11) NOT NULL,
+  `IdAutore` int(11) NOT NULL,
+  PRIMARY KEY (`IdLibro`,`IdAutore`),
+  KEY `FK_Autori` (`IdAutore`),
+  CONSTRAINT `FK_Autori` FOREIGN KEY (`IdAutore`) REFERENCES `autori` (`Id`),
+  CONSTRAINT `FK_Libro` FOREIGN KEY (`IdLibro`) REFERENCES `libri` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `libriutenti` (
+  `IdUtente` int(11) DEFAULT NULL,
+  `IdLibro` int(11) DEFAULT NULL,
+  `DataInizioPrestito` datetime DEFAULT NULL,
+  `DateFinePrestito` datetime DEFAULT NULL,
+  KEY `FK_LibroUtente` (`IdLibro`),
+  KEY `FK_Utente` (`IdUtente`),
+  CONSTRAINT `FK_LibroUtente` FOREIGN KEY (`IdLibro`) REFERENCES `libri` (`Id`),
+  CONSTRAINT `FK_Utente` FOREIGN KEY (`IdUtente`) REFERENCES `utenti` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `utenti` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(45) NOT NULL,
+  `Cognome` varchar(45) NOT NULL,
+  `Telefono` varchar(20) DEFAULT NULL,
+  `Mail` varchar(45) DEFAULT NULL,
+  `DataDiNascita` datetime DEFAULT NULL,
+  `Documento` varchar(10) DEFAULT NULL,
+  `NumeroDocumento` varchar(45) DEFAULT NULL,
+  `CodiceFiscale` varchar(15) DEFAULT NULL,
+  `Indirizzo` varchar(45) DEFAULT NULL,
+  `Località` varchar(45) DEFAULT NULL,
+  `Provincia` varchar(2) DEFAULT NULL,
+  `CAP` varchar(5) DEFAULT NULL,
+  `Disabilitato` bit(1) DEFAULT NULL,
+  `MotivoDisabilitato` varchar(45) DEFAULT NULL,
+  `Note` text,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
