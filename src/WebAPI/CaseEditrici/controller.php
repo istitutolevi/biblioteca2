@@ -22,7 +22,7 @@ function Create($jsonCasaEditrice, $connector)
     $decode = json_decode($jsonCasaEditrice);
 
 
-    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->LuogoSede);
+    $casaEditrice = new genere($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->LuogoSede);
     $query ="INSERT INTO CaseEditrici (Nome,LuogoSede) VALUE (:nome,:luogoSede)";
 
     $stmt = $connector->prepare($query);
@@ -57,7 +57,7 @@ function Read($jsonCasaEditrice, $connector)
     $decode = json_decode($jsonCasaEditrice);
 
 
-    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->LuogoSede);
+    $casaEditrice = new genere($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->LuogoSede);
     $query ="SELECT * FROM CaseEditrici WHERE Nome=:nome && LuogoSede=:luogoSede";
 
     $stmt = $connector->prepare($query);
@@ -86,7 +86,7 @@ function Update($jsonCasaEditrice, $connector)
     $decode = json_decode($jsonCasaEditrice);
 
 
-    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->LuogoSede);
+    $casaEditrice = new genere($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->LuogoSede);
     $query ="UPDATE CaseEditrici SET Nome=:nome, LuogoSede=:luogoSede WHERE Id=:id";
 
     $stmt = $connector->prepare($query);
