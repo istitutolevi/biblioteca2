@@ -71,3 +71,13 @@ h3{
   text-align: center;
   line-height: 50px;
 }
+
+table{
+  padding: 5px;
+}
+td{
+  padding: 5px;
+}
+tr{
+  padding: 5px;
+}
