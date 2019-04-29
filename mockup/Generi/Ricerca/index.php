@@ -1,0 +1,32 @@
+[
+{
+  "Id":"Fantastico"
+},
+{
+  "Id":"Fantascientifico"
+},
+{
+  "Id":"Azione"
+},
+{
+  "Id":"Romanzo"
+},
+{
+  "Id":"Novella"
+},
+{
+  "Id":"Racconto"
+},
+{
+  "Id":"Saggio"
+},
+{
+  "Id":"Tesine"
+},
+{
+  "Id":"Fiabe"
+},
+{
+  "Id":"Favole"
+}
+]

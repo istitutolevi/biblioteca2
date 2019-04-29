@@ -1,0 +1,72 @@
+[
+{
+  "Id":"1",
+	"Nome":"Luigi",
+	"Cognome":"Pirandello",
+  "DataDiNascita":"1867-10-15",
+  "DataDiMorte":"1936-12-10"
+},
+{
+  "Id":"2",
+	"Nome":"Alessandro",
+	"Cognome":"Manzoni",
+  "DataDiNascita":"1867-10-15",
+  "DataDiMorte":"1936-12-10"
+},
+{
+  "Id":"3",
+	"Nome":"Italo",
+	"Cognome":"Svevo",
+  "DataDiNascita":"1867-10-15",
+  "DataDiMorte":"1936-12-10"
+},
+{
+  "Id":"4",
+	"Nome":"Giacomo",
+	"Cognome":"leopardi",
+  "DataDiNascita":"1867-10-15",
+  "DataDiMorte":"1936-12-10"
+},
+{
+  "Id":"5",
+	"Nome":"Dante",
+	"Cognome":"Alighieri",
+  "DataDiNascita":"1867-10-15",
+  "DataDiMorte":"1936-12-10"
+},
+{
+  "Id":"6",
+	"Nome":"Italo",
+	"Cognome":"Calvino",
+  "DataDiNascita":"1867-10-15",
+  "DataDiMorte":"1936-12-10"
+},
+{
+  "Id":"7",
+	"Nome":"Gabriele",
+	"Cognome":"D'Annunzio",
+  "DataDiNascita":"1867-10-15",
+  "DataDiMorte":"1936-12-10"
+},
+{
+  "Id":"8",
+	"Nome":"Eugenio",
+	"Cognome":"Montale",
+  "DataDiNascita":"1867-10-15",
+  "DataDiMorte":"1936-12-10"
+},
+{
+  "Id":"9",
+	"Nome":"Umberto",
+	"Cognome":"Eco",
+  "DataDiNascita":"1867-10-15",
+  "DataDiMorte":"1936-12-10"
+},
+{
+  "Id":"10",
+	"Nome":"Giuseppe",
+	"Cognome":"Ungaretti",
+  "DataDiNascita":"1867-10-15",
+  "DataDiMorte":"1936-12-10"
+}
+]

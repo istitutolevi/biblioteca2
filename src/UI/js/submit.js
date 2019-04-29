@@ -61,7 +61,7 @@ $(document).ready(
         console.log(casa);
         $.ajax({
           type: "GET",
-          url: "../../../mockup/Case.php",
+          url: "../../../mockup/CaseEditrici/Ricerca",
           data: {casa:casa},
           dataType: "json",
           success: function(data){
