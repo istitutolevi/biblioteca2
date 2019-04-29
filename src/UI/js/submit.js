@@ -59,18 +59,18 @@ $(document).ready(
         casa.Nome = $("#CasaNome").val();
         casa.Luogo = $("#CasaLuogo").val();
         console.log(casa);
-          $.ajax({
-              type: "GET",
-              url: "../../../mockup/Case.php",
-              data: {casa:casa},
-              dataType: "json",
-              success: function(data){
-                  $("body").html("<table></table>");
-                  $.each(data,function(index,element){
-                      $("table").append("<tr><td>" + element.Titolo + "</td>"+"<td>"+element.Id+"</td>"+"</tr>");
-                  });
-              }
-          });
+        $.ajax({
+          type: "GET",
+          url: "../../../mockup/Case.php",
+          data: {casa:casa},
+          dataType: "json",
+          success: function(data){
+            $("body").html("");
+            $.each(data,function(index,element){
+
+            });
+          }
+        });
 
       }
     );
