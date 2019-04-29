@@ -48,5 +48,5 @@
   "Id" : "10",
   "Nome" : "blabla",
   "LuogoSede" : "Bologna"
-},
+}
 ]

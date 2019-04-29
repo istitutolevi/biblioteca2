@@ -15,18 +15,6 @@ $(document).ready(
         libro.CasaEditrice = $("#LibroCasaEditriceHidden").val();
         libro.Scaffale = $("#LibroScaffale").val();
         libro.Armadio = $("#LibroArmadio").val();
-        $.ajax({
-          type: "GET",
-          url: "../../../mockup/Libri.php",
-          data: {libro:libro},
-          dataType: "json",
-          success: function(data){
-            $.each(data,function(index,element){
-
-            });
-          }
-        });
-        console.log(libro);
       }
     );
 
@@ -40,7 +28,6 @@ $(document).ready(
         autore.NascitaA = $("#AutoreNascitaA").val();
         autore.MorteDa = $("#AutoreMorteDa").val();
         autore.MorteA = $("#AutoreMorteA").val();
-        console.log(autore);
       }
     );
 
@@ -48,7 +35,6 @@ $(document).ready(
       function(){
         var genere = {};
         genere.Id = $("#GenereId").val();
-        console.log(genere);
       }
     );
 
@@ -58,20 +44,18 @@ $(document).ready(
         casa.Id = $("#CasaId").val();
         casa.Nome = $("#CasaNome").val();
         casa.Luogo = $("#CasaLuogo").val();
-        console.log(casa);
         $.ajax({
-          type: "GET",
-          url: "../../../mockup/CaseEditrici/Ricerca",
-          data: {casa:casa},
-          dataType: "json",
-          success: function(data){
-            $("body").html("");
-            $.each(data,function(index,element){
-
-            });
+          type : "GET",
+          url : "../../../mockup/CaseEditrici/Ricerca/index.php",
+          data : {casa:casa},
+          dataType : "JSON",
+          success : function(data){
+            console.log(data);
+          },
+          error : function(a , b , c){
+            console.log(a + "-" + b + "-" + c);
           }
         });
-
       }
     );
 
