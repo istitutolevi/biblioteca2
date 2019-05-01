@@ -1,0 +1,27 @@
+{
+  "Libro":{
+  "Id":1,
+	"Titolo":"I promessi sposi",
+	"Isbn":1234567891234,
+	"Codice":888,
+	"AnnoPubblicazione":1500,
+	"CasaEditrice":{
+		"Id":2
+  },
+  "Genere":{
+		"Id":"Romanzo di formazione"
+  },
+  "Collocazione":{
+		"Luogo":1,
+		"Armadio":223,
+		"Scaffale":112
+  },
+   "Autori":[
+      {"Id":2},
+      {"Id":4}
+      
+   ]
+  
+  
+}
+}

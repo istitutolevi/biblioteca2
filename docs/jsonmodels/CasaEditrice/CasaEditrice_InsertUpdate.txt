@@ -1,0 +1,8 @@
+{
+  "CasaEditrice":{
+  "Id":1,
+	"Nome":"Mondadori",
+	"LuogoSede":"Milano"
+
+}
+}

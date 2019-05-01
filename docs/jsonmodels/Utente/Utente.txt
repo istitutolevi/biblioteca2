@@ -1,0 +1,21 @@
+{
+  "Utente":{
+  "Id":1,
+	"Nome":"MJ",
+	"Cognome":"Redorici",
+	"Telefono":"0123456789",
+	"Mail":"mj.redo@gmail.com",
+	  "Indirizzo":"Via Vescovada",
+    "Localita":"Vignola",
+    "Provincia":"MO",
+    "CAP":"41058",
+  "DataDiNascita":"2000-10-15",
+ 
+    "Documento":"Carta Identita",
+    "Numero":"AV96587452",
+    
+  
+  "CodiceFiscale":"RDRMTJ00POO854J"
+
+}
+}
