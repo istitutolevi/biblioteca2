@@ -20,18 +20,27 @@ class libro
     public $Stato;
     public $IdUtentePrestito;
     public $DataInizioPresito;
-    public $DataFinePrestito;
+    public $DataFinePrestitoPrevista;
     public $IdGenere;
 
 
-    public function __construct($id, $nome, $sede)
+    public function __construct($id, $titolo, $isbn, $codice, $idCasaEditrice, $annoPubblicazione, $collocazioneLuogo, $collocazioneArmadio, $collocazioneScaffale, $stato, $idUtentePrestito, $dataInizioPrestito, $dataFinePrestitoPrevista, $idGenere)
     {
+        //added by Bonantini
         $this-> Id = $id;
-        $this-> Nome= $nome;
-        $this-> LuogoSede= $sede;
-
-
-
+        $this-> Titolo= $titolo;
+        $this-> ISBN= $isbn;
+        $this-> Codice = $codice;
+        $this-> IdCasaEditrice= $idCasaEditrice;
+        $this-> AnnoPubblicazione= $annoPubblicazione;
+        $this-> CollocazioneLuogo = $collocazioneLuogo;
+        $this-> CollocazioneArmadio= $collocazioneArmadio;
+        $this-> CollocazioneScaffale= $collocazioneScaffale;
+        $this-> Stato = $stato;
+        $this-> IdUtentePrestito= $idUtentePrestito;
+        $this-> DataInizioPresito= $dataInizioPrestito;
+        $this-> DataFinePrestitoPrevista = $dataFinePrestitoPrevista;
+        $this-> IdGenere= $idGenere;
     }
 
 

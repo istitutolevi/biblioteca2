@@ -5,39 +5,73 @@ require_once 'C:/xampp/htdocs/biblioteca2/src/WebAPI/Common/connection.php';
 
 
 $jC= "{
-  \"CasaEditrice\":{
+  \"Libro\":{
   \"Id\":1,
-	\"Nome\":\"Mondadori\",
-	\"LuogoSede\":\"Milano\"
+	\"Titolo\":\"Mondadori\",
+	\"ISBN\":\"Milano\"
 
 }
 }
 
 ";
 Create($jC,$conn);
-function Create($jsonCasaEditrice, $connector)
+function Create($jsonLibro, $connector)
 {
+    //modified by Bonantini
+    //  $Id;
+    //  $Titolo;
+    //  $ISBN;
+    //  $Codice;
+    //  $IdCasaEditrice;
+    //  $AnnoPubblicazione;
+    //  $CollocazioneLuogo;
+    //  $CollocazioneArmadio;
+    //  $CollocazioneScaffale;
+    //  $Stato;
+    //  $IdUtentePrestito;
+    //  $DataInizioPresito;
+    //  $DataFinePrestitoPrevista;
+    //  $IdGenere;
 
-    $decode = json_decode($jsonCasaEditrice);
+    $decode = json_decode($jsonLibro);
 
 
-    $casaEditrice = new libro($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->LuogoSede);
-    $query ="INSERT INTO CaseEditrici (Nome,LuogoSede) VALUE (:nome,:luogoSede)";
+    $libro = new libro($decode->Libro->Id,$decode->Libro->Titolo,$decode->Libro->ISBN,$decode->Libro->Codice,$decode->Libro->IdCasaEditrice,$decode->Libro->AnnoPubblicazione,$decode->Libro->CollocazioneLuogo,$decode->Libro->CollocazioneArmadio,$decode->Libro->CollocazioneScaffale,$decode->Libro->Stato,$decode->Libro->IdUtentePrestito,$decode->Libro->DataInizioPrestito,$decode->Libro->DataFinePrestitoPrevista,$decode->Libro->IdGenere);
+    $query ="INSERT INTO Libri (Id,Titolo,ISBN,Codice,IdCasaEditrice,AnnoPubblicazione,CollocazioneLuogo,CollocazioneArmadio,CollocazioneScaffale,Stato,IdUtentePrestito,DataInizioPrestito,DataFinePrestitoPrevista,IdGenere) VALUE (:id,:titolo,:isbn,:codice,:idCasaEditrice,:annoPubblicazione,:collocazioneLuogo,:collocazioneArmadio,:collocazioneScaffale,:stato,:idUtentePrestito,:dataInizioPrestito,:dataFinePrestitoPrevista,:idGenere)";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':nome',$casaEditrice->Nome,PDO::PARAM_STR);
-    $stmt->bindParam(':luogoSede',$casaEditrice->LuogoSede,PDO::PARAM_STR);
+    $stmt->bindParam(':id',$libro->Nome,PDO::PARAM_STR);
+    $stmt->bindParam(':titolo',$libro->Titolo,PDO::PARAM_STR);
+    $stmt->bindParam(':isbn',$libro->ISBN,PDO::PARAM_STR);
+    $stmt->bindParam(':codice',$libro->Codice,PDO::PARAM_STR);
+    $stmt->bindParam(':idCasaEditrice',$libro->IdCasaEditrice,PDO::PARAM_STR);
+    $stmt->bindParam(':annoPubblicazione',$libro->AnnoPubblicazione,PDO::PARAM_STR);
+    $stmt->bindParam(':collocazioneLuogo',$libro->CollocazioneLuogo,PDO::PARAM_STR);
+    $stmt->bindParam(':collocazioneArmadio',$libro->CollocazioneArmadio,PDO::PARAM_STR);
+    $stmt->bindParam(':collocazioneScaffale',$libro->CollocazioneScaffale,PDO::PARAM_STR);
+    $stmt->bindParam(':stato',$libro->Stato,PDO::PARAM_STR);
+    $stmt->bindParam(':idUtentePrestito',$libro->IdUtentePrestito,PDO::PARAM_STR);
+    $stmt->bindParam(':dataInizioPrestito',$libro->DataInizioPresito,PDO::PARAM_STR);
+    $stmt->bindParam(':dataFinePrestitoPrevista',$libro->DataFinePrestitoPrevista,PDO::PARAM_STR);
+    $stmt->bindParam(':idGenere',$libro->IdGenere,PDO::PARAM_STR);
 
     $stmt->execute();
 
 
     if($stmt->execute()){
-        $returnIdquery ="SELECT Id from CaseEditrici WHERE Nome=:nome && LuogoSede=:luogoSede LIMIT 1";
+        $returnIdquery ="SELECT Id from Libri WHERE Titolo=:titolo && ISBN=:isbn && IdCasaEditrice=:idCasaEditrice && AnnoPubblicazione=:annoPubblicazione && CollocazioneLuogo=:collocazioneLuogo && CollocazioneArmadio=:collocazioneArmadio && CollocazioneScaffale=:collocazioneScaffale && IdGenere=:idGenere LIMIT 1";
         $stmt = $connector->prepare($returnIdquery);
 
-        $stmt->bindParam(':nome',$casaEditrice->Nome,PDO::PARAM_STR);
-        $stmt->bindParam(':luogoSede',$casaEditrice->LuogoSede,PDO::PARAM_STR);
+        $stmt->bindParam(':titolo',$libro->Titolo,PDO::PARAM_STR);
+        $stmt->bindParam(':isbn',$libro->ISBN,PDO::PARAM_STR);
+        $stmt->bindParam(':idCasaEditrice',$libro->IdCasaEditrice,PDO::PARAM_STR);
+        $stmt->bindParam(':annoPubblicazione',$libro->AnnoPubblicazione,PDO::PARAM_STR);
+        $stmt->bindParam(':collocazioneLuogo',$libro->CollocazioneLuogo,PDO::PARAM_STR);
+        $stmt->bindParam(':collocazioneArmadio',$libro->CollocazioneArmadio,PDO::PARAM_STR);
+        $stmt->bindParam(':collocazioneScaffale',$libro->CollocazioneScaffale,PDO::PARAM_STR);
+        $stmt->bindParam(':idGenere',$libro->IdGenere,PDO::PARAM_STR);
+
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -51,42 +85,97 @@ function Create($jsonCasaEditrice, $connector)
 
 }
 
-function Read($jsonAutore, $connector)
+function Read($id, $connector)
 {
-    $decode = json_decode($jsonAutore);
+    //modified by Bonantini
+
+    $id;
 
 
-    $casaEditrice = new libro($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascita,$decode->Autore->DataDiMorte );
-    $query ="SELECT * FROM CaseEditrici WHERE Nome=:nome && LuogoSede=:luogoSede";
+    $libro = 0;
+    $query ="SELECT Libri.*,Autori.* FROM Libri JOIN LibriAutori ON :id=LibriAutori.IdLibro JOIN Autori ON Autori.Id=LibriAutori.IdAutori WHERE Libri.id=:id";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':nome',$casaEditrice->Nome,PDO::PARAM_STR);
-    $stmt->bindParam(':luogoSede',$casaEditrice->LuogoSede,PDO::PARAM_STR);
-    $stmt->execute();
+    $stmt->bindParam(':id',$id,PDO::PARAM_STR);
+
 
 
     if($stmt->execute()){
-        echo "Update true";
+
+        $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($element);
         return true;
     }
 
-    echo "Update false";
+    echo "Read false";
     return false;
 
 
 
+
 }
 
-function Update($jsonAutore, $connector)
+function Update($jsonLibro, $connector)
 {
+   //modified by Bonantini
+    $decode = json_decode($jsonLibro);
 
-   //non so come farlo
+
+    $libro = new libro($decode->Libro->Id,$decode->Libro->Titolo,$decode->Libro->ISBN,$decode->Libro->Codice,$decode->Libro->IdCasaEditrice,$decode->Libro->AnnoPubblicazione,$decode->Libro->CollocazioneLuogo,$decode->Libro->CollocazioneArmadio,$decode->Libro->CollocazioneScaffale,$decode->Libro->Stato,$decode->Libro->IdUtentePrestito,$decode->Libro->DataInizioPrestito,$decode->Libro->DataFinePrestitoPrevista,$decode->Libro->IdGenere);
+    $query ="UPDATE Libri SET Titolo=:titolo,ISBN=:isbn,Codice=:codice,IdCasaEditrice=:idCasaEditrice,AnnoPubblicazione=:annoPubblicazione,CollocazioneLuogo=:collocazioneLuogo,CollocazioneArmadio=:collocazioneArmadio,CollocazioneScaffale=:collocazioneScaffale,Stato=:stato,IdUtentePrestito=:idUtentePrestito,DataInizioPrestito=:dataInizioPrestito,DataFinePrestitoPrevista=:dataFinePrestitoPrevista,IdGenere=:idGenere WHERE Id=:id";
+
+    $stmt = $connector->prepare($query);
+
+    $stmt->bindParam(':id',$libro->Nome,PDO::PARAM_STR);
+    $stmt->bindParam(':titolo',$libro->Titolo,PDO::PARAM_STR);
+    $stmt->bindParam(':isbn',$libro->ISBN,PDO::PARAM_STR);
+    $stmt->bindParam(':codice',$libro->Codice,PDO::PARAM_STR);
+    $stmt->bindParam(':idCasaEditrice',$libro->IdCasaEditrice,PDO::PARAM_STR);
+    $stmt->bindParam(':annoPubblicazione',$libro->AnnoPubblicazione,PDO::PARAM_STR);
+    $stmt->bindParam(':collocazioneLuogo',$libro->CollocazioneLuogo,PDO::PARAM_STR);
+    $stmt->bindParam(':collocazioneArmadio',$libro->CollocazioneArmadio,PDO::PARAM_STR);
+    $stmt->bindParam(':collocazioneScaffale',$libro->CollocazioneScaffale,PDO::PARAM_STR);
+    $stmt->bindParam(':stato',$libro->Stato,PDO::PARAM_STR);
+    $stmt->bindParam(':idUtentePrestito',$libro->IdUtentePrestito,PDO::PARAM_STR);
+    $stmt->bindParam(':dataInizioPrestito',$libro->DataInizioPresito,PDO::PARAM_STR);
+    $stmt->bindParam(':dataFinePrestitoPrevista',$libro->DataFinePrestitoPrevista,PDO::PARAM_STR);
+    $stmt->bindParam(':idGenere',$libro->IdGenere,PDO::PARAM_STR);
+    $stmt->bindParam(':luogoSede',$libro->LuogoSede,PDO::PARAM_STR);
+
+
+
+
+    if($stmt->execute()){
+        $returnIdquery ="SELECT Id from Libri WHERE Titolo=:titolo && ISBN=:isbn && IdCasaEditrice=:idCasaEditrice && AnnoPubblicazione=:annoPubblicazione && CollocazioneLuogo=:collocazioneLuogo && CollocazioneArmadio=:collocazioneArmadio && CollocazioneScaffale=:collocazioneScaffale && IdGenere=:idGenere LIMIT 1";
+        $stmt = $connector->prepare($returnIdquery);
+
+        $stmt->bindParam(':titolo',$libro->Titolo,PDO::PARAM_STR);
+        $stmt->bindParam(':isbn',$libro->ISBN,PDO::PARAM_STR);
+        $stmt->bindParam(':idCasaEditrice',$libro->IdCasaEditrice,PDO::PARAM_STR);
+        $stmt->bindParam(':annoPubblicazione',$libro->AnnoPubblicazione,PDO::PARAM_STR);
+        $stmt->bindParam(':collocazioneLuogo',$libro->CollocazioneLuogo,PDO::PARAM_STR);
+        $stmt->bindParam(':collocazioneArmadio',$libro->CollocazioneArmadio,PDO::PARAM_STR);
+        $stmt->bindParam(':collocazioneScaffale',$libro->CollocazioneScaffale,PDO::PARAM_STR);
+        $stmt->bindParam(':idGenere',$libro->IdGenere,PDO::PARAM_STR);
+        $stmt->execute();
+        $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode($element);
+        return true;
+    }
+
+    echo "Add false";
+    return false;
+
+
+    //non so come farlo
 }
 
 function Delete($id , $connector)
 {
-    $query ="DELETE FROM CaseEditrici WHERE Id=:id";
+    //modified by Bonantini
+    $query ="DELETE FROM Libri WHERE Id=:id";
 
     $stmt = $connector->prepare($query);
 

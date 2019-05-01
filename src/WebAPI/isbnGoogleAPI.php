@@ -34,7 +34,7 @@ $pagine = $json['items']['0']['volumeInfo']['pageCount'];
 //array con tutte le informazioni del libro
 $libro = [
     'titolo' => "$titolo",
-    'genere' => "$genere",
+    'libro' => "$genere",
     'autore' => "$autore",
     'CasaEditrice' => "$casaEditrice",
     'dataPubblicazione' => "$dataPubblicazione",
