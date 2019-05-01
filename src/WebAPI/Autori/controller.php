@@ -49,7 +49,7 @@ function Create($jsonAutore, $connector)
         return true;
     }
 
-    echo "Add false";
+    echo -1;
     return false;
 
 
