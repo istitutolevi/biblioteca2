@@ -28,7 +28,7 @@ $(document).ready(
             $(".modifica").click(
                   function(){
                     console.log("modifica: " + $(this).attr('numero'));
-                    window.location.replace("../Modifica/editlibri.html?id=" + $(this).attr('numero'));
+                    window.location.replace("../Modifica/editlibri.html?" + $(this).attr('numero'));
                   }
                 );
                 $(".elimina").click(
@@ -74,7 +74,7 @@ $(document).ready(
             $(".modifica").click(
                   function(){
                     console.log("modifica: " + $(this).attr('numero'));
-                    window.location.replace("../Modifica/editautori.html?id=" + $(this).attr('numero'));
+                    window.location.replace("../Modifica/editautori.html?" + $(this).attr('numero'));
                   }
                 );
                 $(".elimina").click(
@@ -114,7 +114,7 @@ $(document).ready(
             $(".modifica").click(
                   function(){
                     console.log("modifica: " + $(this).attr('numero'));
-                    window.location.replace("../Modifica/editgeneri.html?id=" + $(this).attr('numero'));
+                    window.location.replace("../Modifica/editgeneri.html?" + $(this).attr('numero'));
                   }
                 );
                 $(".elimina").click(
@@ -156,7 +156,7 @@ $(document).ready(
             $(".modifica").click(
                   function(){
                     console.log("modifica: " + $(this).attr('numero'));
-                    window.location.replace("../Modifica/editcase.html?id=" + $(this).attr('numero'));
+                    window.location.replace("../Modifica/editcase.html?" + $(this).attr('numero'));
                   }
                 );
                 $(".elimina").click(
