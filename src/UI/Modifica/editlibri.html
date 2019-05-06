@@ -13,18 +13,21 @@
     <script src="../js/edit.js"></script>
   </head>
 
-  <body>
+  <body page="libri">
     <a href="admin.html"><i style="color: #0894A1; border: 3px solid #0894A1; border-radius: 50%" class="backbutton fas fa-long-arrow-alt-left"></i></a>
     <div class="wrapper" style="border: 2px solid #0894A1;  box-shadow: 5px 5px 10px 0px #055B63;">
-      <p class="inputdesc" style="color: #0894A1">ISBN</p><input type="text" class="input" name="ISBN"><br>
-      <p class="inputdesc" style="color: #0894A1">Codice</p><input type="text" class="input" name="Codice"><br>
-      <p class="inputdesc" style="color: #0894A1">Titolo</p><input type="text" class="input" name="Titolo"><br>
-      <p class="inputdesc" style="color: #0894A1">Autore</p><input type="text" class="input" id="iAutore" name="Autore" list="Autore"><datalist id="Autore"></datalist><br>
-      <p class="inputdesc" style="color: #0894A1">Genere</p><input type="text" class="input" id="iGenere" name="Genere" list="Genere"><datalist id="Genere"></datalist><br>
-      <p class="inputdesc" style="color: #0894A1">Anno Pubblicazione</p><input type="text" class="input" name="AnnoPubblicazione"><br>
-      <p class="inputdesc" style="color: #0894A1">Casa Editrice</p><input type="text" class="input" id="iCasaEditrice" name="IdCasaEditrice" list="CasaEditrice"><datalist id="CasaEditrice"></datalist><br>
-      <p class="inputdesc" style="color: #0894A1">Scaffale</p><input type="text" class="input" name="CollocazioneScaffale"><br>
-      <p class="inputdesc" style="color: #0894A1">Armadio</p><input type="text" class="input" name="CollocazioneArmadio"><br>
+      <p class="inputdesc" style="color: #0894A1">ISBN</p><input type="text" class="input" id="LibroISBN"><br>
+      <p class="inputdesc" style="color: #0894A1">Codice</p><input type="text" class="input" id="LibroCodice"><br>
+      <p class="inputdesc" style="color: #0894A1">Titolo</p><input type="text" class="input" id="LibroTitolo"><br>
+      <p class="inputdesc" style="color: #0894A1">Autore</p><input type="text" placeholder="Cognome Nome" class="input" id="LibroAutore"><br>
+      <p class="inputdesc" style="color: #0894A1">Genere</p><input type="text" class="input" id="LibroGenere"><br>
+      <p class="inputdesc" style="color: #0894A1">Anno Pubblicazione da / a:</p><input type="date" class="input" id="LibroAnnoDa" style="width: 45%; float: left"><input type="date" class="input" id="LibroAnnoA" style="width: 45%; float: right"><br>
+      <p class="inputdesc" style="color: #0894A1">Casa Editrice</p><input type="text" class="input" id="LibroCasaEditrice"><br>
+      <p class="inputdesc" style="color: #0894A1">Scaffale</p><input type="text" class="input" id="LibroScaffale"><br>
+      <p class="inputdesc" style="color: #0894A1">Armadio</p><input type="text" class="input" id="LibroArmadio"><br>
+      <input type="text" style="display: none" id="LibroAutoreHidden">
+      <input type="text" style="display: none" id="LibroGenereHidden">
+      <input type="text" style="display: none" id="LibroCasaEditriceHidden">
 
       <button style="border: 2px solid #0894A1; color:#0894A1 " class="submitsearch" type="submit" name="librisubmit">Aggiungi Libro</button>
     </div>
