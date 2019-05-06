@@ -23,8 +23,28 @@ $(document).ready(
           success: function(data){
             $("body").html("<table></table>");
             $.each(data,function(index,element){
-              $("table").append("<tr>"+"<td>" + element.Id + "</td>"+"<td>" + element.Nome + "</td>"+"<td>" + element.LuogoSede + "</td>"+"</tr>");
+              $("table").append("<tr>"+"<td>" + element.Id + "</td>"+"<td>" + element.Nome + "</td>"+"<td>" + element.LuogoSede + "</td>"+"<td>"+"<button class=\"modifica\" numero=\"" + element.Id + "\">"+"<td>"+"<button class=\"elimina\" numero=\"" + element.Id + "\">"+"</tr>");
             });
+            $(".modifica").click(
+                  function(){
+                    console.log("modifica: " + $(this).attr('numero'));
+                  }
+                );
+                $(".elimina").click(
+                      function(){
+                        $(this).parent().parent().remove();
+                        console.log($(this).attr('numero'));
+                        $.ajax({
+                          type: "DELETE",
+                          url: "",
+                          dataType: "json",
+                          data: {id:$(this).attr('numero')},
+                          success: function(){
+
+                          }
+                        });
+                      }
+                    );
           }
         });
       }
@@ -48,8 +68,28 @@ $(document).ready(
           success: function(data){
             $("body").html("<table></table>");
             $.each(data,function(index,element){
-              $("table").append("<tr>"+"<td>" + element.Id + "</td>"+"<td>" + element.Nome + "</td>"+"<td>" + element.Cognome + "</td>"+"<td>" + element.DataDiNascita + "</td>"+"<td>" + element.DataDiMorte + "</td>"+"</tr>");
+              $("table").append("<tr id=\"" + element.Id + "\">"+"<td>" + element.Id + "</td>"+"<td>" + element.Nome + "</td>"+"<td>" + element.Cognome + "</td>"+"<td>" + element.DataDiNascita + "</td>"+"<td>" + element.DataDiMorte + "</td>"+"<td>"+"<button class=\"modifica\" numero=\"" + element.Id + "\">"+"<td>"+"<button class=\"elimina\" numero=\"" + element.Id + "\">"+"</tr>");
             });
+            $(".modifica").click(
+                  function(){
+                    console.log("modifica: " + $(this).attr('numero'));
+                  }
+                );
+                $(".elimina").click(
+                      function(){
+                        $(this).parent().parent().remove();
+                        console.log($(this).attr('numero'));
+                        $.ajax({
+                          type: "DELETE",
+                          url: "",
+                          dataType: "json",
+                          data: {id:$(this).attr('numero')},
+                          success: function(){
+
+                          }
+                        });
+                      }
+                    );
           }
         });
       }
@@ -67,8 +107,28 @@ $(document).ready(
           success: function(data){
             $("body").html("<table></table>");
             $.each(data,function(index,element){
-              $("table").append("<tr>"+"<td>" + element.Id + "</td>"+"</tr>");
+              $("table").append("<tr>"+"<td>" + element.Id + "</td>"+"<td>"+"<button class=\"modifica\" numero=\"" + element.Id + "\">"+"<td>"+"<button class=\"elimina\" numero=\"" + element.Id + "\">"+"</tr>");
             });
+            $(".modifica").click(
+                  function(){
+                    console.log("modifica: " + $(this).attr('numero'));
+                  }
+                );
+                $(".elimina").click(
+                      function(){
+                        $(this).parent().parent().remove();
+                        console.log($(this).attr('numero'));
+                        $.ajax({
+                          type: "DELETE",
+                          url: "",
+                          dataType: "json",
+                          data: {id:$(this).attr('numero')},
+                          success: function(){
+
+                          }
+                        });
+                      }
+                    );
           }
         });
       }
@@ -88,8 +148,28 @@ $(document).ready(
           success: function(data){
             $("body").html("<table></table>");
             $.each(data,function(index,element){
-              $("table").append("<tr>"+"<td>" + element.Id + "</td>"+"<td>" + element.Nome + "</td>"+"<td>" + element.LuogoSede + "</td>"+"</tr>");
+              $("table").append("<tr>"+"<td>" + element.Id + "</td>"+"<td>" + element.Nome + "</td>"+"<td>" + element.LuogoSede + "</td>"+"<td>"+"<button class=\"modifica\" numero=\"" + element.Id + "\">"+"<td>"+"<button class=\"elimina\" numero=\"" + element.Id + "\">"+"</tr>");
             });
+            $(".modifica").click(
+                  function(){
+                    console.log("modifica: " + $(this).attr('numero'));
+                  }
+                );
+                $(".elimina").click(
+                      function(){
+                        $(this).parent().parent().remove();
+                        console.log($(this).attr('numero'));
+                        $.ajax({
+                          type: "DELETE",
+                          url: "",
+                          dataType: "json",
+                          data: {id:$(this).attr('numero')},
+                          success: function(){
+
+                          }
+                        });
+                      }
+                    );
           }
         });
 
