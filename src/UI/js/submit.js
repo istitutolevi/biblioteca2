@@ -36,7 +36,7 @@ $(document).ready(
                         $(this).parent().parent().remove();
                         console.log($(this).attr('numero'));
                         $.ajax({
-                          type: "DELE",
+                          type: "DELETE",
                           url: "",
                           dataType: "json",
                           data: {id:$(this).attr('numero')},
@@ -82,7 +82,7 @@ $(document).ready(
                         $(this).parent().parent().remove();
                         console.log($(this).attr('numero'));
                         $.ajax({
-                          type: "DELE",
+                          type: "DELETE",
                           url: "",
                           dataType: "json",
                           data: {id:$(this).attr('numero')},
@@ -122,7 +122,7 @@ $(document).ready(
                         $(this).parent().parent().remove();
                         console.log($(this).attr('numero'));
                         $.ajax({
-                          type: "DELE",
+                          type: "DELETE",
                           url: "",
                           dataType: "json",
                           data: {id:$(this).attr('numero')},
@@ -164,7 +164,7 @@ $(document).ready(
                         $(this).parent().parent().remove();
                         console.log($(this).attr('numero'));
                         $.ajax({
-                          type: "DELE",
+                          type: "DELETE",
                           url: "",
                           dataType: "json",
                           data: {id:$(this).attr('numero')},
