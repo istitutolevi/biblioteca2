@@ -10,14 +10,14 @@ class casaEditrice
 {
     public $Id;
     public $Nome;
-    public $LuogoSede;
+    public $Luogo;
 
 
     public function __construct($id, $nome, $sede)
     {
         $this-> Id = $id;
         $this-> Nome= $nome;
-        $this-> LuogoSede= $sede;
+        $this-> Luogo= $sede;
 
 
 

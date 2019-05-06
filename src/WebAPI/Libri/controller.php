@@ -2,19 +2,28 @@
 include 'Libro.php';
 require_once 'C:/xampp/htdocs/biblioteca2/src/WebAPI/Common/connection.php';
 
+$method= $_SERVER['REQUEST_METHOD'];
+$body= file_get_contents('php://input');
 
-
-$jC= "{
-  \"Libro\":{
-  \"Id\":1,
-	\"Titolo\":\"Mondadori\",
-	\"ISBN\":\"Milano\"
-
+switch ($method) {
+    case "GET":
+        Read($body,$conn);
+        break;
+    case "POST":
+        Update($body,$conn);
+        break;
+    case "PUT":
+        Create($body,$conn);
+        break;
+    case "DELETE":
+        Delete($body, $conn);
+        break;
+    default:
+        echo "Not Method Found";
+        break;
 }
-}
 
-";
-Create($jC,$conn);
+
 function Create($jsonLibro, $connector)
 {
     //modified by Bonantini
@@ -85,14 +94,15 @@ function Create($jsonLibro, $connector)
 
 }
 
-function Read($id, $connector)
+//ballestrazzi
+function Read($jsonBindingLibro, $connector)
 {
     //modified by Bonantini
 
-    $id;
 
 
-    $libro = 0;
+
+
     $query ="SELECT Libri.*,Autori.* FROM Libri JOIN LibriAutori ON :id=LibriAutori.IdLibro JOIN Autori ON Autori.Id=LibriAutori.IdAutori WHERE Libri.id=:id";
 
     $stmt = $connector->prepare($query);

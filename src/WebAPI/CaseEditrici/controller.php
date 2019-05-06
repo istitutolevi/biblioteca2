@@ -2,18 +2,26 @@
 include 'casaEditrice.php';
 require_once 'C:/xampp/htdocs/biblioteca2/src/WebAPI/Common/connection.php';
 
+$method= $_SERVER['REQUEST_METHOD'];
+$body= file_get_contents('php://input');
 
-
-$jC= "{
-  \"CasaEditrice\":{
-  \"Id\":1,
-	\"Nome\":\"Mondadori\",
-	\"LuogoSede\":\"Milano\"
-
+switch ($method) {
+    case "GET":
+        Read($body,$conn);
+        break;
+    case "POST":
+        Update($body,$conn);
+        break;
+    case "PUT":
+        Create($body,$conn);
+        break;
+    case "DELETE":
+        Delete($body, $conn);
+        break;
+    default:
+        echo "Not Method Found";
+        break;
 }
-}
-
-";
 
 
 function Create($jsonCasaEditrice, $connector)
@@ -22,13 +30,13 @@ function Create($jsonCasaEditrice, $connector)
     $decode = json_decode($jsonCasaEditrice);
 
 
-    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->LuogoSede);
+    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->Luogo);
     $query ="INSERT INTO CaseEditrici (Nome,LuogoSede) VALUE (:nome,:luogoSede)";
 
     $stmt = $connector->prepare($query);
 
     $stmt->bindParam(':nome',$casaEditrice->Nome,PDO::PARAM_STR);
-    $stmt->bindParam(':luogoSede',$casaEditrice->LuogoSede,PDO::PARAM_STR);
+    $stmt->bindParam(':luogoSede',$casaEditrice->Luogo,PDO::PARAM_STR);
 
 
 
@@ -38,7 +46,7 @@ function Create($jsonCasaEditrice, $connector)
         $stmt = $connector->prepare($returnIdquery);
 
         $stmt->bindParam(':nome',$casaEditrice->Nome,PDO::PARAM_STR);
-        $stmt->bindParam(':luogoSede',$casaEditrice->LuogoSede,PDO::PARAM_STR);
+        $stmt->bindParam(':luogoSede',$casaEditrice->Luogo,PDO::PARAM_STR);
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -57,13 +65,13 @@ function Read($jsonCasaEditrice, $connector)
     $decode = json_decode($jsonCasaEditrice);
 
 
-    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->LuogoSede);
+    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->Luogo);
     $query ="SELECT * FROM CaseEditrici WHERE Nome=:nome && LuogoSede=:luogoSede";
 
     $stmt = $connector->prepare($query);
 
     $stmt->bindParam(':nome',$casaEditrice->Nome,PDO::PARAM_STR);
-    $stmt->bindParam(':luogoSede',$casaEditrice->LuogoSede,PDO::PARAM_STR);
+    $stmt->bindParam(':luogoSede',$casaEditrice->Luogo,PDO::PARAM_STR);
 
 
 
@@ -86,14 +94,14 @@ function Update($jsonCasaEditrice, $connector)
     $decode = json_decode($jsonCasaEditrice);
 
 
-    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->LuogoSede);
+    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->Luogo);
     $query ="UPDATE CaseEditrici SET Nome=:nome, LuogoSede=:luogoSede WHERE Id=:id";
 
     $stmt = $connector->prepare($query);
 
     $stmt->bindParam(':id',$casaEditrice->Id,PDO::PARAM_INT);
     $stmt->bindParam(':nome',$casaEditrice->Nome,PDO::PARAM_STR);
-    $stmt->bindParam(':luogoSede',$casaEditrice->LuogoSede,PDO::PARAM_STR);
+    $stmt->bindParam(':luogoSede',$casaEditrice->Luogo,PDO::PARAM_STR);
 
 
 
@@ -103,7 +111,7 @@ function Update($jsonCasaEditrice, $connector)
         $stmt = $connector->prepare($returnIdquery);
 
         $stmt->bindParam(':nome',$casaEditrice->Nome,PDO::PARAM_STR);
-        $stmt->bindParam(':luogoSede',$casaEditrice->LuogoSede,PDO::PARAM_STR);
+        $stmt->bindParam(':luogoSede',$casaEditrice->Luogo,PDO::PARAM_STR);
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -119,11 +127,12 @@ function Update($jsonCasaEditrice, $connector)
 
 function Delete($id , $connector)
 {
+    $idDelete= json_decode($id);
     $query ="DELETE FROM CaseEditrici WHERE Id=:id";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':id',$id);
+    $stmt->bindParam(':id',$idDelete);
 
 
 

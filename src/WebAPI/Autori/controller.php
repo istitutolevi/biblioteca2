@@ -3,18 +3,26 @@ include 'BindingAutore.php';
 require_once 'C:/xampp/htdocs/biblioteca2/src/WebAPI/Common/connection.php';
 
 
+$method= $_SERVER['REQUEST_METHOD'];
+$body= file_get_contents('php://input');
 
-$jA= "{
-  \"Autore\":{
-  \"Id\":1,
-	\"Nome\":\"Alessandro\",
-	\"Cognome\":\"Manzoni\",
-  \"DataDiNascita\":\"1824-12-1\",
-  \"DataDiMorte\":\"1872-6-10\"
-
+switch ($method) {
+    case "GET":
+        Read($body,$conn);
+        break;
+    case "POST":
+        Update($body,$conn);
+        break;
+    case "PUT":
+        Create($body,$conn);
+        break;
+    case "DELETE":
+        Delete($body, $conn);
+        break;
+    default:
+        echo "Not Method Found";
+        break;
 }
-}
-";
 
 function Create($jsonAutore, $connector)
 {
@@ -60,18 +68,18 @@ function Read($jsonAutore, $connector)
     $decode = json_decode($jsonAutore);
 
 
-    $autore = new bindingAutore($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascitaDa,
-                                $decode->Autore->DataDiNascitaA,$decode->Autore->DataDiMorteDa, $decode->Autore->DataDiMorteA );
+    $autore = new bindingAutore($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->NascitaDa,
+                                $decode->Autore->NascitaA,$decode->Autore->MorteDa, $decode->Autore->MorteA );
     $query ="SELECT * FROM Autori WHERE Nome=:nome && Cognome=:cognome && (BETWEEN :dataNDA && :dataNA) && (BETWEEN :dataMDA && :dataMA)";
 
     $stmt = $connector->prepare($query);
 
     $stmt->bindParam(':nome',$autore->Nome,PDO::PARAM_STR);
     $stmt->bindParam(':cognome',$autore->Cognome,PDO::PARAM_STR);
-    $stmt->bindParam(':dataNDa',$autore->DataNascitaDa,PDO::PARAM_STR);
-    $stmt->bindParam(':dataNA',$autore->DataNascitaA,PDO::PARAM_STR);
-    $stmt->bindParam(':dataMDa',$autore->DataMorteDa,PDO::PARAM_STR);
-    $stmt->bindParam(':dataMA',$autore->DataMorteA,PDO::PARAM_STR);
+    $stmt->bindParam(':dataNDa',$autore->NascitaDa,PDO::PARAM_STR);
+    $stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
+    $stmt->bindParam(':dataMDa',$autore->MorteDa,PDO::PARAM_STR);
+    $stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
     $stmt->execute();
 
 
