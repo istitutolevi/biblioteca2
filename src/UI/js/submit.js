@@ -28,6 +28,7 @@ $(document).ready(
             $(".modifica").click(
                   function(){
                     console.log("modifica: " + $(this).attr('numero'));
+                    window.location.replace("../Modifica/editlibri.html?id=" + $(this).attr('numero'));
                   }
                 );
                 $(".elimina").click(
@@ -35,7 +36,7 @@ $(document).ready(
                         $(this).parent().parent().remove();
                         console.log($(this).attr('numero'));
                         $.ajax({
-                          type: "DELETE",
+                          type: "DELE",
                           url: "",
                           dataType: "json",
                           data: {id:$(this).attr('numero')},
@@ -73,6 +74,7 @@ $(document).ready(
             $(".modifica").click(
                   function(){
                     console.log("modifica: " + $(this).attr('numero'));
+                    window.location.replace("../Modifica/editautori.html?id=" + $(this).attr('numero'));
                   }
                 );
                 $(".elimina").click(
@@ -80,7 +82,7 @@ $(document).ready(
                         $(this).parent().parent().remove();
                         console.log($(this).attr('numero'));
                         $.ajax({
-                          type: "DELETE",
+                          type: "DELE",
                           url: "",
                           dataType: "json",
                           data: {id:$(this).attr('numero')},
@@ -112,6 +114,7 @@ $(document).ready(
             $(".modifica").click(
                   function(){
                     console.log("modifica: " + $(this).attr('numero'));
+                    window.location.replace("../Modifica/editgeneri.html?id=" + $(this).attr('numero'));
                   }
                 );
                 $(".elimina").click(
@@ -119,7 +122,7 @@ $(document).ready(
                         $(this).parent().parent().remove();
                         console.log($(this).attr('numero'));
                         $.ajax({
-                          type: "DELETE",
+                          type: "DELE",
                           url: "",
                           dataType: "json",
                           data: {id:$(this).attr('numero')},
@@ -153,6 +156,7 @@ $(document).ready(
             $(".modifica").click(
                   function(){
                     console.log("modifica: " + $(this).attr('numero'));
+                    window.location.replace("../Modifica/editcase.html?id=" + $(this).attr('numero'));
                   }
                 );
                 $(".elimina").click(
@@ -160,7 +164,7 @@ $(document).ready(
                         $(this).parent().parent().remove();
                         console.log($(this).attr('numero'));
                         $.ajax({
-                          type: "DELETE",
+                          type: "DELE",
                           url: "",
                           dataType: "json",
                           data: {id:$(this).attr('numero')},
