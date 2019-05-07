@@ -88,7 +88,7 @@ $(document).ready(
                           type: "DELETE",
                           url: "../../WebAPI/Autori/controller.php",
                           dataType: "json",
-                          data: {id:$(this).attr('numero')},
+                          data: {Id:$(this).attr('numero')},
                           success: function(){
 
                           }

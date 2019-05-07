@@ -6,6 +6,7 @@ include 'C:/xampp/htdocs/bibliotecaa/src/WebAPI/Common/connection.php';
 $method= $_SERVER['REQUEST_METHOD'];
 $body= file_get_contents('php://input');
 
+
 switch ($method) {
     case "GET":
         Read($body,$conn);
@@ -71,9 +72,10 @@ function Read($jsonAutore, $connector)
     error_reporting(0);
     $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
                                 $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
+
     error_reporting(1);
-    echo $autore->Nome;
-    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome /*&& Cognome LIKE :cognome && DataNascita BETWEEN :dataNDA AND :dataNA && DataMorte BETWEEN :dataMDA AND :dataMA*/";
+
+    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome || Cognome LIKE :cognome || DataNascita BETWEEN :dataNDA AND :dataNA || DataMorte BETWEEN :dataMDA AND :dataMA";
 
     $stmt = $connector->prepare($query);
 
@@ -81,11 +83,11 @@ function Read($jsonAutore, $connector)
     $cognome= $autore->Cognome."%";
 
     $stmt->bindParam(':nome',$nome,PDO::PARAM_STR);
-    //$stmt->bindParam(':cognome',$cognome,PDO::PARAM_STR);
-    //$stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
-    //$stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
-    //$stmt->bindParam(':dataMDA',$autore->MorteDa,PDO::PARAM_STR);
-    //$stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
+    $stmt->bindParam(':cognome',$cognome,PDO::PARAM_STR);
+    $stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
+    $stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
+    $stmt->bindParam(':dataMDA',$autore->MorteDa,PDO::PARAM_STR);
+    $stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
 
 
 
@@ -148,13 +150,16 @@ function Update($jsonAutore, $connector)
 
 function Delete($id , $connector)
 {
+$s= json_decode($id);
+$IdRemove= $s->Id;
+
     $query ="DELETE FROM autori WHERE Id=:id";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':id',$id);
+    $stmt->bindParam(':id',$IdRemove);
 
-    $stmt->execute();
+
 
 
     if($stmt->execute()){
