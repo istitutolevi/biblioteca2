@@ -65,7 +65,7 @@ $(document).ready(
         $.ajax({
           type: "GET",
           url: "../../WebAPI/Autori/controller.php",
-          data: JSON.stringify(autore),
+          data: autore,
           dataType: "json",
           success: function(data){
             console.log(data);
