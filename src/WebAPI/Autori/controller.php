@@ -68,8 +68,8 @@ function Read($jsonAutore, $connector)
     $decode = json_decode($jsonAutore);
 
 
-    $autore = new bindingAutore($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->NascitaDa,
-                                $decode->Autore->NascitaA,$decode->Autore->MorteDa, $decode->Autore->MorteA );
+    $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
+                                $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
     $query ="SELECT * FROM Autori WHERE Nome=:nome && Cognome=:cognome && (BETWEEN :dataNDA && :dataNA) && (BETWEEN :dataMDA && :dataMA)";
 
     $stmt = $connector->prepare($query);
@@ -90,7 +90,7 @@ function Read($jsonAutore, $connector)
         return true;
     }
 
-    echo "Read false false";
+    echo "Read false ";
     return false;
 
 
