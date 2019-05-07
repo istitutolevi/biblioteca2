@@ -1,9 +1,9 @@
 $(document).ready(
   function() {
     var id = window.location.search.substr(1);
+    var pagina = $("body").attr("page");
     if (id != null && id != "") {
-      var pagina = $("body").attr("page");
-
+      //IN CASO DI MODIFICA
       switch (pagina) {
         case "autori":
         $("button").html("Modifica Autore ID: " + id);
@@ -19,6 +19,26 @@ $(document).ready(
             $("#AutoreMorte").val(data.DataDiMorte);
           }
         });
+        $(".submitsearch").click(
+          function() {
+            var Autore = {};
+            Autore.Id = id;
+            Autore.Nome = $("#AutoreNome").val();
+            Autore.Cognome = $("#AutoreCognome").val();
+            Autore.DataDiNascita = $("#AutoreNascita").val();
+            Autore.DataDiMorte = $("#AutoreNascita").val();
+            console.log(JSON.stringify(Autore));
+            $.ajax({
+              type: "POST",
+              url: "",
+              data: {Autore:Autore},
+              dataType: "json",
+              success:function() {
+                console.log("fatto");
+              }
+            });
+          }
+        );
         break;
 
         case "case":
@@ -33,6 +53,24 @@ $(document).ready(
             $("#CasaLuogo").val(data.LuogoSede);
           }
         });
+        $(".submitsearch").click(
+          function() {
+            var CasaEditrice = {};
+            CasaEditrice.Id = id;
+            CasaEditrice.Nome = $("#CasaNome").val();
+            CasaEditrice.LuogoSede = $("#CasaLuogo").val();
+            console.log(JSON.stringify(CasaEditrice));
+            $.ajax({
+              type: "POST",
+              url: "",
+              data: {CasaEditrice:CasaEditrice},
+              dataType: "json",
+              success:function() {
+                console.log("fatto");
+              }
+            });
+          }
+        );
         break;
 
         case "generi":
@@ -43,12 +81,14 @@ $(document).ready(
           data: {id:id},
           dataType: "json",
           success: function(data){
-            $("#AutoreNome").val(data.Nome);
-            $("#AutoreCognome").val(data.Cognome);
-            $("#AutoreNascita").val(data.DataDiNascita);
-            $("#AutoreMorte").val(data.DataDiMorte);
+            //DA NON FARE
           }
         });
+        $(".submitsearch").click(
+          function() {
+            //DA NON FARE
+          }
+        );
         break;
 
         case "libri":
@@ -59,16 +99,69 @@ $(document).ready(
           data: {id:id},
           dataType: "json",
           success: function(data){
-            $("#AutoreNome").val(data.Nome);
-            $("#AutoreCognome").val(data.Cognome);
-            $("#AutoreNascita").val(data.DataDiNascita);
-            $("#AutoreMorte").val(data.DataDiMorte);
+            //DA FARE
           }
         });
         break;
 
         default:
         break;
+      }
+    }
+    else {
+      //IN CASO DI INSERT
+      switch (pagina) {
+        case "autori":
+        $(".submitsearch").click(
+          function() {
+            var Autore = {};
+            Autore.Nome = $("#AutoreNome").val();
+            Autore.Cognome = $("#AutoreCognome").val();
+            Autore.DataDiNascita = $("#AutoreNascita").val();
+            Autore.DataDiMorte = $("#AutoreNascita").val();
+            console.log(JSON.stringify(Autore));
+            $.ajax({
+              type: "PUT",
+              url: "",
+              data: {Autore:Autore},
+              dataType: "json",
+              success:function() {
+                console.log("fatto");
+              }
+            });
+          }
+        );
+        break;
+
+        case "generi":
+        $(".submitsearch").click(
+          function() {
+            var CasaEditrice = {};
+            CasaEditrice.Nome = $("#CasaNome").val();
+            CasaEditrice.LuogoSede = $("#CasaLuogo").val();
+            console.log(JSON.stringify(CasaEditrice));
+            $.ajax({
+              type: "POST",
+              url: "",
+              data: {CasaEditrice:CasaEditrice},
+              dataType: "json",
+              success:function() {
+                console.log("fatto");
+              }
+            });
+          }
+        );
+        break;
+
+        case "case":
+        break;
+
+        case "libri":
+        break;
+
+        default:
+        break;
+
       }
     }
   }
