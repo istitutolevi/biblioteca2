@@ -5,7 +5,6 @@ include 'C:/xampp/htdocs/bibliotecaa/src/WebAPI/Common/connection.php';
 
 $method= $_SERVER['REQUEST_METHOD'];
 $body= file_get_contents('php://input');
-echo($body);
 
 switch ($method) {
     case "GET":
@@ -30,8 +29,9 @@ function Create($jsonAutore, $connector)
 
     $decode = json_decode($jsonAutore);
 
-
-    $autore = new viewAutore($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascita,$decode->Autore->DataDiMorte );
+    error_reporting(0);
+    $autore = new viewAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->DataDiNascita,$decode->DataDiMorte );
+    error_reporting(1);
     $query ="INSERT INTO AUTORI (Nome,Cognome,DataNascita,DataMorte) VALUE (:nome,:cognome,:dataN,:dataM)";
 
     $stmt = $connector->prepare($query);
@@ -68,33 +68,37 @@ function Read($jsonAutore, $connector)
 {
     $decode = json_decode($jsonAutore);
 
-
+    error_reporting(0);
     $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
                                 $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
-    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome && Cognome LIKE :cognome || DataNascita BETWEEN :dataNDA AND :dataNA || DataMorte BETWEEN :dataMDA AND :dataMA";
+    error_reporting(1);
+    echo $autore->Nome;
+    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome /*&& Cognome LIKE :cognome && DataNascita BETWEEN :dataNDA AND :dataNA && DataMorte BETWEEN :dataMDA AND :dataMA*/";
 
     $stmt = $connector->prepare($query);
 
-    $nome= "%".$autore->Nome."%";
-    $cognome= "%".$autore->Cognome."%";
-    //
+    $nome= $autore->Nome."%";
+    $cognome= $autore->Cognome."%";
+
     $stmt->bindParam(':nome',$nome,PDO::PARAM_STR);
-    $stmt->bindParam(':cognome',$cognome,PDO::PARAM_STR);
-    $stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
-    $stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
-    $stmt->bindParam(':dataMDA',$autore->MorteDa,PDO::PARAM_STR);
-    $stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
+    //$stmt->bindParam(':cognome',$cognome,PDO::PARAM_STR);
+    //$stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
+    //$stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
+    //$stmt->bindParam(':dataMDA',$autore->MorteDa,PDO::PARAM_STR);
+    //$stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
 
 
 
     if($stmt->execute()){
 
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        header('Content-Type: json');
         echo json_encode($element);
         return true;
     }
 
-    echo "Read false ";
+    echo "Read false";
     return false;
 
 
@@ -106,8 +110,10 @@ function Update($jsonAutore, $connector)
 
     $decode = json_decode($jsonAutore);
 
+    error_reporting(0);
+    $autore = new viewAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->DataDiNascita,$decode->DataDiMorte );
+    error_reporting(1);
 
-    $autore = new viewAutore($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascita,$decode->Autore->DataDiMorte );
     $query ="UPDATE Autori SET Nome=:nome, Cognome=:cognome, DataNascita=:dataN, DataMorte=:dataM WHERE Id=:id";
     $stmt = $connector->prepare($query);
 

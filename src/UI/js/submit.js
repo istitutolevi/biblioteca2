@@ -66,12 +66,13 @@ $(document).ready(
           type: "GET",
           url: "../../WebAPI/Autori/controller.php",
           data: { Autore: autore },
-          dataType: "text",
+          dataType: "json",
+          contentType: "json",
           success: function(data){
-            console.log(data);
-            /* $("body").html("<table></table>");
+            //console.log(data);
+            $("body").html("<table></table>");
             $.each(data,function(index,element){
-              $("table").append("<tr id=\"" + element.Id + "\">"+"<td>" + element.Id + "</td>"+"<td>" + element.Nome + "</td>"+"<td>" + element.Cognome + "</td>"+"<td>" + element.DataDiNascita + "</td>"+"<td>" + element.DataDiMorte + "</td>"+"<td>"+"<button class=\"modifica\" numero=\"" + element.Id + "\">Modifica</button>"+"<td>"+"<button class=\"elimina\" numero=\"" + element.Id + "\">Elimina</button>"+"</tr>");
+              $("table").append("<tr id=\"" + element.Id + "\">"+"<td>" + element.Id + "</td>"+"<td>" + element.Nome + "</td>"+"<td>" + element.Cognome + "</td>"+"<td>" + element.DataNascita + "</td>"+"<td>" + element.DataMorte + "</td>"+"<td>"+"<button class=\"modifica\" numero=\"" + element.Id + "\">Modifica</button>"+"<td>"+"<button class=\"elimina\" numero=\"" + element.Id + "\">Elimina</button>"+"</tr>");
             });
             $(".modifica").click(
                   function(){
@@ -93,7 +94,7 @@ $(document).ready(
                           }
                         });
                       }
-                    ); */
+                    );
           },
       error: function (xhr, ajaxOptions, thrownError) {
         console.log(xhr.status);
