@@ -71,18 +71,7 @@ function Read($jsonAutore, $connector)
 
     $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
                                 $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
-<<<<<<< HEAD
-    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome/*&& Cognome=:cognome && (BETWEEN :dataNDA && :dataNA) && (BETWEEN :dataMDA && :dataMA)*/";
-
-    $stmt = $connector->prepare($query);
-
-    $nome="%".$autore->Nome."%";
-
-    $stmt->bindParam(':nome',$nome,PDO::PARAM_STR);
-  /*  $stmt->bindParam(':cognome',$autore->Cognome,PDO::PARAM_STR);
-    $stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
-=======
-    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome && Cognome LIKE :cognome && (BETWEEN :dataNDA && :dataNA) && (BETWEEN :dataMDA && :dataMA)";
+    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome && Cognome LIKE :cognome || DataNascita BETWEEN :dataNDA AND :dataNA || DataMorte BETWEEN :dataMDA AND :dataMA";
 
     $stmt = $connector->prepare($query);
 
@@ -91,11 +80,10 @@ function Read($jsonAutore, $connector)
 
     $stmt->bindParam(':nome',$nome,PDO::PARAM_STR);
     $stmt->bindParam(':cognome',$cognome,PDO::PARAM_STR);
-    $stmt->bindParam(':dataNDa',$autore->NascitaDa,PDO::PARAM_STR);
->>>>>>> 2e046e01ce47deff33da856884010ea98ce0e468
+    $stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
     $stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
     $stmt->bindParam(':dataMDA',$autore->MorteDa,PDO::PARAM_STR);
-    $stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);*/
+    $stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
 
 
 
