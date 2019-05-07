@@ -84,11 +84,13 @@ function Read($jsonAutore, $connector)
 
 
     if($stmt->execute()){
-        echo "Update true";
+
+        $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($element);
         return true;
     }
 
-    echo "Update false";
+    echo "Read false false";
     return false;
 
 
