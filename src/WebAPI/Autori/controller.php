@@ -77,7 +77,7 @@ function Read($jsonAutore, $connector)
 
     $nome= "%".$autore->Nome."%";
     $cognome= "%".$autore->Cognome."%";
-
+    //
     $stmt->bindParam(':nome',$nome,PDO::PARAM_STR);
     $stmt->bindParam(':cognome',$cognome,PDO::PARAM_STR);
     $stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
