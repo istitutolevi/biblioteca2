@@ -70,12 +70,15 @@ function Read($jsonAutore, $connector)
 
     $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
                                 $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
-    $query ="SELECT * FROM Autori WHERE Nome=:nome && Cognome=:cognome && (BETWEEN :dataNDA && :dataNA) && (BETWEEN :dataMDA && :dataMA)";
+    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome && Cognome LIKE :cognome && (BETWEEN :dataNDA && :dataNA) && (BETWEEN :dataMDA && :dataMA)";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':nome',$autore->Nome,PDO::PARAM_STR);
-    $stmt->bindParam(':cognome',$autore->Cognome,PDO::PARAM_STR);
+    $nome= "%".$autore->Nome."%";
+    $cognome= "%".$autore->Cognome."%";
+
+    $stmt->bindParam(':nome',$nome,PDO::PARAM_STR);
+    $stmt->bindParam(':cognome',$cognome,PDO::PARAM_STR);
     $stmt->bindParam(':dataNDa',$autore->NascitaDa,PDO::PARAM_STR);
     $stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
     $stmt->bindParam(':dataMDa',$autore->MorteDa,PDO::PARAM_STR);
