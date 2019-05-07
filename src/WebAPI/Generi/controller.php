@@ -8,27 +8,27 @@ $body= file_get_contents('php://input');
 
 switch ($method) {
     case "GET":
-       // Read($body,$conn);
-        echo $method.$body;
+       Read($body,$conn);
+
         break;
     case "POST":
-        //Update($body,$conn);
-        echo $method.$body;
+        Update($body,$conn);
+
         break;
     case "PUT":
-        //Create($body,$conn);
-        echo $method.$body;
+        Create($body,$conn);
+
         break;
     case "DELETE":
-        //Delete($body, $conn);
-        echo $method.$body;
+        Delete($body, $conn);
+
         break;
     default:
         echo "Not Method Found";
         break;
 }
 
-/*
+
 function Create($jsonGenere, $connector)
 {
 
@@ -55,12 +55,13 @@ function Create($jsonGenere, $connector)
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        http_response_code(201);
         echo json_encode($element);
-        return true;
+
     }
 
-    echo -1;
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile creare un genere."));
 
 
 }
@@ -83,12 +84,15 @@ function Read($jsonGenere, $connector)
     if($stmt->execute()){
 
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($element);
-        return true;
-    }
 
-    echo -1;
-    return false;
+        http_response_code(200);
+        echo json_encode($element);
+
+    }
+    http_response_code(404);
+    echo json_encode(
+        array("message" => "No genere trovato.")
+    );
 
 
 
@@ -119,12 +123,13 @@ function Update($jsonGenere, $connector)
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        http_response_code(200);
         echo json_encode($element);
-        return true;
+
     }
 
-    echo -1;
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile aggiornare un genere."));
 
 
 }
@@ -143,14 +148,14 @@ function Delete($id , $connector)
     if($stmt->execute()){
 
 
+        http_response_code(200);
         echo 1;
-        return true;
+
     }
 
-    echo -1;
-    return false;
-
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile cancellare un genere."));
 
 }
 
-?>*/
+?>
