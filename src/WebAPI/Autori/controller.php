@@ -31,7 +31,7 @@ function Create($jsonAutore, $connector)
     $decode = json_decode($jsonAutore);
 
 
-    $autore = new viewAutore($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascita,$decode->Autore->DataDiMorte );
+    $autore = new viewAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->DataDiNascita,$decode->DataDiMorte );
     $query ="INSERT INTO AUTORI (Nome,Cognome,DataNascita,DataMorte) VALUE (:nome,:cognome,:dataN,:dataM)";
 
     $stmt = $connector->prepare($query);
@@ -71,7 +71,7 @@ function Read($jsonAutore, $connector)
 
     $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
                                 $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
-<<<<<<< HEAD
+
     $query ="SELECT * FROM Autori WHERE Nome LIKE :nome/*&& Cognome=:cognome && (BETWEEN :dataNDA && :dataNA) && (BETWEEN :dataMDA && :dataMA)*/";
 
     $stmt = $connector->prepare($query);
@@ -81,7 +81,7 @@ function Read($jsonAutore, $connector)
     $stmt->bindParam(':nome',$nome,PDO::PARAM_STR);
   /*  $stmt->bindParam(':cognome',$autore->Cognome,PDO::PARAM_STR);
     $stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
-=======
+
     $query ="SELECT * FROM Autori WHERE Nome LIKE :nome && Cognome LIKE :cognome && (BETWEEN :dataNDA && :dataNA) && (BETWEEN :dataMDA && :dataMA)";
 
     $stmt = $connector->prepare($query);
