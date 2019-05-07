@@ -31,7 +31,7 @@ $(document).ready(
             $.ajax({
               type: "POST",
               url: "../../WebAPI/Autori/controller.php",
-              data: {Autore:autore},
+              data: { "Autore": autore },
               dataType: "json",
               success:function() {
                 console.log("fatto");
@@ -127,7 +127,7 @@ $(document).ready(
             $.ajax({
               type: "PUT",
               url: "../../WebAPI/Autori/controller.php",
-              data: { Autore: autore},
+              data: { "Autore": autore },
               dataType: "json",
               success:function() {
                 console.log("fatto");

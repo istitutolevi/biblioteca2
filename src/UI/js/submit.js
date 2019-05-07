@@ -66,7 +66,7 @@ $(document).ready(
           type: "GET",
           url: "../../WebAPI/Autori/controller.php",
           data: { Autore: autore },
-          dataType: "json",
+          dataType: "text",
           success: function(data){
             console.log(data);
             /* $("body").html("<table></table>");
