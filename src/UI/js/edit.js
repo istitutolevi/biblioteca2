@@ -35,6 +35,9 @@ $(document).ready(
               dataType: "json",
               success:function() {
                 console.log("fatto");
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                  alert(jqXHR +" "+ textStatus +" "+ errorThrown);
               }
             });
           }
@@ -127,6 +130,9 @@ $(document).ready(
               dataType: "json",
               success:function() {
                 console.log("fatto");
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                  alert(jqXHR +" "+ textStatus +" "+ errorThrown);
               }
             });
           }
