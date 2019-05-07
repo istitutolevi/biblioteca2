@@ -10,24 +10,16 @@
     <link rel="stylesheet" href="..\css\common.css">
     <script src="../js/jquery.js"></script>
     <script src="../js/autoComplete.js"></script>
+    <script src="../js/edit.js"></script>
 </head>
 
-<body>
-<a href="search.html"><i style="color: #47AB6C; border: 3px solid #47AB6C; border-radius: 50%" class="backbutton fas fa-long-arrow-alt-left"></i></a>
+<body page="autori">
+<a href="admin.html"><i style="color: #47AB6C; border: 3px solid #47AB6C; border-radius: 50%" class="backbutton fas fa-long-arrow-alt-left"></i></a>
 <div class="wrapper" style="border: 2px solid #47AB6C;  box-shadow: 5px 5px 10px 0px #2E6E45;">
-
-    <p class="inputdesc" style="color: #47AB6C">Nome</p><input type="text" class="input" name="Nome"><br>
-    <p class="inputdesc" style="color: #47AB6C">Cognome</p><input type="text" class="input" name="Cognome"><br>
-    <p class="inputdesc" style="color: #47AB6C">DataNascita</p>
-    <input type="date" class="input" name="DataNascitaDa">
-
-    <br>
-    <p class="inputdesc" style="color: #47AB6C">DataMorte</p>
-    <input type="date" class="input" name="DataMorteDa">
-
-    <br>
-
-    <button style="border: 2px solid #47AB6C; color: #47AB6C" class="submitsearch" type="submit" name="librisubmit">Aggiungi Autore</button>
+  <p class="inputdesc" style="color: #47AB6C">Nome</p><input type="text" class="input" id="AutoreNome"><br>
+  <p class="inputdesc" style="color: #47AB6C">Cognome</p><input type="text" class="input" id="AutoreCognome"><br>
+  <p class="inputdesc" style="color: #47AB6C">Data nascita/ Data morte:</p><input type="date" class="input" id="AutoreNascita" style="width: 45%; float: left"><input type="date" class="input" id="AutoreMorte" style="width: 45%; float: right"><br>
+  <button style="border: 2px solid #47AB6C; color: #47AB6C" class="submitsearch" type="submit" name="librisubmit">Aggiungi Autore</button>
 </div>
 </body>
 
