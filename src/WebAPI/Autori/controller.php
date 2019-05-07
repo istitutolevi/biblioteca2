@@ -1,10 +1,11 @@
 <?php
 include 'BindingAutore.php';
-require_once 'C:/xampp/htdocs/bibliotecaa/src/WebAPI/Common/connection.php';
+include 'C:/xampp/htdocs/bibliotecaa/src/WebAPI/Common/connection.php';
 
 
 $method= $_SERVER['REQUEST_METHOD'];
 $body= file_get_contents('php://input');
+echo($body);
 
 switch ($method) {
     case "GET":
@@ -70,17 +71,19 @@ function Read($jsonAutore, $connector)
 
     $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
                                 $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
-    $query ="SELECT * FROM Autori WHERE Nome=:nome && Cognome=:cognome && (BETWEEN :dataNDA && :dataNA) && (BETWEEN :dataMDA && :dataMA)";
+    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome/*&& Cognome=:cognome && (BETWEEN :dataNDA && :dataNA) && (BETWEEN :dataMDA && :dataMA)*/";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':nome',$autore->Nome,PDO::PARAM_STR);
-    $stmt->bindParam(':cognome',$autore->Cognome,PDO::PARAM_STR);
-    $stmt->bindParam(':dataNDa',$autore->NascitaDa,PDO::PARAM_STR);
+    $nome="%".$autore->Nome."%";
+
+    $stmt->bindParam(':nome',$nome,PDO::PARAM_STR);
+  /*  $stmt->bindParam(':cognome',$autore->Cognome,PDO::PARAM_STR);
+    $stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
     $stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
-    $stmt->bindParam(':dataMDa',$autore->MorteDa,PDO::PARAM_STR);
-    $stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
-    $stmt->execute();
+    $stmt->bindParam(':dataMDA',$autore->MorteDa,PDO::PARAM_STR);
+    $stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);*/
+
 
 
     if($stmt->execute()){

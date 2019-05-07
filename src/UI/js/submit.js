@@ -53,19 +53,19 @@ $(document).ready(
 
     $("#autorisubmit").click(
       function(){
-        var Autore = {};
-        Autore.Id = $("#AutoreId").val();
-        Autore.Nome = $("#AutoreNome").val();
-        Autore.Cognome = $("#AutoreCognome").val();
-        Autore.NascitaDa = $("#AutoreNascitaDa").val();
-        Autore.NascitaA = $("#AutoreNascitaA").val();
-        Autore.MorteDa = $("#AutoreMorteDa").val();
-        Autore.MorteA = $("#AutoreMorteA").val();
-        console.log(JSON.stringify(Autore));
+        var autore = {};
+        autore.Id = $("#AutoreId").val();
+        autore.Nome = $("#AutoreNome").val();
+        autore.Cognome = $("#AutoreCognome").val();
+        autore.NascitaDa = $("#AutoreNascitaDa").val();
+        autore.NascitaA = $("#AutoreNascitaA").val();
+        autore.MorteDa = $("#AutoreMorteDa").val();
+        autore.MorteA = $("#AutoreMorteA").val();
+        console.log(JSON.stringify(autore));
         $.ajax({
           type: "GET",
           url: "../../WebAPI/Autori/controller.php",
-          data: {Autore:Autore},
+          data: JSON.stringify(autore),
           dataType: "json",
           success: function(data){
             console.log(data);
