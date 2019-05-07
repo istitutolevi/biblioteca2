@@ -53,21 +53,23 @@ $(document).ready(
 
     $("#autorisubmit").click(
       function(){
-        var autore = {};
-        autore.Id = $("#AutoreId").val();
-        autore.Nome = $("#AutoreNome").val();
-        autore.Cognome = $("#AutoreCognome").val();
-        autore.NascitaDa = $("#AutoreNascitaDa").val();
-        autore.NascitaA = $("#AutoreNascitaA").val();
-        autore.MorteDa = $("#AutoreMorteDa").val();
-        autore.MorteA = $("#AutoreMorteA").val();
+        var Autore = {};
+        Autore.Id = $("#AutoreId").val();
+        Autore.Nome = $("#AutoreNome").val();
+        Autore.Cognome = $("#AutoreCognome").val();
+        Autore.NascitaDa = $("#AutoreNascitaDa").val();
+        Autore.NascitaA = $("#AutoreNascitaA").val();
+        Autore.MorteDa = $("#AutoreMorteDa").val();
+        Autore.MorteA = $("#AutoreMorteA").val();
+        console.log(JSON.stringify(Autore));
         $.ajax({
           type: "GET",
-          url: "../../../mockup/Autori/Ricerca",
-          data: {autore:autore},
+          url: "../../WebAPI/Autori/controller.php",
+          data: {Autore:Autore},
           dataType: "json",
           success: function(data){
-            $("body").html("<table></table>");
+            console.log(data);
+            /* $("body").html("<table></table>");
             $.each(data,function(index,element){
               $("table").append("<tr id=\"" + element.Id + "\">"+"<td>" + element.Id + "</td>"+"<td>" + element.Nome + "</td>"+"<td>" + element.Cognome + "</td>"+"<td>" + element.DataDiNascita + "</td>"+"<td>" + element.DataDiMorte + "</td>"+"<td>"+"<button class=\"modifica\" numero=\"" + element.Id + "\">Modifica</button>"+"<td>"+"<button class=\"elimina\" numero=\"" + element.Id + "\">Elimina</button>"+"</tr>");
             });
@@ -83,7 +85,7 @@ $(document).ready(
                         console.log($(this).attr('numero'));
                         $.ajax({
                           type: "DELETE",
-                          url: "",
+                          url: "../../WebAPI/Autori/controller.php",
                           dataType: "json",
                           data: {id:$(this).attr('numero')},
                           success: function(){
@@ -91,8 +93,12 @@ $(document).ready(
                           }
                         });
                       }
-                    );
-          }
+                    ); */
+          },
+      error: function (xhr, ajaxOptions, thrownError) {
+        console.log(xhr.status);
+        console.log(thrownError);
+      }
         });
       }
     );

@@ -30,7 +30,7 @@ $(document).ready(
             console.log(JSON.stringify(Autore));
             $.ajax({
               type: "POST",
-              url: "",
+              url: "../../WebAPI/Autori/controller.php",
               data: {Autore:Autore},
               dataType: "json",
               success:function() {
@@ -122,7 +122,7 @@ $(document).ready(
             console.log(JSON.stringify(Autore));
             $.ajax({
               type: "PUT",
-              url: "",
+              url: "../../WebAPI/Autori/controller.php",
               data: {Autore:Autore},
               dataType: "json",
               success:function() {
