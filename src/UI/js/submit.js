@@ -61,11 +61,11 @@ $(document).ready(
         autore.NascitaA = $("#AutoreNascitaA").val();
         autore.MorteDa = $("#AutoreMorteDa").val();
         autore.MorteA = $("#AutoreMorteA").val();
-        console.log(JSON.stringify(autore));
+        //console.log(JSON.stringify(autore));
         $.ajax({
           type: "GET",
           url: "../../WebAPI/Autori/controller.php",
-          data: autore,
+          data: {Autore:autore},
           dataType: "json",
           success: function(data){
             console.log(data);
