@@ -11,10 +11,10 @@ class bindingAutore
     public $Id;
     public $Nome;
     public $Cognome;
-    public $DataNascitaDa;
-    public $DataNascitaA;
-    public $DataMorteDa;
-    public $DataMorteA;
+    public $NascitaDa;
+    public $NascitaA;
+    public $MorteDa;
+    public $MorteA;
 
 
     public function __construct($id,$nome,$cognome, $dataNascitaDa,$dataNascitaA, $dataMorteDa, $dataMorteA)
@@ -22,10 +22,10 @@ class bindingAutore
         $this-> Id = $id;
         $this-> Nome = $nome;
         $this-> Cognome = $cognome;
-        $this-> DataNascitaDa = $dataNascitaDa;
-        $this-> DataNascitaA= $dataNascitaA;
-        $this-> DataMorteDa= $dataMorteDa;
-        $this-> DataMorteA= $dataMorteA;
+        $this-> NascitaDa = $dataNascitaDa;
+        $this-> NascitaA= $dataNascitaA;
+        $this-> MorteDa= $dataMorteDa;
+        $this-> MorteA= $dataMorteA;
 
 
     }

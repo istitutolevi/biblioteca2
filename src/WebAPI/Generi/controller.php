@@ -3,18 +3,32 @@ include 'Genere.php';
 require_once 'C:/xampp/htdocs/biblioteca2/src/WebAPI/Common/connection.php';
 
 
+$method= $_SERVER['REQUEST_METHOD'];
+$body= file_get_contents('php://input');
 
-$jC= "{
-  \"Genere\":{
-  \"Id\":\"Fantasy\",
-	
-
+switch ($method) {
+    case "GET":
+       // Read($body,$conn);
+        echo $method.$body;
+        break;
+    case "POST":
+        //Update($body,$conn);
+        echo $method.$body;
+        break;
+    case "PUT":
+        //Create($body,$conn);
+        echo $method.$body;
+        break;
+    case "DELETE":
+        //Delete($body, $conn);
+        echo $method.$body;
+        break;
+    default:
+        echo "Not Method Found";
+        break;
 }
-}
 
-";
-
-
+/*
 function Create($jsonGenere, $connector)
 {
 
@@ -139,4 +153,4 @@ function Delete($id , $connector)
 
 }
 
-?>
+?>*/
