@@ -21,24 +21,25 @@ $(document).ready(
         });
         $(".submitsearch").click(
           function() {
-            var Autore = {};
-            Autore.Id = id;
-            Autore.Nome = $("#AutoreNome").val();
-            Autore.Cognome = $("#AutoreCognome").val();
-            Autore.DataDiNascita = $("#AutoreNascita").val();
-            Autore.DataDiMorte = $("#AutoreNascita").val();
-            console.log(JSON.stringify(Autore));
+            var autore = {};
+            autore.Id = id;
+            autore.Nome = $("#AutoreNome").val();
+            autore.Cognome = $("#AutoreCognome").val();
+            autore.DataDiNascita = $("#AutoreNascita").val();
+            autore.DataDiMorte = $("#AutoreNascita").val();
+            console.log(JSON.stringify(autore));
             $.ajax({
               type: "POST",
               url: "../../WebAPI/Autori/controller.php",
-              data: {Autore:Autore},
+              data: {Autore:autore},
               dataType: "json",
               success:function() {
                 console.log("fatto");
               },
-              error: function(jqXHR, textStatus, errorThrown){
-                  alert(jqXHR +" "+ textStatus +" "+ errorThrown);
-              }
+          error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+          }
             });
           }
         );
@@ -117,23 +118,24 @@ $(document).ready(
         case "autori":
         $(".submitsearch").click(
           function() {
-            var Autore = {};
-            Autore.Nome = $("#AutoreNome").val();
-            Autore.Cognome = $("#AutoreCognome").val();
-            Autore.DataDiNascita = $("#AutoreNascita").val();
-            Autore.DataDiMorte = $("#AutoreNascita").val();
-            console.log(JSON.stringify(Autore));
+            var autore = {};
+            autore.Nome = $("#AutoreNome").val();
+            autore.Cognome = $("#AutoreCognome").val();
+            autore.DataDiNascita = $("#AutoreNascita").val();
+            autore.DataDiMorte = $("#AutoreNascita").val();
+            console.log(JSON.stringify(autore));
             $.ajax({
               type: "PUT",
               url: "../../WebAPI/Autori/controller.php",
-              data: {Autore:Autore},
+              data: { Autore: autore},
               dataType: "json",
               success:function() {
                 console.log("fatto");
               },
-              error: function(jqXHR, textStatus, errorThrown){
-                  alert(jqXHR +" "+ textStatus +" "+ errorThrown);
-              }
+          error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+          }
             });
           }
         );
