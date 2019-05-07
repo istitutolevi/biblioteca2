@@ -8,7 +8,7 @@ $(document).ready(
                     $.ajax(
                         {
                             type:"GET",
-                            url:"../../../mockup/Autori/AutoComplete/?text=" + encodeURI(val),
+                            url:"../../WebAPI/Autori/autocomplete.php?text=" + encodeURI(val),
                             dataType:"json",
                             success: function(data){
                                 var opzioni = new Array();

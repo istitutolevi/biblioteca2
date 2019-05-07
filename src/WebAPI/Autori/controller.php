@@ -1,6 +1,6 @@
 <?php
 include 'BindingAutore.php';
-require_once 'C:/xampp/htdocs/biblioteca2/src/WebAPI/Common/connection.php';
+require_once 'C:/xampp/htdocs/bibliotecaa/src/WebAPI/Common/connection.php';
 
 
 $method= $_SERVER['REQUEST_METHOD'];
