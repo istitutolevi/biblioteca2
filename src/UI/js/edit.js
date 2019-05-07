@@ -67,6 +67,10 @@ $(document).ready(
               dataType: "json",
               success:function() {
                 console.log("fatto");
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
               }
             });
           }
@@ -125,8 +129,12 @@ $(document).ready(
               url: "../../WebAPI/Autori/controller.php",
               data: {Autore:Autore},
               dataType: "json",
-              success:function() {
-                console.log("fatto");
+              success:function(data) {
+                console.log(data);
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
               }
             });
           }
