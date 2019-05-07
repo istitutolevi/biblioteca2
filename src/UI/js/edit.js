@@ -6,169 +6,184 @@ $(document).ready(
       //IN CASO DI MODIFICA
       switch (pagina) {
         case "autori":
-        $("button").html("Modifica Autore ID: " + id);
-        $.ajax({
-          type: "GET",
-          url: "../../../mockup/Autori/Modifica",
-          data: {id:id},
-          dataType: "json",
-          success: function(data){
-            $("#AutoreNome").val(data.Nome);
-            $("#AutoreCognome").val(data.Cognome);
-            $("#AutoreNascita").val(data.DataDiNascita);
-            $("#AutoreMorte").val(data.DataDiMorte);
-          }
-        });
-        $(".submitsearch").click(
-          function() {
-            var autore = {};
-            autore.Id = id;
-            autore.Nome = $("#AutoreNome").val();
-            autore.Cognome = $("#AutoreCognome").val();
-            autore.DataDiNascita = $("#AutoreNascita").val();
-            autore.DataDiMorte = $("#AutoreNascita").val();
-            console.log(JSON.stringify(autore));
-            $.ajax({
-              type: "POST",
-              url: "../../WebAPI/Autori/controller.php",
-              data: { "Autore": autore },
-              dataType: "json",
-              success:function() {
-                console.log("fatto");
-              },
-          error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status);
-            console.log(thrownError);
-          }
-            });
-          }
-        );
-        break;
+          $("button").html("Modifica Autore ID: " + id);
+          $.ajax({
+            type: "GET",
+            url: "../../../mockup/Autori/Modifica",
+            data: {
+              id: id
+            },
+            dataType: "json",
+            success: function(data) {
+              $("#AutoreNome").val(data.Nome);
+              $("#AutoreCognome").val(data.Cognome);
+              $("#AutoreNascita").val(data.DataDiNascita);
+              $("#AutoreMorte").val(data.DataDiMorte);
+            }
+          });
+          $(".submitsearch").click(
+            function() {
+              var autore = {};
+              autore.Id = id;
+              autore.Nome = $("#AutoreNome").val();
+              autore.Cognome = $("#AutoreCognome").val();
+              autore.DataDiNascita = $("#AutoreNascita").val();
+              autore.DataDiMorte = $("#AutoreNascita").val();
+              console.log(JSON.stringify(autore));
+              $.ajax({
+                type: "POST",
+                url: "../../WebAPI/Autori/controller.php",
+                data: {
+                  "Autore": autore
+                },
+                dataType: "json",
+                success: function() {
+                  console.log("fatto");
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                  console.log(xhr.status);
+                  console.log(thrownError);
+                }
+              });
+            }
+          );
+          break;
 
         case "case":
-        $("button").html("Modifica Casa ID: " + id);
-        $.ajax({
-          type: "GET",
-          url: "../../../mockup/CaseEditrici/Modifica",
-          data: {id:id},
-          dataType: "json",
-          success: function(data){
-            $("#CasaNome").val(data.Nome);
-            $("#CasaLuogo").val(data.LuogoSede);
-          }
-        });
-        $(".submitsearch").click(
-          function() {
-            var CasaEditrice = {};
-            CasaEditrice.Id = id;
-            CasaEditrice.Nome = $("#CasaNome").val();
-            CasaEditrice.LuogoSede = $("#CasaLuogo").val();
-            console.log(JSON.stringify(CasaEditrice));
-            $.ajax({
-              type: "POST",
-              url: "",
-              data: {CasaEditrice:CasaEditrice},
-              dataType: "json",
-              success:function() {
-                console.log("fatto");
-              }
-            });
-          }
-        );
-        break;
+          $("button").html("Modifica Casa ID: " + id);
+          $.ajax({
+            type: "GET",
+            url: "../../../mockup/CaseEditrici/Modifica",
+            data: {
+              id: id
+            },
+            dataType: "json",
+            success: function(data) {
+              $("#CasaNome").val(data.Nome);
+              $("#CasaLuogo").val(data.LuogoSede);
+            }
+          });
+          $(".submitsearch").click(
+            function() {
+              var CasaEditrice = {};
+              CasaEditrice.Id = id;
+              CasaEditrice.Nome = $("#CasaNome").val();
+              CasaEditrice.LuogoSede = $("#CasaLuogo").val();
+              console.log(JSON.stringify(CasaEditrice));
+              $.ajax({
+                type: "POST",
+                url: "",
+                data: {
+                  CasaEditrice: CasaEditrice
+                },
+                dataType: "json",
+                success: function() {
+                  console.log("fatto");
+                }
+              });
+            }
+          );
+          break;
 
         case "generi":
-        $("button").html("Modifica Genere ID: " + id);
-        $.ajax({
-          type: "GET",
-          url: "../../../mockup/Generi/Modifica",
-          data: {id:id},
-          dataType: "json",
-          success: function(data){
-            //DA NON FARE
-          }
-        });
-        $(".submitsearch").click(
-          function() {
-            //DA NON FARE
-          }
-        );
-        break;
+          $("button").html("Modifica Genere ID: " + id);
+          $.ajax({
+            type: "GET",
+            url: "../../../mockup/Generi/Modifica",
+            data: {
+              id: id
+            },
+            dataType: "json",
+            success: function(data) {
+              //DA NON FARE
+            }
+          });
+          $(".submitsearch").click(
+            function() {
+              //DA NON FARE
+            }
+          );
+          break;
 
         case "libri":
-        $("button").html("Modifica Libro ID: " + id);
-        $.ajax({
-          type: "GET",
-          url: "../../../mockup/Libri/Modifica",
-          data: {id:id},
-          dataType: "json",
-          success: function(data){
-            //DA FARE
-          }
-        });
-        break;
+          $("button").html("Modifica Libro ID: " + id);
+          $.ajax({
+            type: "GET",
+            url: "../../../mockup/Libri/Modifica",
+            data: {
+              id: id
+            },
+            dataType: "json",
+            success: function(data) {
+              //DA FARE
+            }
+          });
+          break;
 
         default:
-        break;
+          break;
       }
-    }
-    else {
+    } else {
       //IN CASO DI INSERT
       switch (pagina) {
         case "autori":
-        $(".submitsearch").click(
-          function() {
-            var autore = {};
-            autore.Nome = $("#AutoreNome").val();
-            autore.Cognome = $("#AutoreCognome").val();
-            autore.DataDiNascita = $("#AutoreNascita").val();
-            autore.DataDiMorte = $("#AutoreNascita").val();
-            console.log(JSON.stringify(autore));
-            $.ajax({
-              type: "PUT",
-              url: "../../WebAPI/Autori/controller.php",
-              data: { "Autore": autore },
-              dataType: "json",
-              success:function() {
-                console.log("fatto");
-              },
-          error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status);
-            console.log(thrownError);
-          }
-            });
-          }
-        );
-        break;
+          $(".submitsearch").click(
+            function() {
+              var autore = {};
+              autore.Nome = $("#AutoreNome").val();
+              autore.Cognome = $("#AutoreCognome").val();
+              autore.DataDiNascita = $("#AutoreNascita").val();
+              autore.DataDiMorte = $("#AutoreNascita").val();
+              console.log(JSON.stringify(autore));
+              $.ajax({
+                type: "PUT",
+                url: "../../WebAPI/Autori/controller.php",
+                data: {
+                  "Autore": autore
+                },
+                dataType: "json",
+                success: function() {
+                  console.log("fatto");
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                  console.log(xhr.status);
+                  console.log(thrownError);
+                }
+              });
+            }
+          );
+          break;
 
         case "generi":
-        $(".submitsearch").click(
-          function() {
-            var CasaEditrice = {};
-            CasaEditrice.Nome = $("#CasaNome").val();
-            CasaEditrice.LuogoSede = $("#CasaLuogo").val();
-            console.log(JSON.stringify(CasaEditrice));
-            $.ajax({
-              type: "POST",
-              url: "",
-              data: {CasaEditrice:CasaEditrice},
-              dataType: "json",
-              success:function() {
-                console.log("fatto");
-              }
-            });
-          }
-        );
-        break;
+          $(".submitsearch").click(
+            function() {
+              var CasaEditrice = {};
+              CasaEditrice.Nome = $("#CasaNome").val();
+              CasaEditrice.LuogoSede = $("#CasaLuogo").val();
+              console.log(JSON.stringify(CasaEditrice));
+              $.ajax({
+                type: "POST",
+                url: "",
+                data: {
+                  CasaEditrice: CasaEditrice
+                },
+                dataType: "json",
+                success: function() {
+                  console.log("fatto");
+                }
+              });
+            }
+          );
+          break;
 
         case "case":
-        break;
+          break;
 
         case "libri":
-        break;
+          break;
 
         default:
-        break;
+          break;
 
       }
     }
