@@ -70,7 +70,7 @@ function Read($jsonAutore, $connector)
 
     $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
                                 $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
-                                
+
     $query ="SELECT * FROM Autori WHERE Nome LIKE :nome /*&& Cognome LIKE :cognome || DataNascita BETWEEN :dataNDA AND :dataNA || DataMorte BETWEEN :dataMDA AND :dataMA*/";
 
     $stmt = $connector->prepare($query);
@@ -151,9 +151,6 @@ function Delete($id , $connector)
 
     $stmt->bindParam(':id',$id);
 
-    $stmt->execute();
-
-
     if($stmt->execute()){
 
 
@@ -161,8 +158,8 @@ function Delete($id , $connector)
         echo 1;
     }
 
-    http_response_code(503);
-    echo json_encode(array("message" => "Impossibile cancellare un autore."));
+    //http_response_code(503);
+    //echo json_encode(array("message" => "Impossibile cancellare un autore."));
 
 
 }
