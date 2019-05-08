@@ -1,5 +1,6 @@
 <?php
 include 'BindingAutore.php';
+include 'ViewAutore.php';
 include '../Common/connection.php';
 
 

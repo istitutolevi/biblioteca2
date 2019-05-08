@@ -34,7 +34,7 @@ $(document).ready(
                 type: "POST",
                 url: "../../WebAPI/Autori/controller.php",
                 data: {
-                  "Autore": autore
+                  Autore: autore
                 },
                 dataType: "json",
                 success: function() {
@@ -139,7 +139,7 @@ $(document).ready(
                 type: "PUT",
                 url: "../../WebAPI/Autori/controller.php",
                 data: {
-                  "Autore": autore
+                  Autore: autore
                 },
                 dataType: "json",
                 success: function() {
