@@ -1,6 +1,6 @@
 <?php
 include 'BindingAutore.php';
-include 'C:/xampp/htdocs/bibliotecaa/src/WebAPI/Common/connection.php';
+include '../Common/connection.php';
 
 
 $method= $_SERVER['REQUEST_METHOD'];
@@ -9,7 +9,7 @@ echo($body);
 
 switch ($method) {
     case "GET":
-        Read($_GET["autori"],$conn);
+        Read($_GET["autore"],$conn);
         break;
     case "POST":
         Update($body,$conn);
@@ -68,22 +68,22 @@ function Read($jsonAutore, $connector)
 {
     $decode = json_decode($jsonAutore);
 
-
     $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
                                 $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
-    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome && Cognome LIKE :cognome || DataNascita BETWEEN :dataNDA AND :dataNA || DataMorte BETWEEN :dataMDA AND :dataMA";
+                                
+    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome /*&& Cognome LIKE :cognome || DataNascita BETWEEN :dataNDA AND :dataNA || DataMorte BETWEEN :dataMDA AND :dataMA*/";
 
     $stmt = $connector->prepare($query);
 
-    $nome= "%".$autore->Nome."%";
-    $cognome= "%".$autore->Cognome."%";
+    $nome= $autore->Nome."%";
+    //$cognome= "%".$autore->Cognome."%";
     //
     $stmt->bindParam(':nome',$nome,PDO::PARAM_STR);
-    $stmt->bindParam(':cognome',$cognome,PDO::PARAM_STR);
-    $stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
-    $stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
-    $stmt->bindParam(':dataMDA',$autore->MorteDa,PDO::PARAM_STR);
-    $stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
+    //$stmt->bindParam(':cognome',$cognome,PDO::PARAM_STR);
+    //$stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
+    //$stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
+    //$stmt->bindParam(':dataMDA',$autore->MorteDa,PDO::PARAM_STR);
+    //$stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
 
 
 
@@ -94,10 +94,10 @@ function Read($jsonAutore, $connector)
         echo json_encode($element);
 
     }
-    http_response_code(404);
-    echo json_encode(
-        array("message" => "No autore trovato.")
-    );
+    //http_response_code(404);
+    //echo json_encode(
+        //array("message" => "No autore trovato.")
+    //);
 
 
 

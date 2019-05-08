@@ -69,9 +69,8 @@ $(document).ready(
         $.ajax({
           type: "GET",
           url: "../../WebAPI/Autori/controller.php?autore=" + encodeURI(JSON.stringify(autore)),
-          dataType: "json",
           success: function(data) {
-            //console.log(data);
+            console.log(data);
             $("body").html("<table></table>");
             $.each(data, function(index, element) {
               $("table").append("<tr id=\"" + element.Id + "\">" + "<td>" + element.Id + "</td>" + "<td>" + element.Nome + "</td>" + "<td>" + element.Cognome + "</td>" + "<td>" + element.DataNascita + "</td>" + "<td>" + element.DataMorte + "</td>" + "<td>" + "<button class=\"modifica\" numero=\"" + element.Id + "\">Modifica</button>" + "<td>" + "<button class=\"elimina\" numero=\"" + element.Id + "\">Elimina</button>" + "</tr>");
