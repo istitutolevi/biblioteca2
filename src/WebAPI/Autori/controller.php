@@ -1,15 +1,16 @@
 <?php
 include 'BindingAutore.php';
+include 'ViewAutore.php';
 include '../Common/connection.php';
 
 
 $method= $_SERVER['REQUEST_METHOD'];
 $body= file_get_contents('php://input');
-
+echo($body);
 
 switch ($method) {
     case "GET":
-        Read($body,$conn);
+        Read($_GET["autore"],$conn);
         break;
     case "POST":
         Update($body,$conn);
@@ -18,7 +19,7 @@ switch ($method) {
         Create($body,$conn);
         break;
     case "DELETE":
-        Delete($body, $conn);
+        Delete($_GET["id"], $conn);
         break;
     default:
         echo "Not Method Found";
@@ -30,9 +31,8 @@ function Create($jsonAutore, $connector)
 
     $decode = json_decode($jsonAutore);
 
-    error_reporting(0);
+
     $autore = new viewAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->DataDiNascita,$decode->DataDiMorte );
-    error_reporting(1);
     $query ="INSERT INTO AUTORI (Nome,Cognome,DataNascita,DataMorte) VALUE (:nome,:cognome,:dataN,:dataM)";
 
     $stmt = $connector->prepare($query);
@@ -55,12 +55,12 @@ function Create($jsonAutore, $connector)
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        echo $element;
-        return true;
+        http_response_code(201);
+        echo json_encode($element);
     }
 
-    echo -1;
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile creare un autore."));
 
 
 }
@@ -69,18 +69,25 @@ function Read($jsonAutore, $connector)
 {
     $decode = json_decode($jsonAutore, true);
 
+<<<<<<< HEAD
     //error_reporting(0);
     $autore = new bindingAutore($decode["Id"],$decode["Nome"],$decode["Cognome"],$decode["NascitaDa"],$decode["NascitaA"],$decode["MorteDa"], $decode["MorteA"]);
     print_r($autore);
     //error_reporting(1);
 
     $query ="SELECT * FROM Autori WHERE Nome LIKE :nome /* || Cognome LIKE :cognome || DataNascita BETWEEN :dataNDA AND :dataNA || DataMorte BETWEEN :dataMDA AND :dataMA*/";
+=======
+    $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
+                                $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
+
+    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome /*&& Cognome LIKE :cognome || DataNascita BETWEEN :dataNDA AND :dataNA || DataMorte BETWEEN :dataMDA AND :dataMA*/";
+>>>>>>> ec762a3a17072a0b0d5a10f4934067c22b918700
 
     $stmt = $connector->prepare($query);
 
     $nome= $autore->Nome."%";
-    //$cognome= $autore->Cognome."%";
-
+    //$cognome= "%".$autore->Cognome."%";
+    //
     $stmt->bindParam(':nome',$nome,PDO::PARAM_STR);
     //$stmt->bindParam(':cognome',$cognome,PDO::PARAM_STR);
     //$stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
@@ -93,14 +100,14 @@ function Read($jsonAutore, $connector)
     if($stmt->execute()){
 
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        header('Content-Type: json');
+        http_response_code(200);
         echo json_encode($element);
-        return true;
-    }
 
-    echo "Read false";
-    return false;
+    }
+    //http_response_code(404);
+    //echo json_encode(
+        //array("message" => "No autore trovato.")
+    //);
 
 
 
@@ -111,10 +118,8 @@ function Update($jsonAutore, $connector)
 
     $decode = json_decode($jsonAutore);
 
-    error_reporting(0);
-    $autore = new viewAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->DataDiNascita,$decode->DataDiMorte );
-    error_reporting(1);
 
+    $autore = new viewAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->DataDiNascita,$decode->DataDiMorte );
     $query ="UPDATE Autori SET Nome=:nome, Cognome=:cognome, DataNascita=:dataN, DataMorte=:dataM WHERE Id=:id";
     $stmt = $connector->prepare($query);
 
@@ -138,38 +143,33 @@ function Update($jsonAutore, $connector)
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        echo $element;
-        return true;
+        http_response_code(200);
+        echo json_encode($element);
+
     }
 
-    echo "Add false";
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile aggiornare un genere."));
 
 }
 
 function Delete($id , $connector)
 {
-$s= json_decode($id);
-$IdRemove= $s->Id;
-
     $query ="DELETE FROM autori WHERE Id=:id";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':id',$IdRemove);
-
-
-
+    $stmt->bindParam(':id',$id);
 
     if($stmt->execute()){
 
 
-        echo "Remove true";
-        return true;
+        http_response_code(200);
+        echo 1;
     }
 
-    echo "Remove false";
-    return false;
+    //http_response_code(503);
+    //echo json_encode(array("message" => "Impossibile cancellare un autore."));
 
 
 }

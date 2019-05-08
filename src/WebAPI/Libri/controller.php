@@ -7,7 +7,7 @@ $body= file_get_contents('php://input');
 
 switch ($method) {
     case "GET":
-        Read($body,$conn);
+        Read($_GET["libri"],$conn);
         break;
     case "POST":
         Update($body,$conn);
@@ -16,7 +16,7 @@ switch ($method) {
         Create($body,$conn);
         break;
     case "DELETE":
-        Delete($body, $conn);
+        Delete($_GET["id"], $conn);
         break;
     default:
         echo "Not Method Found";
@@ -45,7 +45,7 @@ function Create($jsonLibro, $connector)
     $decode = json_decode($jsonLibro);
 
 
-    $libro = new libro($decode->Libro->Id,$decode->Libro->Titolo,$decode->Libro->ISBN,$decode->Libro->Codice,$decode->Libro->IdCasaEditrice,$decode->Libro->AnnoPubblicazione,$decode->Libro->CollocazioneLuogo,$decode->Libro->CollocazioneArmadio,$decode->Libro->CollocazioneScaffale,$decode->Libro->Stato,$decode->Libro->IdUtentePrestito,$decode->Libro->DataInizioPrestito,$decode->Libro->DataFinePrestitoPrevista,$decode->Libro->IdGenere);
+    $libro = new libro($decode->Id,$decode->Titolo,$decode->ISBN,$decode->Codice,$decode->IdCasaEditrice,$decode->AnnoPubblicazione,$decode->CollocazioneLuogo,$decode->Libro->CollocazioneArmadio,$decode->CollocazioneScaffale,$decode->Stato,$decode->IdUtentePrestito,$decode->DataInizioPrestito,$decode->DataFinePrestitoPrevista,$decode->IdGenere);
     $query ="INSERT INTO Libri (Id,Titolo,ISBN,Codice,IdCasaEditrice,AnnoPubblicazione,CollocazioneLuogo,CollocazioneArmadio,CollocazioneScaffale,Stato,IdUtentePrestito,DataInizioPrestito,DataFinePrestitoPrevista,IdGenere) VALUE (:id,:titolo,:isbn,:codice,:idCasaEditrice,:annoPubblicazione,:collocazioneLuogo,:collocazioneArmadio,:collocazioneScaffale,:stato,:idUtentePrestito,:dataInizioPrestito,:dataFinePrestitoPrevista,:idGenere)";
 
     $stmt = $connector->prepare($query);
@@ -84,12 +84,13 @@ function Create($jsonLibro, $connector)
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        echo $element;
-        return true;
+        http_response_code(201);
+        echo json_encode($element);
+
     }
 
-    echo "Add false";
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile creare un libro."));
 
 
 }
@@ -114,12 +115,14 @@ function Read($jsonBindingLibro, $connector)
     if($stmt->execute()){
 
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        http_response_code(200);
         echo json_encode($element);
-        return true;
-    }
 
-    echo "Read false";
-    return false;
+    }
+    http_response_code(404);
+    echo json_encode(
+        array("message" => "No libro trovato.")
+    );
 
 
 
@@ -132,7 +135,7 @@ function Update($jsonLibro, $connector)
     $decode = json_decode($jsonLibro);
 
 
-    $libro = new libro($decode->Libro->Id,$decode->Libro->Titolo,$decode->Libro->ISBN,$decode->Libro->Codice,$decode->Libro->IdCasaEditrice,$decode->Libro->AnnoPubblicazione,$decode->Libro->CollocazioneLuogo,$decode->Libro->CollocazioneArmadio,$decode->Libro->CollocazioneScaffale,$decode->Libro->Stato,$decode->Libro->IdUtentePrestito,$decode->Libro->DataInizioPrestito,$decode->Libro->DataFinePrestitoPrevista,$decode->Libro->IdGenere);
+    $libro = new libro($decode->Id,$decode->Titolo,$decode->ISBN,$decode->Codice,$decode->IdCasaEditrice,$decode->AnnoPubblicazione,$decode->CollocazioneLuogo,$decode->CollocazioneArmadio,$decode->CollocazioneScaffale,$decode->Stato,$decode->IdUtentePrestito,$decode->DataInizioPrestito,$decode->DataFinePrestitoPrevista,$decode->IdGenere);
     $query ="UPDATE Libri SET Titolo=:titolo,ISBN=:isbn,Codice=:codice,IdCasaEditrice=:idCasaEditrice,AnnoPubblicazione=:annoPubblicazione,CollocazioneLuogo=:collocazioneLuogo,CollocazioneArmadio=:collocazioneArmadio,CollocazioneScaffale=:collocazioneScaffale,Stato=:stato,IdUtentePrestito=:idUtentePrestito,DataInizioPrestito=:dataInizioPrestito,DataFinePrestitoPrevista=:dataFinePrestitoPrevista,IdGenere=:idGenere WHERE Id=:id";
 
     $stmt = $connector->prepare($query);
@@ -171,12 +174,13 @@ function Update($jsonLibro, $connector)
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        http_response_code(200);
         echo json_encode($element);
-        return true;
+
     }
 
-    echo "Add false";
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile aggiornare un libro."));
 
 
     //non so come farlo
@@ -196,13 +200,13 @@ function Delete($id , $connector)
 
     if($stmt->execute()){
 
+        http_response_code(200);
+        echo 1;
 
-        echo "Remove true";
-        return true;
     }
 
-    echo "Remove false";
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile cancellare un genere."));
 
 
 }

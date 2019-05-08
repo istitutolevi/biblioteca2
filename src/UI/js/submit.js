@@ -69,12 +69,17 @@ $(document).ready(
         console.log(JSON.stringify(autore));
         $.ajax({
           type: "GET",
+<<<<<<< HEAD
           url: "../../WebAPI/Autori/controller.php",
           data: { data : autore},
           dataType: "json",
           contentType: "jsonp",
+=======
+          url: "../../WebAPI/Autori/controller.php?autore=" + encodeURI(JSON.stringify(autore)),
+          dataType: "json",
+>>>>>>> ec762a3a17072a0b0d5a10f4934067c22b918700
           success: function(data) {
-            //console.log(data);
+            console.log(data);
             $("body").html("<table></table>");
             $.each(data, function(index, element) {
               $("table").append("<tr id=\"" + element.Id + "\">" + "<td>" + element.Id + "</td>" + "<td>" + element.Nome + "</td>" + "<td>" + element.Cognome + "</td>" + "<td>" + element.DataNascita + "</td>" + "<td>" + element.DataMorte + "</td>" + "<td>" + "<button class=\"modifica\" numero=\"" + element.Id + "\">Modifica</button>" + "<td>" + "<button class=\"elimina\" numero=\"" + element.Id + "\">Elimina</button>" + "</tr>");
@@ -91,11 +96,8 @@ $(document).ready(
                 console.log($(this).attr('numero'));
                 $.ajax({
                   type: "DELETE",
-                  url: "../../WebAPI/Autori/controller.php",
+                  url: "../../WebAPI/Autori/controller.php?id=" + encodeURI($(this).attr('numero')),
                   dataType: "json",
-                  data: {
-                    Id: $(this).attr('numero')
-                  },
                   success: function() {
 
                   }
