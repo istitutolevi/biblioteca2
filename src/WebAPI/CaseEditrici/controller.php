@@ -7,7 +7,7 @@ $body= file_get_contents('php://input');
 
 switch ($method) {
     case "GET":
-        Read($body,$conn);
+        Read($_GET["casaEditrice"],$conn);
         break;
     case "POST":
         Update($body,$conn);
@@ -16,7 +16,7 @@ switch ($method) {
         Create($body,$conn);
         break;
     case "DELETE":
-        Delete($body, $conn);
+        Delete($_GET["id"], $conn);
         break;
     default:
         echo "Not Method Found";
@@ -30,7 +30,7 @@ function Create($jsonCasaEditrice, $connector)
     $decode = json_decode($jsonCasaEditrice);
 
 
-    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->Luogo);
+    $casaEditrice = new casaEditrice($decode->Id,$decode->Nome,$decode->Luogo);
     $query ="INSERT INTO CaseEditrici (Nome,LuogoSede) VALUE (:nome,:luogoSede)";
 
     $stmt = $connector->prepare($query);
@@ -50,12 +50,13 @@ function Create($jsonCasaEditrice, $connector)
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        http_response_code(201);
         echo json_encode($element);
-        return true;
+
     }
 
-    echo "Add false";
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile creare un casa editrice."));
 
 
 }
@@ -65,7 +66,7 @@ function Read($jsonCasaEditrice, $connector)
     $decode = json_decode($jsonCasaEditrice);
 
 
-    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->Luogo);
+    $casaEditrice = new casaEditrice($decode->Id,$decode->Nome,$decode->Luogo);
     $query ="SELECT * FROM CaseEditrici WHERE Nome=:nome && LuogoSede=:luogoSede";
 
     $stmt = $connector->prepare($query);
@@ -78,12 +79,14 @@ function Read($jsonCasaEditrice, $connector)
     if($stmt->execute()){
 
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        http_response_code(200);
         echo json_encode($element);
-        return true;
-    }
 
-    echo "Read false";
-    return false;
+    }
+    http_response_code(404);
+    echo json_encode(
+        array("message" => "No casa editrice trovato.")
+    );
 
 
 
@@ -94,7 +97,7 @@ function Update($jsonCasaEditrice, $connector)
     $decode = json_decode($jsonCasaEditrice);
 
 
-    $casaEditrice = new casaEditrice($decode->CasaEditrice->Id,$decode->CasaEditrice->Nome,$decode->CasaEditrice->Luogo);
+    $casaEditrice = new casaEditrice($decode->Id,$decode->Nome,$decode->Luogo);
     $query ="UPDATE CaseEditrici SET Nome=:nome, LuogoSede=:luogoSede WHERE Id=:id";
 
     $stmt = $connector->prepare($query);
@@ -115,12 +118,13 @@ function Update($jsonCasaEditrice, $connector)
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        http_response_code(200);
         echo json_encode($element);
-        return true;
+
     }
 
-    echo "Add false";
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile aggiornare un genere."));
 
 
 }
@@ -140,12 +144,13 @@ function Delete($id , $connector)
     if($stmt->execute()){
 
 
-        echo "Remove true";
-        return true;
+        http_response_code(200);
+        echo 1;
+
     }
 
-    echo "Remove false";
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile cancellare un genere."));
 
 
 }

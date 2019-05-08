@@ -8,7 +8,7 @@ $body= file_get_contents('php://input');
 
 switch ($method) {
     case "GET":
-       Read($body,$conn);
+       Read($_GET["generi"],$conn);
 
         break;
     case "POST":
@@ -20,7 +20,7 @@ switch ($method) {
 
         break;
     case "DELETE":
-        Delete($body, $conn);
+        Delete($_GET["id"], $conn);
 
         break;
     default:
@@ -35,7 +35,7 @@ function Create($jsonGenere, $connector)
     $decode = json_decode($jsonGenere);
 
 
-    $genere = new genere($decode->Genere->Id);
+    $genere = new genere($decode->Id);
     $query ="INSERT INTO Generi (Id) VALUE (:id)";
 
     $stmt = $connector->prepare($query);
@@ -71,7 +71,7 @@ function Read($jsonGenere, $connector)
     $decode = json_decode($jsonGenere);
 
 
-    $genere = new genere($decode->Genere->Id);
+    $genere = new genere($decode->Id);
     $query ="SELECT * FROM Generi WHERE Id=:id";
 
     $stmt = $connector->prepare($query);
@@ -103,7 +103,7 @@ function Update($jsonGenere, $connector)
     $decode = json_decode($jsonGenere);
 
 
-    $genere = new genere($decode->Genere->Id);
+    $genere = new genere($decode->Id);
     $query ="UPDATE Generi SET Id=:id WHERE Id=:id";
 
     $stmt = $connector->prepare($query);

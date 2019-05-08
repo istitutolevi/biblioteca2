@@ -9,7 +9,7 @@ echo($body);
 
 switch ($method) {
     case "GET":
-        Read($body,$conn);
+        Read($_GET["autori"],$conn);
         break;
     case "POST":
         Update($body,$conn);
@@ -18,7 +18,7 @@ switch ($method) {
         Create($body,$conn);
         break;
     case "DELETE":
-        Delete($body, $conn);
+        Delete($_GET["id"], $conn);
         break;
     default:
         echo "Not Method Found";
@@ -31,7 +31,7 @@ function Create($jsonAutore, $connector)
     $decode = json_decode($jsonAutore);
 
 
-    $autore = new viewAutore($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascita,$decode->Autore->DataDiMorte );
+    $autore = new viewAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->DataDiNascita,$decode->DataDiMorte );
     $query ="INSERT INTO AUTORI (Nome,Cognome,DataNascita,DataMorte) VALUE (:nome,:cognome,:dataN,:dataM)";
 
     $stmt = $connector->prepare($query);
@@ -54,12 +54,12 @@ function Create($jsonAutore, $connector)
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        echo $element;
-        return true;
+        http_response_code(201);
+        echo json_encode($element);
     }
 
-    echo -1;
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile creare un autore."));
 
 
 }
@@ -90,12 +90,14 @@ function Read($jsonAutore, $connector)
     if($stmt->execute()){
 
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        http_response_code(200);
         echo json_encode($element);
-        return true;
-    }
 
-    echo "Read false ";
-    return false;
+    }
+    http_response_code(404);
+    echo json_encode(
+        array("message" => "No autore trovato.")
+    );
 
 
 
@@ -107,7 +109,7 @@ function Update($jsonAutore, $connector)
     $decode = json_decode($jsonAutore);
 
 
-    $autore = new viewAutore($decode->Autore->Id,$decode->Autore->Nome,$decode->Autore->Cognome,$decode->Autore->DataDiNascita,$decode->Autore->DataDiMorte );
+    $autore = new viewAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->DataDiNascita,$decode->DataDiMorte );
     $query ="UPDATE Autori SET Nome=:nome, Cognome=:cognome, DataNascita=:dataN, DataMorte=:dataM WHERE Id=:id";
     $stmt = $connector->prepare($query);
 
@@ -131,12 +133,13 @@ function Update($jsonAutore, $connector)
         $stmt->execute();
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        echo $element;
-        return true;
+        http_response_code(200);
+        echo json_encode($element);
+
     }
 
-    echo "Add false";
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile aggiornare un genere."));
 
 }
 
@@ -154,12 +157,12 @@ function Delete($id , $connector)
     if($stmt->execute()){
 
 
-        echo "Remove true";
-        return true;
+        http_response_code(200);
+        echo 1;
     }
 
-    echo "Remove false";
-    return false;
+    http_response_code(503);
+    echo json_encode(array("message" => "Impossibile cancellare un autore."));
 
 
 }
