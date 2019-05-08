@@ -68,12 +68,8 @@ $(document).ready(
         console.log(JSON.stringify(autore));
         $.ajax({
           type: "GET",
-          url: "../../WebAPI/Autori/controller.php",
-          data: {
-            Autore: autore
-          },
+          url: "../../WebAPI/Autori/controller.php?autore=" + encodeURI(autore),
           dataType: "json",
-          contentType: "json",
           success: function(data) {
             //console.log(data);
             $("body").html("<table></table>");
@@ -92,11 +88,8 @@ $(document).ready(
                 console.log($(this).attr('numero'));
                 $.ajax({
                   type: "DELETE",
-                  url: "../../WebAPI/Autori/controller.php",
+                  url: "../../WebAPI/Autori/controller.php?id=" + encodeURI($(this).attr('numero')),
                   dataType: "json",
-                  data: {
-                    Id: $(this).attr('numero')
-                  },
                   success: function() {
 
                   }
