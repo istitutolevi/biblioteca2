@@ -69,19 +69,10 @@ function Read($jsonAutore, $connector)
 {
     $decode = json_decode($jsonAutore, true);
 
-<<<<<<< HEAD
-    //error_reporting(0);
-    $autore = new bindingAutore($decode["Id"],$decode["Nome"],$decode["Cognome"],$decode["NascitaDa"],$decode["NascitaA"],$decode["MorteDa"], $decode["MorteA"]);
-    print_r($autore);
-    //error_reporting(1);
-
-    $query ="SELECT * FROM Autori WHERE Nome LIKE :nome /* || Cognome LIKE :cognome || DataNascita BETWEEN :dataNDA AND :dataNA || DataMorte BETWEEN :dataMDA AND :dataMA*/";
-=======
     $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
                                 $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
 
     $query ="SELECT * FROM Autori WHERE Nome LIKE :nome /*&& Cognome LIKE :cognome || DataNascita BETWEEN :dataNDA AND :dataNA || DataMorte BETWEEN :dataMDA AND :dataMA*/";
->>>>>>> ec762a3a17072a0b0d5a10f4934067c22b918700
 
     $stmt = $connector->prepare($query);
 

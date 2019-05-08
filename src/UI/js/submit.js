@@ -69,15 +69,8 @@ $(document).ready(
         console.log(JSON.stringify(autore));
         $.ajax({
           type: "GET",
-<<<<<<< HEAD
-          url: "../../WebAPI/Autori/controller.php",
-          data: { data : autore},
-          dataType: "json",
-          contentType: "jsonp",
-=======
           url: "../../WebAPI/Autori/controller.php?autore=" + encodeURI(JSON.stringify(autore)),
           dataType: "json",
->>>>>>> ec762a3a17072a0b0d5a10f4934067c22b918700
           success: function(data) {
             console.log(data);
             $("body").html("<table></table>");
