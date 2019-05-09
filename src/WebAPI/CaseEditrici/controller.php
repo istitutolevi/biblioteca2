@@ -68,12 +68,17 @@ function Read($jsonCasaEditrice, $connector)
 
 
     $casaEditrice = new casaEditrice($decode->Id,$decode->Nome,$decode->Luogo);
-    $query ="SELECT * FROM CaseEditrici WHERE Nome=:nome && LuogoSede=:luogoSede";
+
+    $query ="SELECT * FROM CaseEditrici WHERE Id=:id || ( Nome LIKE :nome && LuogoSede LIKE :luogoSede) LIMIT 50";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':nome',$casaEditrice->Nome,PDO::PARAM_STR);
-    $stmt->bindParam(':luogoSede',$casaEditrice->Luogo,PDO::PARAM_STR);
+    $nomeSearch= $casaEditrice->Nome."%";
+    $LuogoSedeSerach= $casaEditrice->Luogo."%";
+
+    $stmt->bindParam(':id',$casaEditrice->Id,PDO::PARAM_INT);
+    $stmt->bindParam(':nome',$nomeSearch,PDO::PARAM_STR);
+    $stmt->bindParam(':luogoSede',$LuogoSedeSerach,PDO::PARAM_STR);
 
 
 
@@ -132,12 +137,12 @@ function Update($jsonCasaEditrice, $connector)
 
 function Delete($id , $connector)
 {
-    $idDelete= json_decode($id);
+
     $query ="DELETE FROM CaseEditrici WHERE Id=:id";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':id',$idDelete);
+    $stmt->bindParam(':id',$id);
 
 
 
