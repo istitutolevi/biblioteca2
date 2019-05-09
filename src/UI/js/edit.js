@@ -64,34 +64,47 @@ $(document).ready(
 
         case "case":
           $("button").html("Modifica Casa ID: " + id);
+          var casa = {};
+          casa.Id = id;
+          casa.Nome = "";
+          casa.LuogoSede = "";
+          console.log(JSON.stringify(casa));
           $.ajax({
             type: "GET",
-            url: "../../../mockup/CaseEditrici/Modifica",
-            data: {
-              id: id
-            },
+            url: "../../WebAPI/CaseEditrici/controller.php",
             dataType: "json",
+            data: {
+              autore: JSON.stringify(casa)
+            },
             success: function(data) {
-              $("#CasaNome").val(data.Nome);
-              $("#CasaLuogo").val(data.LuogoSede);
+              console.log(data);
+              $("#CasaNome").val(data[0].Nome);
+              $("#CasaLuogo").val(data[0].LuogoSede);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              console.log(xhr.status);
+              console.log(thrownError);
             }
           });
           $(".submitsearch").click(
             function() {
-              var CasaEditrice = {};
-              CasaEditrice.Id = id;
-              CasaEditrice.Nome = $("#CasaNome").val();
-              CasaEditrice.LuogoSede = $("#CasaLuogo").val();
-              console.log(JSON.stringify(CasaEditrice));
+              var casa = {};
+              casa.Id = id;
+              casa.Nome = $("#CasaNome").val();
+              casa.Cognome = $("#CasaLuogo").val();
+              console.log(JSON.stringify(casa));
               $.ajax({
                 type: "POST",
-                url: "",
-                data: {
-                  CasaEditrice: CasaEditrice
+                url: "../../WebAPI/CaseEditrici/controller.php",
+                data: JSON.stringify(casa),
+                dataType: "text",
+                contentType: "application/json",
+                success: function(data) {
+                  console.log(data);
                 },
-                dataType: "json",
-                success: function() {
-                  console.log("fatto");
+                error: function(xhr, ajaxOptions, thrownError) {
+                  console.log(xhr.status);
+                  console.log(thrownError);
                 }
               });
             }
@@ -99,38 +112,47 @@ $(document).ready(
           break;
 
         case "generi":
-          $("button").html("Modifica Genere ID: " + id);
+          $("button").html("Modifica Casa ID: " + id);
+          var genere = {};
+          genere.Id = id;
+          console.log(JSON.stringify(genere));
           $.ajax({
             type: "GET",
-            url: "../../../mockup/Generi/Modifica",
-            data: {
-              id: id
-            },
+            url: "../../WebAPI/Generi/controller.php",
             dataType: "json",
+            data: {
+              autore: JSON.stringify(genere)
+            },
             success: function(data) {
-              //DA NON FARE
+              console.log(data);
+              $("#GenereId").val(data[0].Id);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              console.log(xhr.status);
+              console.log(thrownError);
             }
           });
           $(".submitsearch").click(
             function() {
-              //DA NON FARE
+              var genere = {};
+              genere.Id = $("#GenereId").val();
+              console.log(JSON.stringify(genere));
+              $.ajax({
+                type: "POST",
+                url: "../../WebAPI/Generi/controller.php",
+                data: JSON.stringify(genere),
+                dataType: "text",
+                contentType: "application/json",
+                success: function(data) {
+                  console.log(data);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                  console.log(xhr.status);
+                  console.log(thrownError);
+                }
+              });
             }
           );
-          break;
-
-        case "libri":
-          $("button").html("Modifica Libro ID: " + id);
-          $.ajax({
-            type: "GET",
-            url: "../../../mockup/Libri/Modifica",
-            data: {
-              id: id
-            },
-            dataType: "json",
-            success: function(data) {
-              //DA FARE
-            }
-          });
           break;
 
         default:
@@ -170,19 +192,21 @@ $(document).ready(
         case "generi":
           $(".submitsearch").click(
             function() {
-              var CasaEditrice = {};
-              CasaEditrice.Nome = $("#CasaNome").val();
-              CasaEditrice.LuogoSede = $("#CasaLuogo").val();
-              console.log(JSON.stringify(CasaEditrice));
+              var genere = {};
+              genere.Id = "";
+              console.log(JSON.stringify(genere));
               $.ajax({
-                type: "POST",
-                url: "",
-                data: {
-                  CasaEditrice: CasaEditrice
+                type: "PUT",
+                url: "../../WebAPI/Generi/controller.php",
+                data: JSON.stringify(autore),
+                dataType: "text",
+                contentType: "application/json",
+                success: function(data) {
+                  console.log(data);
                 },
-                dataType: "json",
-                success: function() {
-                  console.log("fatto");
+                error: function(xhr, ajaxOptions, thrownError) {
+                  console.log(xhr.status);
+                  console.log(thrownError);
                 }
               });
             }
@@ -190,9 +214,29 @@ $(document).ready(
           break;
 
         case "case":
-          break;
-
-        case "libri":
+          $(".submitsearch").click(
+            function() {
+              var casa = {};
+              casa.Id = "";
+              casa.Nome = $("#CasaNome").val();
+              casa.LuogoSede = $("#CasaLuogo").val();
+              console.log(JSON.stringify(casa));
+              $.ajax({
+                type: "PUT",
+                url: "../../WebAPI/CaseEditrici/controller.php",
+                data: JSON.stringify(casa),
+                dataType: "text",
+                contentType: "application/json",
+                success: function(data) {
+                  console.log(data);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                  console.log(xhr.status);
+                  console.log(thrownError);
+                }
+              });
+            }
+          );
           break;
 
         default:

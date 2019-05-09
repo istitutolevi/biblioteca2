@@ -125,11 +125,11 @@ $(document).ready(
         genere.Id = $("#GenereId").val();
         $.ajax({
           type: "GET",
-          url: "../../../mockup/Generi/Ricerca",
-          data: {
-            genere: genere
-          },
+          url: "../../WebAPI/Generi/controller.php",
           dataType: "json",
+          data: {
+            genere: JSON.stringify(genere)
+          },
           success: function(data) {
             $("body").html("<table></table>");
             $.each(data, function(index, element) {
@@ -147,13 +147,9 @@ $(document).ready(
                 console.log($(this).attr('numero'));
                 $.ajax({
                   type: "DELETE",
-                  url: "",
-                  dataType: "json",
-                  data: {
-                    id: $(this).attr('numero')
-                  },
+                  url: "../../WebAPI/Generi/controller.php?id=" + $(this).attr('numero'),
                   success: function() {
-
+                    console.log("eliminato");
                   }
                 });
               }

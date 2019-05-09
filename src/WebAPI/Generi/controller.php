@@ -1,4 +1,5 @@
 <?php
+include 'BindingGenere.php';
 include 'Genere.php';
 require_once '../Common/connection.php';
 
@@ -8,7 +9,7 @@ $body= file_get_contents('php://input');
 
 switch ($method) {
     case "GET":
-       Read($_GET["generi"],$conn);
+       Read($_GET["genere"],$conn);
 
         break;
     case "POST":

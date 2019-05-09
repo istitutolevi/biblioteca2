@@ -6,7 +6,6 @@ include '../Common/connection.php';
 
 $method= $_SERVER['REQUEST_METHOD'];
 $body= file_get_contents('php://input');
-echo($body);
 
 switch ($method) {
     case "GET":
