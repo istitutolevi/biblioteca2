@@ -69,12 +69,12 @@ function Create($jsonAutore, $connector)
 
 function Read($jsonAutore, $connector)
 {
-    $decode = json_decode($jsonAutore, true);
+    $decode = json_decode($jsonAutore);
 
     $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
                                 $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
 
-    $query ="SELECT * FROM Autori WHERE Id=:id || ( Nome LIKE :nome && Cognome LIKE :cognome && DataNascita BETWEEN :dataNDA AND :dataNA && DataMorte BETWEEN :dataMDA AND :dataMA)";
+    $query ="SELECT * FROM Autori WHERE Id=:id && ( Nome LIKE :nome && Cognome LIKE :cognome && DataNascita BETWEEN :dataNDA AND :dataNA && DataMorte BETWEEN :dataMDA AND :dataMA)";
 
     $stmt = $connector->prepare($query);
 

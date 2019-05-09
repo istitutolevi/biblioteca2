@@ -57,19 +57,30 @@ $(document).ready(
 
     $("#autorisubmit").click(
       function() {
-        var autore = {
-          'Id' : $("#AutoreId").val(),
-          'Nome' : $("#AutoreNome").val(),
-          'Cognome' : $("#AutoreCognome").val(),
-          'NascitaDa' : $("#AutoreNascitaDa").val(),
-          'NascitaA' : $("#AutoreNascitaA").val(),
-          'MorteDa' : $("#AutoreMorteDa").val(),
-          'MorteA' : $("#AutoreMorteA").val()
-        };
+        var autore = {};
+          autore.Id = $("#AutoreId").val();
+          autore.Nome = $("#AutoreNome").val();
+          autore.Cognome = $("#AutoreCognome").val();
+          autore.NascitaDa = $("#AutoreNascitaDa").val();
+          autore.NascitaA = $("#AutoreNascitaA").val();
+          autore.MorteDa = $("#AutoreMorteDa").val();
+          autore.MorteA = $("#AutoreMorteA").val();
+          if ($("#AutoreNascitaDa").val() == "") {
+            autore.NascitaDa = "0001-01-01"
+          }
+          if ($("#AutoreNascitaA").val() == "") {
+            autore.NascitaA = "9999-01-01"
+          }
+          if ($("#AutoreMorteDa").val() == "") {
+            autore.MorteDa = "0001-01-01"
+          }
+          if ($("#AutoreMorteA").val() == "") {
+            autore.MorteA = "9999-01-01"
+          }
         console.log(JSON.stringify(autore));
         $.ajax({
           type: "GET",
-          url: "../../WebAPI/Autori/controller.php"/*?autore=" + encodeURI(JSON.stringify(autore))*/,
+          url: "../../WebAPI/Autori/controller.php",
           dataType: "json",
           data: {autore:JSON.stringify(autore)},
           success: function(data) {
@@ -90,10 +101,9 @@ $(document).ready(
                 console.log($(this).attr('numero'));
                 $.ajax({
                   type: "DELETE",
-                  url: "../../WebAPI/Autori/controller.php?id=" + encodeURI($(this).attr('numero')),
-                  dataType: "json",
+                  url: "../../WebAPI/Autori/controller.php?id="+$(this).attr('numero'),
                   success: function() {
-
+                    console.log("eliminato");
                   }
                 });
               }
