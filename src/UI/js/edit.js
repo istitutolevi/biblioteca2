@@ -141,6 +141,7 @@ $(document).ready(
           $(".submitsearch").click(
             function() {
               var autore = {};
+              autore.Id = "";
               autore.Nome = $("#AutoreNome").val();
               autore.Cognome = $("#AutoreCognome").val();
               autore.DataDiNascita = $("#AutoreNascita").val();
@@ -149,12 +150,11 @@ $(document).ready(
               $.ajax({
                 type: "PUT",
                 url: "../../WebAPI/Autori/controller.php",
-                data: {
-                  Autore: autore
-                },
-                dataType: "json",
-                success: function() {
-                  console.log("fatto");
+                data: JSON.stringify(autore),
+                dataType: "text",
+                contentType: "application/json",
+                success: function(data) {
+                  console.log(data);
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                   console.log(xhr.status);
