@@ -8,19 +8,21 @@ $(document).ready(
         case "autori":
           $("button").html("Modifica Autore ID: " + id);
           var autore = {};
-            autore.Id = id;
-            autore.Nome = "";
-            autore.Cognome = "";
-            autore.NascitaDa = "";
-            autore.NascitaA = "";
-            autore.MorteDa = "";
-            autore.MorteA = "";
+          autore.Id = id;
+          autore.Nome = "";
+          autore.Cognome = "";
+          autore.NascitaDa = "";
+          autore.NascitaA = "";
+          autore.MorteDa = "";
+          autore.MorteA = "";
           console.log(JSON.stringify(autore));
           $.ajax({
             type: "GET",
             url: "../../WebAPI/Autori/controller.php",
             dataType: "json",
-            data: {autore:JSON.stringify(autore)},
+            data: {
+              autore: JSON.stringify(autore)
+            },
             success: function(data) {
               console.log(data);
               $("#AutoreNome").val(data[0].Nome);

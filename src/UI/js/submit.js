@@ -58,31 +58,33 @@ $(document).ready(
     $("#autorisubmit").click(
       function() {
         var autore = {};
-          autore.Id = $("#AutoreId").val();
-          autore.Nome = $("#AutoreNome").val();
-          autore.Cognome = $("#AutoreCognome").val();
-          autore.NascitaDa = $("#AutoreNascitaDa").val();
-          autore.NascitaA = $("#AutoreNascitaA").val();
-          autore.MorteDa = $("#AutoreMorteDa").val();
-          autore.MorteA = $("#AutoreMorteA").val();
-          if ($("#AutoreNascitaDa").val() == "") {
-            autore.NascitaDa = "0001-01-01"
-          }
-          if ($("#AutoreNascitaA").val() == "") {
-            autore.NascitaA = "9999-01-01"
-          }
-          if ($("#AutoreMorteDa").val() == "") {
-            autore.MorteDa = "0001-01-01"
-          }
-          if ($("#AutoreMorteA").val() == "") {
-            autore.MorteA = "9999-01-01"
-          }
+        autore.Id = $("#AutoreId").val();
+        autore.Nome = $("#AutoreNome").val();
+        autore.Cognome = $("#AutoreCognome").val();
+        autore.NascitaDa = $("#AutoreNascitaDa").val();
+        autore.NascitaA = $("#AutoreNascitaA").val();
+        autore.MorteDa = $("#AutoreMorteDa").val();
+        autore.MorteA = $("#AutoreMorteA").val();
+        if ($("#AutoreNascitaDa").val() == "") {
+          autore.NascitaDa = "0001-01-01"
+        }
+        if ($("#AutoreNascitaA").val() == "") {
+          autore.NascitaA = "9999-01-01"
+        }
+        if ($("#AutoreMorteDa").val() == "") {
+          autore.MorteDa = "0001-01-01"
+        }
+        if ($("#AutoreMorteA").val() == "") {
+          autore.MorteA = "9999-01-01"
+        }
         console.log(JSON.stringify(autore));
         $.ajax({
           type: "GET",
           url: "../../WebAPI/Autori/controller.php",
           dataType: "json",
-          data: {autore:JSON.stringify(autore)},
+          data: {
+            autore: JSON.stringify(autore)
+          },
           success: function(data) {
             console.log(data);
             $("body").html("<table></table>");
@@ -101,7 +103,7 @@ $(document).ready(
                 console.log($(this).attr('numero'));
                 $.ajax({
                   type: "DELETE",
-                  url: "../../WebAPI/Autori/controller.php?id="+$(this).attr('numero'),
+                  url: "../../WebAPI/Autori/controller.php?id=" + $(this).attr('numero'),
                   success: function() {
                     console.log("eliminato");
                   }
