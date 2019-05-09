@@ -57,14 +57,15 @@ $(document).ready(
 
     $("#autorisubmit").click(
       function() {
-        var autore = {};
-        autore.Id = $("#AutoreId").val();
-        autore.Nome = $("#AutoreNome").val();
-        autore.Cognome = $("#AutoreCognome").val();
-        autore.NascitaDa = $("#AutoreNascitaDa").val();
-        autore.NascitaA = $("#AutoreNascitaA").val();
-        autore.MorteDa = $("#AutoreMorteDa").val();
-        autore.MorteA = $("#AutoreMorteA").val();
+        var autore = {
+          'Id' : $("#AutoreId").val(),
+          'Nome' : $("#AutoreNome").val(),
+          'Cognome' : $("#AutoreCognome").val(),
+          'NascitaDa' : $("#AutoreNascitaDa").val(),
+          'NascitaA' : $("#AutoreNascitaA").val(),
+          'MorteDa' : $("#AutoreMorteDa").val(),
+          'MorteA' : $("#AutoreMorteA").val()
+        };
         console.log(JSON.stringify(autore));
         $.ajax({
           type: "GET",

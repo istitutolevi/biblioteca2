@@ -86,12 +86,12 @@ function Create($jsonLibro, $connector)
 
         http_response_code(201);
         echo json_encode($element);
-
+        return true;
     }
 
     http_response_code(503);
     echo json_encode(array("message" => "Impossibile creare un libro."));
-
+    return false;
 
 }
 
@@ -117,13 +117,13 @@ function Read($jsonBindingLibro, $connector)
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
         http_response_code(200);
         echo json_encode($element);
-
+        return true;
     }
     http_response_code(404);
     echo json_encode(
         array("message" => "No libro trovato.")
     );
-
+    return false;
 
 
 
@@ -176,12 +176,12 @@ function Update($jsonLibro, $connector)
 
         http_response_code(200);
         echo json_encode($element);
-
+        return true;
     }
 
     http_response_code(503);
     echo json_encode(array("message" => "Impossibile aggiornare un libro."));
-
+    return false;
 
     //non so come farlo
 }
@@ -201,13 +201,13 @@ function Delete($id , $connector)
     if($stmt->execute()){
 
         http_response_code(200);
-        echo 1;
-
+        echo $id;
+        return true;
     }
 
     http_response_code(503);
     echo json_encode(array("message" => "Impossibile cancellare un genere."));
-
+    return false;
 
 }
 

@@ -57,12 +57,12 @@ function Create($jsonGenere, $connector)
 
         http_response_code(201);
         echo json_encode($element);
-
+        return true;
     }
 
     http_response_code(503);
     echo json_encode(array("message" => "Impossibile creare un genere."));
-
+    return false;
 
 }
 
@@ -87,13 +87,13 @@ function Read($jsonGenere, $connector)
 
         http_response_code(200);
         echo json_encode($element);
-
+        return true;
     }
     http_response_code(404);
     echo json_encode(
         array("message" => "No genere trovato.")
     );
-
+    return false;
 
 
 }
@@ -125,12 +125,12 @@ function Update($jsonGenere, $connector)
 
         http_response_code(200);
         echo json_encode($element);
-
+        return true;
     }
 
     http_response_code(503);
     echo json_encode(array("message" => "Impossibile aggiornare un genere."));
-
+    return false;
 
 }
 
@@ -149,13 +149,13 @@ function Delete($id , $connector)
 
 
         http_response_code(200);
-        echo 1;
-
+        echo $id;
+        return true;
     }
 
     http_response_code(503);
     echo json_encode(array("message" => "Impossibile cancellare un genere."));
-
+    return false;
 }
 
 ?>

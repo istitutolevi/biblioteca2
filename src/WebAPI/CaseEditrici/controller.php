@@ -52,11 +52,12 @@ function Create($jsonCasaEditrice, $connector)
 
         http_response_code(201);
         echo json_encode($element);
-
+        return true;
     }
 
     http_response_code(503);
     echo json_encode(array("message" => "Impossibile creare un casa editrice."));
+    return false;
 
 
 }
@@ -67,12 +68,17 @@ function Read($jsonCasaEditrice, $connector)
 
 
     $casaEditrice = new casaEditrice($decode->Id,$decode->Nome,$decode->Luogo);
-    $query ="SELECT * FROM CaseEditrici WHERE Nome=:nome && LuogoSede=:luogoSede";
+
+    $query ="SELECT * FROM CaseEditrici WHERE Id=:id || ( Nome LIKE :nome && LuogoSede LIKE :luogoSede) LIMIT 50";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':nome',$casaEditrice->Nome,PDO::PARAM_STR);
-    $stmt->bindParam(':luogoSede',$casaEditrice->Luogo,PDO::PARAM_STR);
+    $nomeSearch= $casaEditrice->Nome."%";
+    $LuogoSedeSerach= $casaEditrice->Luogo."%";
+
+    $stmt->bindParam(':id',$casaEditrice->Id,PDO::PARAM_INT);
+    $stmt->bindParam(':nome',$nomeSearch,PDO::PARAM_STR);
+    $stmt->bindParam(':luogoSede',$LuogoSedeSerach,PDO::PARAM_STR);
 
 
 
@@ -81,13 +87,13 @@ function Read($jsonCasaEditrice, $connector)
         $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
         http_response_code(200);
         echo json_encode($element);
-
+        return true;
     }
     http_response_code(404);
     echo json_encode(
         array("message" => "No casa editrice trovato.")
     );
-
+    return false;
 
 
 }
@@ -120,23 +126,23 @@ function Update($jsonCasaEditrice, $connector)
 
         http_response_code(200);
         echo json_encode($element);
-
+        return true;
     }
 
     http_response_code(503);
     echo json_encode(array("message" => "Impossibile aggiornare un genere."));
-
+    return false;
 
 }
 
 function Delete($id , $connector)
 {
-    $idDelete= json_decode($id);
+
     $query ="DELETE FROM CaseEditrici WHERE Id=:id";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':id',$idDelete);
+    $stmt->bindParam(':id',$id);
 
 
 
@@ -145,13 +151,13 @@ function Delete($id , $connector)
 
 
         http_response_code(200);
-        echo 1;
-
+        echo $id;
+        return true;
     }
 
     http_response_code(503);
     echo json_encode(array("message" => "Impossibile cancellare un genere."));
-
+    return false;
 
 }
 
