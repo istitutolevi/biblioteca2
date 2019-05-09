@@ -71,25 +71,29 @@ function Read($jsonAutore, $connector)
 {
     $decode = json_decode($jsonAutore);
 
-    $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,
-                                $decode->NascitaA,$decode->MorteDa, $decode->MorteA );
+    $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,$decode->NascitaA,$decode->MorteDa, $decode->MorteA );
+    if ($decode->Id == "") {
+      $query ="SELECT * FROM Autori WHERE ( Nome LIKE :nome && Cognome LIKE :cognome && DataNascita BETWEEN :dataNDA AND :dataNA && DataMorte BETWEEN :dataMDA AND :dataMA)";
+      $stmt = $connector->prepare($query);
 
-    $query ="SELECT * FROM Autori WHERE Id=:id && ( Nome LIKE :nome && Cognome LIKE :cognome && DataNascita BETWEEN :dataNDA AND :dataNA && DataMorte BETWEEN :dataMDA AND :dataMA)";
+      $nomeSearch= $autore->Nome."%";
+      $cognomeSearch= $autore->Cognome."%";
 
-    $stmt = $connector->prepare($query);
+      $stmt->bindParam(':nome',$nomeSearch,PDO::PARAM_STR);
+      $stmt->bindParam(':cognome',$cognomeSearch,PDO::PARAM_STR);
+      $stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
+      $stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
+      $stmt->bindParam(':dataMDA',$autore->MorteDa,PDO::PARAM_STR);
+      $stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
 
-    $nomeSearch= $autore->Nome."%";
-    $cognomeSearch= $autore->Cognome."%";
+    }
+    else {
+      $query ="SELECT * FROM Autori WHERE Id = :id";
+      $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':id',$autore->Id,PDO::PARAM_INT);
-    $stmt->bindParam(':nome',$nomeSearch,PDO::PARAM_STR);
-    $stmt->bindParam(':cognome',$cognomeSearch,PDO::PARAM_STR);
-    $stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
-    $stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
-    $stmt->bindParam(':dataMDA',$autore->MorteDa,PDO::PARAM_STR);
-    $stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
+      $stmt->bindParam(':id',$autore->Id,PDO::PARAM_INT);
 
-
+    }
 
     if($stmt->execute()){
 

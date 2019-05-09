@@ -7,18 +7,30 @@ $(document).ready(
       switch (pagina) {
         case "autori":
           $("button").html("Modifica Autore ID: " + id);
+          var autore = {};
+            autore.Id = id;
+            autore.Nome = "";
+            autore.Cognome = "";
+            autore.NascitaDa = "";
+            autore.NascitaA = "";
+            autore.MorteDa = "";
+            autore.MorteA = "";
+          console.log(JSON.stringify(autore));
           $.ajax({
             type: "GET",
-            url: "../../../mockup/Autori/Modifica",
-            data: {
-              id: id
-            },
+            url: "../../WebAPI/Autori/controller.php",
             dataType: "json",
+            data: {autore:JSON.stringify(autore)},
             success: function(data) {
-              $("#AutoreNome").val(data.Nome);
-              $("#AutoreCognome").val(data.Cognome);
-              $("#AutoreNascita").val(data.DataDiNascita);
-              $("#AutoreMorte").val(data.DataDiMorte);
+              console.log(data);
+              $("#AutoreNome").val(data[0].Nome);
+              $("#AutoreCognome").val(data[0].Cognome);
+              $("#AutoreNascita").val(data[0].DataNascita.split(" ")[0]);
+              $("#AutoreMorte").val(data[0].DataMorte.split(" ")[0]);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              console.log(xhr.status);
+              console.log(thrownError);
             }
           });
           $(".submitsearch").click(
