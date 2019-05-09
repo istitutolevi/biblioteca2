@@ -45,12 +45,10 @@ $(document).ready(
               $.ajax({
                 type: "POST",
                 url: "../../WebAPI/Autori/controller.php",
-                data: {
-                  Autore: autore
-                },
+                data: {autore: JSON.stringify(autore)},
                 dataType: "json",
-                success: function() {
-                  console.log("fatto");
+                success: function(data) {
+                  console.log(data);
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                   console.log(xhr.status);
