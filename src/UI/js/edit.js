@@ -45,8 +45,9 @@ $(document).ready(
               $.ajax({
                 type: "POST",
                 url: "../../WebAPI/Autori/controller.php",
-                data: {autore: JSON.stringify(autore)},
-                dataType: "json",
+                data: JSON.stringify(autore),
+                dataType: "text",
+                contentType: "application/json",
                 success: function(data) {
                   console.log(data);
                 },
