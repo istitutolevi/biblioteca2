@@ -46,6 +46,17 @@ body {
   font-size: 16px;
 }
 
+.websearch{
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  outline: none;
+  border-radius: 10px;
+  font-family: 'Righteous', cursive;
+  font-weight: bold;
+  font-size: 16px;
+}
+
 h2 {
   font-family: 'Righteous', cursive;
   text-align: center;

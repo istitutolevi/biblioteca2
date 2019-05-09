@@ -205,6 +205,5 @@ $(document).ready(
 
       }
     );
-
   }
 );

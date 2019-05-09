@@ -160,6 +160,24 @@ $(document).ready(
       }
     } else {
       //IN CASO DI INSERT
+      $(".websearch").click(
+        function() {
+          $.ajax({
+            type: "POST",
+            url: "../../WebAPI/isbnGoogleAPI.php",
+            data: $("#LibroISBN").val(),
+            dataType: "json",
+            contentType: "text",
+            success: function(data) {
+              console.log(data);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              console.log(xhr.status);
+              console.log(thrownError);
+            }
+          });
+        }
+      );
       switch (pagina) {
         case "autori":
           $(".submitsearch").click(
