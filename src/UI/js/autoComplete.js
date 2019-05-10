@@ -8,7 +8,7 @@ $(document).ready(
                     $.ajax(
                         {
                             type:"GET",
-                            url:"../../WebAPI/Autori/autocomplete.php?text=" + encodeURI(val),
+                            url:"../../mockup/Autori/AutoComplete/?text=" + encodeURI(val),
                             dataType:"json",
                             success: function(data){
                                 var opzioni = new Array();
@@ -47,7 +47,7 @@ $(document).ready(
                     $.ajax(
                         {
                             type:"GET",
-                            url:"../../../mockup/Generi/AutoComplete/?text=" + encodeURI(val),
+                            url:"../../mockup/Generi/AutoComplete/?text=" + encodeURI(val),
                             dataType:"json",
                             success: function(data){
                                 var opzioni = new Array();
@@ -86,7 +86,7 @@ $(document).ready(
                     $.ajax(
                         {
                             type:"GET",
-                            url:"../../../mockup/CaseEditrici/AutoComplete/?text=" + encodeURI(val),
+                            url:"../../mockup/CaseEditrici/AutoComplete/?text=" + encodeURI(val),
                             dataType:"json",
                             success: function(data){
                                 var opzioni = new Array();
