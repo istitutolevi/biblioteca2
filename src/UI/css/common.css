@@ -17,9 +17,9 @@ header{
 h1{
   line-height: 56px;
   margin-left: 30px;
-  font-size: 27px;
+  font-size: 31px;
   font-family: 'Righteous', cursive;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
 }
 
 nav{
@@ -84,7 +84,7 @@ main{
   height: 100%;
   margin-left: 210px;
   margin-top: 57px;
-  width: calc(100% - 240px);
+  width: calc(100% - 210px);
 }
 
 #content{
@@ -163,4 +163,41 @@ td{
 .modifica:hover{
   transition-duration: 0.1s;
   background: #57B56B;
+}
+
+.fa-user{
+  position: fixed;
+  right: 30px;
+  top: 13px;
+  display: block;
+  cursor: pointer;
+  font-size: 21px;
+  color: #F2F2F2;
+  width: 30px;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 30px;
+  border: 2px solid #F2F2F2;
+}
+
+#username{
+  position: fixed;
+  right: 330px;
+  top: 13px;
+  height: 20px;
+  line-height: 20px;
+  top: 18px;
+  width: 210px;
+  border-radius: 3px;
+}
+
+#password{
+  position: fixed;
+  right: 90px;
+  top: 13px;
+  height: 20px;
+  line-height: 20px;
+  top: 18px;
+  width: 210px;
+  border-radius: 3px;
 }
