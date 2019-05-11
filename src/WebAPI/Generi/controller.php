@@ -1,5 +1,4 @@
 <?php
-include 'BindingGenere.php';
 include 'Genere.php';
 require_once '../Common/connection.php';
 

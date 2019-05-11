@@ -64,37 +64,44 @@ function Create($jsonCasaEditrice, $connector)
 
 function Read($jsonCasaEditrice, $connector)
 {
-    $decode = json_decode($jsonCasaEditrice);
 
+  $decode = json_decode($jsonCasaEditrice);
 
-    $casaEditrice = new casaEditrice($decode->Id,$decode->Nome,$decode->Luogo);
+  $casaEditrice = new casaEditrice($decode->Id,$decode->Nome,$decode->Luogo);
+  //print_r($casaEditrice);
+  if ($decode->Id == "") {
+      $query ="SELECT * FROM CaseEditrici WHERE (Nome LIKE :nome && LuogoSede LIKE :luogosede)";
+      $stmt = $connector->prepare($query);
 
-    $query ="SELECT * FROM CaseEditrici WHERE Id=:id || ( Nome LIKE :nome && LuogoSede LIKE :luogoSede) LIMIT 50";
+      $nomeSearch= $casaEditrice->Nome."%";
+      $luogoSearch= $casaEditrice->Luogo."%";
 
-    $stmt = $connector->prepare($query);
+      $stmt->bindParam(':nome',$nomeSearch,PDO::PARAM_STR);
+      $stmt->bindParam(':luogosede',$luogoSearch,PDO::PARAM_STR);
 
-    $nomeSearch= $casaEditrice->Nome."%";
-    $LuogoSedeSerach= $casaEditrice->Luogo."%";
-
-    $stmt->bindParam(':id',$casaEditrice->Id,PDO::PARAM_INT);
-    $stmt->bindParam(':nome',$nomeSearch,PDO::PARAM_STR);
-    $stmt->bindParam(':luogoSede',$LuogoSedeSerach,PDO::PARAM_STR);
-
-
-
-    if($stmt->execute()){
-
-        $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        http_response_code(200);
-        echo json_encode($element);
-        return true;
     }
-    http_response_code(404);
-    echo json_encode(
-        array("message" => "No casa editrice trovato.")
-    );
-    return false;
+    else {
+      $query ="SELECT * FROM CaseEditrici WHERE Id = :id";
+      $stmt = $connector->prepare($query);
 
+      $stmt->bindParam(':id',$casaEditrice->Id,PDO::PARAM_INT);
+
+    }
+
+  if($stmt->execute()){
+
+      $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      http_response_code(200);
+      echo json_encode($element);
+      return true;
+
+  }
+  http_response_code(404);
+  echo json_encode(
+      array("message" => "No Casa trovata.")
+
+  );
+  return false;
 
 }
 

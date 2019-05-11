@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>BiblioLevi ricerca libri</title>
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="css\reset-style.css">
+    <link rel="stylesheet" href="css\common.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/autoComplete.js"></script>
+    <script type="text/javascript" src="pages.js"></script>
+    <script src="js/submit.js"></script>
+    <script src="js/nav.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>BiblioLevi</h1>
+    </header>
+    <nav>
+      <ul>
+        <h3 class="navlabel">Ricerca</h3>
+        <li><p class="navlinks" pagina="Autori">Autori</p></li>
+        <li><p class="navlinks" pagina="Generi">Generi</p></li>
+        <li><p class="navlinks" pagina="Libri">Libri</p></li>
+        <li><p class="navlinks" pagina="Case Editrici">Case Editrici</p></li>
+        <h3 class="navlabel">Edit</h3>
+        <li><p class="navlinke" pagina="Autori">Autori</p></li>
+        <li><p class="navlinke" pagina="Generi">Generi</p></li>
+        <li><p class="navlinke" pagina="Libri">Libri</p></li>
+        <li><p class="navlinke" pagina="Case Editrici">Case Editrici</p></li>
+      </ul>
+    </nav>
+    <main>
+      <div id="content">
+        <p class="inputdesc">ISBN</p><input type="text" class="input" id="LibroISBN"><br>
+        <p class="inputdesc">Codice</p><input type="text" class="input" id="LibroCodice"><br>
+        <p class="inputdesc">Titolo</p><input type="text" class="input" id="LibroTitolo"><br>
+        <p class="inputdesc">Autore</p><input type="text" placeholder="Cognome Nome" class="input" id="LibroAutore"><br>
+        <p class="inputdesc">Genere</p><input type="text" class="input" id="LibroGenere"><br>
+        <p class="inputdesc">Anno Pubblicazione da / a:</p>
+        <input type="date" class="input" id="LibroAnnoDa">
+        <input type="date" class="input" id="LibroAnnoA"><br>
+        <p class="inputdesc">Casa Editrice</p><input type="text" class="input" id="LibroCasaEditrice"><br>
+        <p class="inputdesc">Scaffale</p><input type="text" class="input" id="LibroScaffale"><br>
+        <p class="inputdesc">Armadio</p><input type="text" class="input" id="LibroArmadio"><br>
+        <input type="text" style="display: none" id="LibroAutoreHidden">
+        <input type="text" style="display: none" id="LibroGenereHidden">
+        <input type="text" style="display: none" id="LibroCasaEditriceHidden">
+
+        <button class="submitsearch" type="submit" name="librisubmit">Aggiungi Libro</button>
+        <button class="websearch" type="submit" name="librisubmit">Importa Libro dal Web</button>
+      </div>
+    </main>
+  </body>
+
+</html>

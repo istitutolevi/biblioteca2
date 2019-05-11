@@ -1,127 +1,164 @@
-body {
-  background-image: url("../images/bkgsearch.svg");
+body{
+  background: #ececec;
 }
 
-.wrapper {
-  width: 300px;
-  border-radius: 10px;
-  margin: 0 auto;
-  margin-top: calc(50vh - 370px);
-  background-color: white;
+header{
+  height: 65px;
+  width: 100%;
+  border-bottom: 1px solid #7630D9;
+  background: #7630D9;
+  color: #F2F2F2;
+  position: fixed;
+  top: 0px;
+}
+
+h1{
+  line-height: 65px;
+  margin-left: 20px;
+  font-size: 27px;
+  font-family: 'Righteous', cursive;
+  letter-spacing: 1px;
+}
+
+nav{
+  background: #F2F2F2;
+  border-right: 1px solid #7630D9;
+  height: 100%;
+  width: 9.3%;
+  position: fixed;
+  overflow-x: hidden;
+  top: 66px;
+}
+
+.navlinks, .navlinke, .navlabel{
+  text-decoration: none;
+  color: #1B0A40;
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
+  display: block;
+}
+
+li{
+  transition-duration: 0.1s;
+  margin-top: 10px;
+}
+
+.navlinks, .navlinke{
+  margin-left: 40px;
+  cursor: pointer;
+}
+
+li:hover{
+  background-color: #7630D9;
+}
+
+li:hover .navlinks, li:hover .navlinke{
+  transition-duration: 0.1s;
+  color: #F2F2F2;
+}
+
+.navlabel{
+  margin-left: 30px;
+  margin-top: 30px;
+  color: #D92588;
+}
+
+.selected{
+  cursor: pointer;
+  background-color: #7630D9;
+  color: #F2F2F2;
+}
+
+.selected p{
+  color: #F2F2F2;
+}
+
+ul{
+  margin-top: 30px;
+}
+
+main{
+  background-color: #ececec;
+  width: 100%;
+  height: 100%;
+  margin-left: calc(9.3%);
+  margin-top: 65px;
+  width: calc(100% - 9.3%);
+}
+
+#content{
   padding: 30px;
-  box-sizing: border-box;
 }
 
-.wrapper .inputdesc {
-  font-family: 'Righteous', cursive;
-  margin-bottom: 10px;
-  width: 100%;
+p{
+  text-decoration: none;
+  color: #1B0A40;
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
 }
 
-.wrapper .input {
+.inputdesc{
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.submitsearch{
+  margin-top: 15px;
+  border: 0px;
+  background: #dcdcdc;
   outline: none;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.backbutton {
-  position: absolute;
-  top: 25px;
-  left: 25px;
-  font-size: 35px;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-}
-
-.submitsearch {
-  width: 100%;
-  height: 40px;
-  background-color: white;
-  outline: none;
-  border-radius: 10px;
-  font-family: 'Righteous', cursive;
-  font-weight: bold;
-  font-size: 16px;
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid #7630D9;
+  color: #7630D9;
+  border-radius: 3px;
 }
 
 .websearch{
-  width: 100%;
-  height: 40px;
-  background-color: white;
-  outline: none;
-  border-radius: 10px;
-  font-family: 'Righteous', cursive;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-h2 {
-  font-family: 'Righteous', cursive;
-  text-align: center;
-  text-shadow: 5px 5px #bbb;
-  position: absolute;
-  top: 28px;
-  left: 100px;
-  font-size: 35px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-}
-
-h3 {
-  font-family: 'Righteous', cursive;
-  text-align: center;
-  text-shadow: 5px 5px #bbb;
-  position: absolute;
-  top: 31px;
-  left: 260px;
-  font-size: 25px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-}
-
-table {
-  padding: 5px;
-  width: 95%;
-  margin: 30px auto;
-}
-
-td {
-  padding: 10px;
-  border: 1px solid black;
-  text-align: center;
-  font-family: 'Righteous', cursive;
-  font-size: 14px;
-}
-
-.autoritable td{
-  border: 1px solid #47AB6C;
-}
-
-.casetable td{
-  border: 1px solid #ED553B;
-}
-
-.generitable td{
-  border: 1px solid #F2B134;
-}
-
-.libritable td{
-  border: 1px solid #0894A1;
-}
-tr {
-  padding: 5px;
-}
-
-button{
+  margin-top: 15px;
   border: 0px;
-  background-color: inherit;
-  width: 100%;
-  height: 100%;
+  background: #dcdcdc;
   outline: none;
-  font-family: 'Righteous', cursive;
-  font-size: 14px;
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid #7630D9;
+  color: #7630D9;
+  border-radius: 3px;
+}
+
+input{
+  border: 0px;
+  background: #dcdcdc;
+  outline: none;
+  padding: 3px;
+  font-size: 17px;
+  margin-right: 5px;
+}
+
+table{
+  width: 100%;
+  text-align: center;
+}
+
+td{
+  border: 1px solid #1B0A40;
+  padding: 3px;
+}
+
+.modifica, .elimina{
+  border: 0px;
+  outline: none;
+  background: #ececec;
+  display: block;
+  width: 100%;
+}
+
+.elimina:hover{
+  transition-duration: 0.1s;
+  background: #B23242;
+}
+
+.modifica:hover{
+  transition-duration: 0.1s;
+  background: #57B56B;
 }
