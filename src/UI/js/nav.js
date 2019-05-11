@@ -345,6 +345,45 @@ $(document).ready(
           case "Libri":
             $("main").html("<div id=\"content\"></div>");
             $("#content").append(editLibri);
+            $("#LibroGenere").keyup(
+                function(){
+                    var val = $("#LibroGenere").val();
+                    console.clear();
+                        $.ajax(
+                            {
+                                type:"GET",
+                                url:"../WebAPI/Generi/autocomplete.php?text=" + encodeURI(val),
+                                dataType:"text",
+                                success: function(data){
+                                  console.log(data);
+                                    var opzioni = new Array();
+                                    for(var i in data){
+                                        var opzione = {};
+                                        opzione.label = data[i].text;
+                                        opzione.value = data[i].value;
+                                        opzioni.push(opzione);
+                                    }
+                                    $('#LibroGenere').autocomplete({
+                                        source: opzioni,
+                                        select: function (event, ui) {
+                                            $("#LibroGenere").val(ui.item.label);
+                                            $("#LibroGenereHidden").val(ui.item.value);
+                                            return false;
+                                        },
+                                        focus: function(event, ui) {
+                                          event.preventDefault();
+                                          $("#LibroGenere").val(ui.item.label);
+                                        }
+                                    });
+
+                                },
+                                error: function(jqXHR, textStatus, errorThrown){
+                                    console.log(jqXHR +" "+ textStatus +" "+ errorThrown);
+                                }
+                            }
+                        );
+                }
+            );
             break;
           case "Case Editrici":
             $("main").html("<div id=\"content\"></div>");

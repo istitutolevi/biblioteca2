@@ -8,7 +8,7 @@ $(document).ready(
                     $.ajax(
                         {
                             type:"GET",
-                            url:"../../mockup/Autori/AutoComplete/?text=" + encodeURI(val),
+                            url:"../WebAPI/Autori/autocomplete.php?text=" + encodeURI(val),
                             dataType:"json",
                             success: function(data){
                                 var opzioni = new Array();
@@ -33,51 +33,14 @@ $(document).ready(
 
                             },
                             error: function(jqXHR, textStatus, errorThrown){
-                                alert(jqXHR +" "+ textStatus +" "+ errorThrown);
+                                console.log(jqXHR +" "+ textStatus +" "+ errorThrown);
                             }
                         }
                     );
             }
         );
 
-        $("#LibroGenere").keyup(
-            function(){
-                var val = $("#LibroGenere").val();
-                console.clear();
-                    $.ajax(
-                        {
-                            type:"GET",
-                            url:"../../mockup/Generi/AutoComplete/?text=" + encodeURI(val),
-                            dataType:"json",
-                            success: function(data){
-                                var opzioni = new Array();
-                                for(var i in data){
-                                    var opzione = {};
-                                    opzione.label = data[i].text;
-                                    opzione.value = data[i].value;
-                                    opzioni.push(opzione);
-                                }
-                                $('#LibroGenere').autocomplete({
-                                    source: opzioni,
-                                    select: function (event, ui) {
-                                        $("#LibroGenere").val(ui.item.label);
-                                        $("#LibroGenereHidden").val(ui.item.value);
-                                        return false;
-                                    },
-                                    focus: function(event, ui) {
-                                      event.preventDefault();
-                                      $("#LibroGenere").val(ui.item.label);
-                                    }
-                                });
-
-                            },
-                            error: function(jqXHR, textStatus, errorThrown){
-                                alert(jqXHR +" "+ textStatus +" "+ errorThrown);
-                            }
-                        }
-                    );
-            }
-        );
+        
 
         $("#LibroCasaEditrice").keyup(
             function(){
@@ -86,7 +49,7 @@ $(document).ready(
                     $.ajax(
                         {
                             type:"GET",
-                            url:"../../mockup/CaseEditrici/AutoComplete/?text=" + encodeURI(val),
+                            url:"../WebAPI/CaseEditrici/autocomplete.php/?text=" + encodeURI(val),
                             dataType:"json",
                             success: function(data){
                                 var opzioni = new Array();
@@ -111,7 +74,7 @@ $(document).ready(
 
                             },
                             error: function(jqXHR, textStatus, errorThrown){
-                                alert(jqXHR +" "+ textStatus +" "+ errorThrown);
+                                console.log(jqXHR +" "+ textStatus +" "+ errorThrown);
                             }
                         }
                     );

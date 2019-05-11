@@ -1,7 +1,7 @@
 
 <?php
 
-include 'C:/xampp/htdocs/biblioteca2/src/WebAPI/Common/connection.php';
+include '../Common/connection.php';
 $partName= $_GET["text"];
 
 
