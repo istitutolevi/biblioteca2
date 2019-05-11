@@ -67,28 +67,26 @@ function Read($jsonCasaEditrice, $connector)
 
   $decode = json_decode($jsonCasaEditrice);
 
-  $casaEditrice = $casaEditrice = new casaEditrice($decode->Id,$decode->Nome,$decode->Luogo);
-  print_r($casaEditrice);
+  $casaEditrice = new casaEditrice($decode->Id,$decode->Nome,$decode->Luogo);
+  //print_r($casaEditrice);
   if ($decode->Id == "") {
-    $query ="SELECT * FROM CaseEditrici WHERE ( Nome LIKE :nome && LuogoSede LIKE :luogoSede)";
-    $stmt = $connector->prepare($query);
+      $query ="SELECT * FROM CaseEditrici WHERE (Nome LIKE :nome && LuogoSede LIKE :luogosede)";
+      $stmt = $connector->prepare($query);
 
-    $stmt = $connector->prepare($query);
+      $nomeSearch= $casaEditrice->Nome."%";
+      $luogoSearch= $casaEditrice->Luogo."%";
 
-    $nomeSearch= $casaEditrice->Nome."%";
-    $LuogoSedeSerach= $casaEditrice->Luogo."%";
+      $stmt->bindParam(':nome',$nomeSearch,PDO::PARAM_STR);
+      $stmt->bindParam(':luogosede',$luogoSearch,PDO::PARAM_STR);
 
-    $stmt->bindParam(':nome',$nomeSearch,PDO::PARAM_STR);
-    $stmt->bindParam(':luogoSede',$LuogoSedeSerach,PDO::PARAM_STR);
+    }
+    else {
+      $query ="SELECT * FROM CaseEditrici WHERE Id = :id";
+      $stmt = $connector->prepare($query);
 
-  }
-  else {
-    $query ="SELECT * FROM CaseEditrici WHERE Id = :id";
-    $stmt = $connector->prepare($query);
+      $stmt->bindParam(':id',$casaEditrice->Id,PDO::PARAM_INT);
 
-    $stmt->bindParam(':id',$casaEditrice->Id,PDO::PARAM_INT);
-
-  }
+    }
 
   if($stmt->execute()){
 
