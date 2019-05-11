@@ -10,7 +10,7 @@ $ch = curl_init();
 
 // set options
 curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_PROXY, $proxy); // da mettere a commento se non si utilizza il proxy
+//curl_setopt($ch, CURLOPT_PROXY, $proxy); // da mettere a commento se non si utilizza il proxy
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 

@@ -70,14 +70,14 @@ function Read($jsonCasaEditrice, $connector)
   $casaEditrice = new casaEditrice($decode->Id,$decode->Nome,$decode->Luogo);
   //print_r($casaEditrice);
   if ($decode->Id == "") {
-      $query ="SELECT * FROM CaseEditrici WHERE (Nome LIKE :nome && LuogoSede LIKE :luogosede)";
+      $query ="SELECT * FROM CaseEditrici WHERE Nome LIKE :nome /*&& LuogoSede LIKE :luogosede*/";
       $stmt = $connector->prepare($query);
 
       $nomeSearch= $casaEditrice->Nome."%";
-      $luogoSearch= $casaEditrice->Luogo."%";
+      //$luogoSearch= $casaEditrice->Luogo."%";
 
       $stmt->bindParam(':nome',$nomeSearch,PDO::PARAM_STR);
-      $stmt->bindParam(':luogosede',$luogoSearch,PDO::PARAM_STR);
+      //$stmt->bindParam(':luogosede',$luogoSearch,PDO::PARAM_STR);
 
     }
     else {

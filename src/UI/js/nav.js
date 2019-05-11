@@ -4,8 +4,8 @@ $(document).ready(
     $(".navlinks").click(
       function() {
         var cliccato = $(this).attr('pagina');
-        $(".selected").attr("class","");
-        $(this).parent().attr("class","selected");
+        $(".selected").attr("class", "");
+        $(this).parent().attr("class", "selected");
         switch (cliccato) {
           case "Autori":
             $("main").html("<div id=\"content\"></div>");
@@ -42,7 +42,7 @@ $(document).ready(
                   },
                   success: function(data) {
                     console.log(data);
-                    $("main").html("<table class=\"autoritable\"></table>");
+                    $("main").html("<table></table>");
                     $.each(data, function(index, element) {
                       $("table").append("<tr id=\"" + element.Id + "\">" + "<td>" + element.Id + "</td>" + "<td>" + element.Nome + "</td>" + "<td>" + element.Cognome + "</td>" + "<td>" + element.DataNascita + "</td>" + "<td>" + element.DataMorte + "</td>" + "<td>" + "<button class=\"modifica\" numero=\"" + element.Id + "\">Modifica</button>" + "<td>" + "<button class=\"elimina\" numero=\"" + element.Id + "\">Elimina</button>" + "</tr>");
                     });
@@ -133,6 +133,45 @@ $(document).ready(
           case "Generi":
             $("main").html("<div id=\"content\"></div>");
             $("#content").append(cercaGeneri);
+            $("#generisubmit").click(
+              function() {
+                console.log("ok");
+                var genere = {};
+                genere.Id = $("#GenereId").val();
+                $.ajax({
+                  type: "GET",
+                  url: "../WebAPI/Generi/controller.php",
+                  dataType: "json",
+                  data: {
+                    genere: JSON.stringify(genere)
+                  },
+                  success: function(data) {
+                    $("main").html("<table></table>");
+                    $.each(data, function(index, element) {
+                      $("table").append("<tr>" + "<td>" + element.Id + "</td>" + "<td>" + "<button class=\"elimina\" numero=\"" + element.Id + "\">Elimina</button>" + "</tr>");
+                    });
+                    $(".elimina").click(
+                      function() {
+                        $(this).parent().parent().remove();
+                        console.log($(this).attr('numero'));
+                        $.ajax({
+                          type: "DELETE",
+                          url: "../WebAPI/Generi/controller.php?id=" + $(this).attr('numero'),
+                          success: function() {
+                            console.log("eliminato");
+                          }
+                        });
+                      }
+                    );
+                  },
+                  error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                  }
+                });
+
+              }
+            );
             break;
           case "Libri":
             $("main").html("<div id=\"content\"></div>");
@@ -246,8 +285,8 @@ $(document).ready(
     $(".navlinke").click(
       function() {
         var cliccato = $(this).attr('pagina');
-        $(".selected").attr("class","");
-        $(this).parent().attr("class","selected");
+        $(".selected").attr("class", "");
+        $(this).parent().attr("class", "selected");
         switch (cliccato) {
           case "Autori":
             $("main").html("<div id=\"content\"></div>");

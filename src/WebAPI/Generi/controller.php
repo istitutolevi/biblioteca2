@@ -72,11 +72,13 @@ function Read($jsonGenere, $connector)
 
 
     $genere = new genere($decode->Id);
-    $query ="SELECT * FROM Generi WHERE Id=:id";
+    $query ="SELECT * FROM Generi WHERE Id LIKE :id";
 
     $stmt = $connector->prepare($query);
 
-    $stmt->bindParam(':id',$genere->Id,PDO::PARAM_STR);
+    $generesearch= $genere->Id."%";
+
+    $stmt->bindParam(':id',$generesearch,PDO::PARAM_STR);
 
 
 
