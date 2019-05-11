@@ -1,6 +1,7 @@
 <?php
 
 $isbn= file_get_contents('php://input');
+echo $isbn;
 $url = "https://www.googleapis.com/books/v1/volumes?q=isbn:".$isbn;
 // to check your proxy
 $proxy = '192.168.153.1:808';

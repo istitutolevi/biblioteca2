@@ -3,38 +3,39 @@ body{
 }
 
 header{
-  height: 65px;
+  height: 56px;
   width: 100%;
   border-bottom: 1px solid #7630D9;
   background: #7630D9;
   color: #F2F2F2;
   position: fixed;
   top: 0px;
+  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.75);
+  z-index: 1;
 }
 
 h1{
-  line-height: 65px;
-  margin-left: 20px;
-  font-size: 27px;
+  line-height: 56px;
+  margin-left: 30px;
+  font-size: 29px;
   font-family: 'Righteous', cursive;
-  letter-spacing: 1px;
+  letter-spacing: 5px;
 }
 
 nav{
   background: #F2F2F2;
-  border-right: 1px solid #7630D9;
   height: 100%;
-  width: 9.3%;
+  width: 210px;
   position: fixed;
   overflow-x: hidden;
-  top: 66px;
+  top: 57px;
 }
 
 .navlinks, .navlinke, .navlabel{
   text-decoration: none;
   color: #1B0A40;
   font-family: 'Roboto', sans-serif;
-  font-size: 17px;
+  font-size: 19px;
   display: block;
 }
 
@@ -81,13 +82,14 @@ main{
   background-color: #ececec;
   width: 100%;
   height: 100%;
-  margin-left: calc(9.3%);
-  margin-top: 65px;
-  width: calc(100% - 9.3%);
+  margin-left: 210px;
+  margin-top: 57px;
+  width: calc(100% - 240px);
 }
 
 #content{
-  padding: 30px;
+  padding-left: 60px;
+  padding-top: 30px;
 }
 
 p{
@@ -99,7 +101,6 @@ p{
 
 .inputdesc{
   margin-bottom: 5px;
-  margin-top: 10px;
 }
 
 .submitsearch{
@@ -133,6 +134,7 @@ input{
   padding: 3px;
   font-size: 17px;
   margin-right: 5px;
+  margin-bottom: 10px;
 }
 
 table{
