@@ -3,10 +3,10 @@ $access_token= $_GET['token'];
 //$access_token= "05a70b00df17fb5d4a217526b20aa0e127afbf57";
 try {
     $hostname = "localhost";
-    $dbname = "my_oauth2_db";
+    $dbname = "biblioteca";
     $user = "root";
     $pass = "";
-    
+
     $db = new PDO ("mysql:host=$hostname;dbname=$dbname", $user, $pass);
 }
 catch (PDOException $e) {

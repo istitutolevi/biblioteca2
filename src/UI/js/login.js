@@ -1,6 +1,6 @@
 $(document).ready(
   function(){
-
+    console.log(localStorage);
     if (localStorage.getItem("token") !== null) {
       $("#usernametext").html("Benvenuto, " + localStorage.getItem('username'));
       $("#username").remove();
