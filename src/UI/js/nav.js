@@ -190,7 +190,7 @@ $(document).ready(
                 $.ajax({
                   type: "GET",
                   url: "../WebAPI/CaseEditrici/controller.php",
-                  dataType: "json",
+                  dataType: "text",
                   data: {
                     casaEditrice: JSON.stringify(casa)
                   },
