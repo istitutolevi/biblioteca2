@@ -19,6 +19,27 @@ CREATE TABLE `generi` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `utenti` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(45) NOT NULL,
+  `Cognome` varchar(45) NOT NULL,
+  `Telefono` varchar(20) DEFAULT NULL,
+  `Mail` varchar(45) DEFAULT NULL,
+  `DataDiNascita` datetime DEFAULT NULL,
+  `Documento` varchar(10) DEFAULT NULL,
+  `NumeroDocumento` varchar(45) DEFAULT NULL,
+  `CodiceFiscale` varchar(15) DEFAULT NULL,
+  `Indirizzo` varchar(45) DEFAULT NULL,
+  `Località` varchar(45) DEFAULT NULL,
+  `Provincia` varchar(2) DEFAULT NULL,
+  `CAP` varchar(5) DEFAULT NULL,
+  `Disabilitato` bit(1) DEFAULT NULL,
+  `MotivoDisabilitato` varchar(45) DEFAULT NULL,
+  `Note` text,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 CREATE TABLE `libri` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Titolo` varchar(200) NOT NULL,
@@ -63,22 +84,3 @@ CREATE TABLE `libriutenti` (
   CONSTRAINT `FK_Utente` FOREIGN KEY (`IdUtente`) REFERENCES `utenti` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `utenti` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nome` varchar(45) NOT NULL,
-  `Cognome` varchar(45) NOT NULL,
-  `Telefono` varchar(20) DEFAULT NULL,
-  `Mail` varchar(45) DEFAULT NULL,
-  `DataDiNascita` datetime DEFAULT NULL,
-  `Documento` varchar(10) DEFAULT NULL,
-  `NumeroDocumento` varchar(45) DEFAULT NULL,
-  `CodiceFiscale` varchar(15) DEFAULT NULL,
-  `Indirizzo` varchar(45) DEFAULT NULL,
-  `Località` varchar(45) DEFAULT NULL,
-  `Provincia` varchar(2) DEFAULT NULL,
-  `CAP` varchar(5) DEFAULT NULL,
-  `Disabilitato` bit(1) DEFAULT NULL,
-  `MotivoDisabilitato` varchar(45) DEFAULT NULL,
-  `Note` text,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;

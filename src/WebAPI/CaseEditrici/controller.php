@@ -7,7 +7,7 @@ $body= file_get_contents('php://input');
 
 switch ($method) {
     case "GET":
-        Read($_GET["casaEditrice"],$conn);
+        Read($_GET["id"], $_GET["nome"], $_GET["luogoSede"],$conn);
         break;
     case "POST":
         Update($body,$conn);
@@ -62,19 +62,17 @@ function Create($jsonCasaEditrice, $connector)
 
 }
 
-function Read($jsonCasaEditrice, $connector)
+function Read($id, $nome, $luogoSede, $connector)
 {
 
-  $decode = json_decode($jsonCasaEditrice);
 
-  $casaEditrice = new casaEditrice($decode->Id,$decode->Nome,$decode->Luogo);
-  //print_r($casaEditrice);
-  if ($decode->Id == "") {
+
+  if ($id == "") {
       $query ="SELECT * FROM CaseEditrici WHERE Nome LIKE :nome /*&& LuogoSede LIKE :luogosede*/";
       $stmt = $connector->prepare($query);
 
-      $nomeSearch= $casaEditrice->Nome."%";
-      //$luogoSearch= $casaEditrice->Luogo."%";
+      $nomeSearch= $nome."%";
+      //$luogoSearch= $luogo."%";
 
       $stmt->bindParam(':nome',$nomeSearch,PDO::PARAM_STR);
       //$stmt->bindParam(':luogosede',$luogoSearch,PDO::PARAM_STR);
@@ -84,7 +82,7 @@ function Read($jsonCasaEditrice, $connector)
       $query ="SELECT * FROM CaseEditrici WHERE Id = :id";
       $stmt = $connector->prepare($query);
 
-      $stmt->bindParam(':id',$casaEditrice->Id,PDO::PARAM_INT);
+      $stmt->bindParam(':id',$id,PDO::PARAM_INT);
 
     }
 
@@ -92,7 +90,7 @@ function Read($jsonCasaEditrice, $connector)
 
       $element = $stmt->fetchAll(PDO::FETCH_ASSOC);
       http_response_code(200);
-      echo json_encode($element);
+      echo json_encode($element, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
       return true;
 
   }
