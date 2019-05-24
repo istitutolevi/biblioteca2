@@ -1,10 +1,9 @@
 <?php
 
-$isbn= "9788893675253";//file_get_contents('php://input');
-echo $isbn;
+$isbn= /*"9788893675253";*/$_GET["isbn"];
 $url = "https://www.googleapis.com/books/v1/volumes?q=isbn:".$isbn;
 // to check your proxy
-$proxy = '192.168.153.1:808';
+$proxy = '192.168.156.1:808';
 
 // create curl resource
 $ch = curl_init();

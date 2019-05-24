@@ -147,7 +147,12 @@ td{
   border: 1px solid #1B0A40;
   padding: 3px;
 }
-
+tr{
+  transition-duration: 0.2s;
+}
+tr:hover{
+  background-color: rgba(118, 48, 217, 0.3);
+}
 .modifica, .elimina{
   border: 0px;
   outline: none;

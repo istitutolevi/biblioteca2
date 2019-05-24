@@ -4,7 +4,6 @@ $(document).ready(
         $("#LibroAutore").keyup(
             function(){
                 var val = $("#LibroAutore").val();
-                console.clear();
                     $.ajax(
                         {
                             type:"GET",
@@ -45,7 +44,6 @@ $(document).ready(
         $("#LibroCasaEditrice").keyup(
             function(){
                 var val = $("#LibroCasaEditrice").val();
-                console.clear();
                     $.ajax(
                         {
                             type:"GET",

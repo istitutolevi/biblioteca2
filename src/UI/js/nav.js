@@ -38,7 +38,13 @@ $(document).ready(
                   url: "../WebAPI/Autori/controller.php",
                   dataType: "json",
                   data: {
-                    autore: JSON.stringify(autore)
+                    id: autore.Id,
+                    nome: autore.Nome,
+                    cognome: autore.Cognome,
+                    dataNDA: autore.NascitaDa,
+                    dataNA: autore.NascitaA,
+                    dataMDA: autore.MorteDa,
+                    dataMA: autore.MorteA
                   },
                   success: function(data) {
                     console.log(data);
@@ -67,7 +73,13 @@ $(document).ready(
                           url: "../WebAPI/Autori/controller.php",
                           dataType: "json",
                           data: {
-                            autore: JSON.stringify(autore)
+                            id: autore.Id,
+                            nome: autore.Nome,
+                            cognome: autore.Cognome,
+                            dataNDA: autore.NascitaDa,
+                            dataNA: autore.NascitaA,
+                            dataMDA: autore.MorteDa,
+                            dataMA: autore.MorteA
                           },
                           success: function(data) {
                             console.log(data);
@@ -143,7 +155,7 @@ $(document).ready(
                   url: "../WebAPI/Generi/controller.php",
                   dataType: "json",
                   data: {
-                    genere: JSON.stringify(genere)
+                    id: genere.Id
                   },
                   success: function(data) {
                     $("main").html("<table></table>");
@@ -192,7 +204,9 @@ $(document).ready(
                   url: "../WebAPI/CaseEditrici/controller.php",
                   dataType: "text",
                   data: {
-                    casaEditrice: JSON.stringify(casa)
+                    id: JSON.stringify(casa.Id),
+                    nome: JSON.stringify(casa.Nome),
+                    luogoSede: JSON.stringify(casa.Luogo)
                   },
                   success: function(data) {
                     console.log(data);
@@ -383,11 +397,69 @@ $(document).ready(
               }
             );
 
-            $("#LibroAutore").focusout(function() {
-              if ($("#LibroAutoreHidden").val() == "") {
-                $("#LibroAutore").val("");
+            $("#LibroAutore").focusout(
+              function() {
+                console.log("aaa");
+                var autore = {};
+                autore.Id = "a";
+                autore.Nome = $("#LibroAutore").val().split(" ")[1];
+                autore.Cognome = $("#LibroAutore").val().split(" ")[0];
+                autore.NascitaDa = "0001-01-01";
+                autore.NascitaA = "9999-01-01";
+                autore.MorteDa = "0001-01-01";
+                autore.MorteA = "9999-01-01";
+                console.log(JSON.stringify(autore));
+                $.ajax({
+                  type: "GET",
+                  url: "../WebAPI/Autori/controller.php",
+                  dataType: "json",
+                  data: {
+                    id: autore.Id,
+                    nome: autore.Nome,
+                    cognome: autore.Cognome,
+                    dataNDA: autore.NascitaDa,
+                    dataNA: autore.NascitaA,
+                    dataMDA: autore.MorteDa,
+                    dataMA: autore.MorteA
+                  },
+                  success: function(data) {
+                    console.log(data);
+                    if (data.length < 1) {
+                      $("#LibroAutore").val("");
+                      $("#LibroAutoreHidden").val("");
+                    }
+                  },
+                  error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                  }
+                });
               }
-            });
+            );
+
+            $(".websearch").click(
+              function(){
+                var isbn = $("#LibroISBN").val();
+                $.ajax({
+                  type: "GET",
+                  url: "../WebAPI/isbnGoogleAPI.php",
+                  data: {isbn: isbn},
+                  dataType: "json",
+                  contentType: "text",
+                  success: function(data) {
+                    console.log(data);
+                    $("#LibroTitolo").val(data.title);
+                    $("#LibroAutore").val(data.authors[0]);
+                    $("#LibroGenere").val(data.categories[0]);
+                    $("#LibroAnno").val(data.publishedDate + "-01-01");
+                  },
+                  error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                  }
+                });
+              }
+            );
 
             $("#LibroCasaEditrice").keyup(
               function() {
