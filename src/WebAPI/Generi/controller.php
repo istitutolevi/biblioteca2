@@ -8,7 +8,7 @@ $body= file_get_contents('php://input');
 
 switch ($method) {
     case "GET":
-       Read($_GET["genere"],$conn);
+       Read($_GET["id"],$conn);
 
         break;
     case "POST":
@@ -66,17 +66,14 @@ function Create($jsonGenere, $connector)
 
 }
 
-function Read($jsonGenere, $connector)
+function Read($id, $connector)
 {
-    $decode = json_decode($jsonGenere);
 
-
-    $genere = new genere($decode->Id);
     $query ="SELECT * FROM Generi WHERE Id LIKE :id";
 
     $stmt = $connector->prepare($query);
 
-    $generesearch= $genere->Id."%";
+    $generesearch= $id."%";
 
     $stmt->bindParam(':id',$generesearch,PDO::PARAM_STR);
 
