@@ -7,7 +7,7 @@ $body= file_get_contents('php://input');
 
 switch ($method) {
     case "GET":
-        Read($_GET["libri"],$conn);
+        Read($_GET["id"],$conn);
         break;
     case "POST":
         Update($body,$conn);
@@ -95,14 +95,9 @@ function Create($jsonLibro, $connector)
 
 }
 
-//ballestrazzi
-function Read($jsonBindingLibro, $connector)
+
+function Read($id, $connector)
 {
-    //modified by Bonantini
-
-
-
-
 
     $query ="SELECT Libri.*,Autori.* FROM Libri JOIN LibriAutori ON :id=LibriAutori.IdLibro JOIN Autori ON Autori.Id=LibriAutori.IdAutori WHERE Libri.id=:id";
 
@@ -206,7 +201,7 @@ function Delete($id , $connector)
     }
 
     http_response_code(503);
-    echo json_encode(array("message" => "Impossibile cancellare un genere."));
+    echo json_encode(array("message" => "Impossibile cancellare un libro."));
     return false;
 
 }
