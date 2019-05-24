@@ -9,7 +9,7 @@ $body= file_get_contents('php://input');
 
 switch ($method) {
     case "GET":
-        Read($_GET["autore"],$conn);
+        Read($_GET["id"], $_GET["nome"], $_GET["cognome"], $_GET["dataNDA"], $_GET["dataNA"], $_GET["dataMDA"], $_GET["dataMA"],$conn);
         break;
     case "POST":
         Update($body,$conn);
@@ -66,31 +66,29 @@ function Create($jsonAutore, $connector)
 
 }
 
-function Read($jsonAutore, $connector)
+function Read($id,$nome, $cognome, $dataNDA, $dataNA,$dataMDA, $dataMA, $connector)
 {
-    $decode = json_decode($jsonAutore);
 
-    $autore = new bindingAutore($decode->Id,$decode->Nome,$decode->Cognome,$decode->NascitaDa,$decode->NascitaA,$decode->MorteDa, $decode->MorteA );
-    if ($decode->Id == "") {
+    if ($id == "") {
       $query ="SELECT * FROM Autori WHERE ( Nome LIKE :nome && Cognome LIKE :cognome && DataNascita BETWEEN :dataNDA AND :dataNA && DataMorte BETWEEN :dataMDA AND :dataMA)";
       $stmt = $connector->prepare($query);
 
-      $nomeSearch= $autore->Nome."%";
-      $cognomeSearch= $autore->Cognome."%";
+      $nomeSearch= $nome."%";
+      $cognomeSearch= $cognome."%";
 
       $stmt->bindParam(':nome',$nomeSearch,PDO::PARAM_STR);
       $stmt->bindParam(':cognome',$cognomeSearch,PDO::PARAM_STR);
-      $stmt->bindParam(':dataNDA',$autore->NascitaDa,PDO::PARAM_STR);
-      $stmt->bindParam(':dataNA',$autore->NascitaA,PDO::PARAM_STR);
-      $stmt->bindParam(':dataMDA',$autore->MorteDa,PDO::PARAM_STR);
-      $stmt->bindParam(':dataMA',$autore->MorteA,PDO::PARAM_STR);
+      $stmt->bindParam(':dataNDA',$dataNDA,PDO::PARAM_STR);
+      $stmt->bindParam(':dataNA',$dataNA,PDO::PARAM_STR);
+      $stmt->bindParam(':dataMDA',$dataMDA,PDO::PARAM_STR);
+      $stmt->bindParam(':dataMA',$dataMA,PDO::PARAM_STR);
 
     }
     else {
       $query ="SELECT * FROM Autori WHERE Id = :id";
       $stmt = $connector->prepare($query);
 
-      $stmt->bindParam(':id',$autore->Id,PDO::PARAM_INT);
+      $stmt->bindParam(':id',$id,PDO::PARAM_INT);
 
     }
 
