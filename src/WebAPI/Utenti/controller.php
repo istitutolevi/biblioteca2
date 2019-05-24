@@ -6,7 +6,7 @@ require_once '../Common/connection.php';
 $method= $_SERVER['REQUEST_METHOD'];
 $body= file_get_contents('php://input');
 
-/*switch ($method) {
+switch ($method) {
     case "GET":
        Read($_GET["genere"],$conn);
 
@@ -26,7 +26,7 @@ $body= file_get_contents('php://input');
     default:
         echo "Not Method Found";
         break;
-}*/
+}
 $Utente=[
     'Username' => 'nick7',
     'Password' => 'pass8',

@@ -462,6 +462,43 @@ $(document).ready(
             case "AddUser":
             $("main").html("<div id=\"content\"></div>");
             $("#content").append(editUser);
+            $(".submitsearch").click(
+              function() {
+                var user = {};
+                user.Id = "";
+                user.Nome = $("#UserNome").val();
+                user.Cognome = $("#UserCognome").val();
+                user.Telefono = $("#UserTelefono").val();
+                user.Mail = $("#UserMail").val();
+                user.DataDiNascita = $("#UserData").val();
+                user.Documento = $("#UserDocumento").val();
+                user.NumeroDocumento = $("#UserCarta").val();
+                user.CodiceFiscale = $("#UserCF").val();
+                user.Indirizzo = $("#UserIndirizzo").val();
+                user.Localita = $("#UserLocalita").val();
+                user.Indirizzo = $("#UserIndirizzo").val();
+                user.Provincia = $("#UserProvincia").val();
+                user.CAP = $("#UserCap").val();
+                user.LivelloUtente = $("#UserLevel").val();
+                user.Username = $("#UserUsername").val();
+                user.Password = $("#UserPassword").val();
+                console.log(JSON.stringify(user));
+                $.ajax({
+                  type: "PUT",
+                  url: "../WebAPI/Utenti/controller.php",
+                  data: JSON.stringify(user),
+                  dataType: "text",
+                  contentType: "application/json",
+                  success: function(data) {
+                    console.log(data);
+                  },
+                  error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                  }
+                });
+              }
+            );
             break;
           default:
 
