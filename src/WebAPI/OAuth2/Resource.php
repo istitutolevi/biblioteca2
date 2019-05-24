@@ -14,7 +14,7 @@ catch (PDOException $e) {
     die();
 }
 //phpinfo();
-$sql = "SELECT `oauth_access_tokens`.client_id,`oauth_access_tokens`.expires FROM `oauth_access_tokens` WHERE `oauth_access_tokens`.access_token=:token";
+$sql = "SELECT `utenti`.Nome,`utenti`.Cognome,`utenti`.Mail,`utenti`.LivelloUtente FROM `oauth_access_tokens` JOIN `utenti` ON `utenti`.Id = `oauth_access_tokens`.user_id  WHERE `oauth_access_tokens`.access_token=:token";
 
 $stmt = $db->prepare($sql);
 $stmt->execute(['token' => $access_token]);
