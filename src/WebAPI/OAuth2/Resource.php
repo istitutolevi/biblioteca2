@@ -19,11 +19,11 @@ $sql = "SELECT `utenti`.Nome,`utenti`.Cognome,`utenti`.Mail,`utenti`.LivelloUten
 $stmt = $db->prepare($sql);
 $stmt->execute(['token' => $access_token]);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-echo json_encode($rows);
-echo "<br>";
-foreach($rows as $row){
-echo $row['client_id'].'  '.$row['expires'];
-}
+echo json_encode($rows[0]);
+//echo "<br>";
+//foreach($rows as $row){
+//echo $row['client_id'].'  '.$row['expires'];
+//}
 /*while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
     echo '
 ' . $row['access_token'] . ' ' . $row['client_id'] . '

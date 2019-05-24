@@ -455,6 +455,14 @@ $(document).ready(
               }
             );
             break;
+            case "User":
+            $("main").html("<div id=\"content\"></div>");
+            $("#content").append(cercaUser);
+            break;
+            case "AddUser":
+            $("main").html("<div id=\"content\"></div>");
+            $("#content").append(editUser);
+            break;
           default:
 
         }
