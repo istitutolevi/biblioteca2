@@ -7,7 +7,9 @@ $body= file_get_contents('php://input');
 
 switch ($method) {
     case "GET":
-        Read($_GET["id"],$conn);
+        Read($_GET["id"], $_GET["isbn"], $_GET["codice"], $_GET["titolo"],$_GET["idGenere"],
+             $_GET["annoPubblicazioneDa"], $_GET["annoPubblicazioneA"], $_GET["idCasaEditrice"],
+             $_GET["scaffale"], $_GET["armadio"], $_GET["autori"],$conn);
         break;
     case "POST":
         Update($body,$conn);
@@ -86,12 +88,14 @@ function Create($jsonLibro, $connector)
 }
 
 
-function Read($jsonLibro, $connector)
+function Read($id, $isbn,$codice, $titolo,$idGenere,
+             $annoPubblicazioneDa, $annoPubblicazioneA, $idCasaEditrice,
+             $scaffale, $armadio,$arrayAutori, $connector)
 {
 
     $query ="SELECT Libri.*,Autori.*
     FROM Libri
-    JOIN LibriAutori ON :id=LibriAutori.IdLibro
+    JOIN LibriAutori ON Libri.Id=LibriAutori.IdLibro
     JOIN Autori ON Autori.Id=LibriAutori.IdAutori
     WHERE Libri.id=:id
     OR (Libri.Titolo LIKE :titolo
@@ -99,34 +103,42 @@ function Read($jsonLibro, $connector)
     AND Libri.Codice LIKE :codice
     AND Libri.IdCas = :idCasaEditrice
     AND Libri.Anno BETWEEN :annoDa AND :annoA
-    AND Libri.CollocazioneLuogo LIKE :collocazioneLuogo
     AND Libri.CollocazioneArmadio LIKE :collocazioneArmadio
     AND Libri.CollocazioneScaffale LIKE :collocazioneScaffale
-    AND Libri.Stato = :stato
-    AND Libri.IdUtentePrestito = :idUtentePrestito
-    AND Libri.DataInizioPresito BETWEEN :dataInizioPrestitoDa AND :dataInizioPrestitoA
-    AND Libri.DataFinePrestitoPrevista BETWEEN :dataFinePrestitoPrevistaDa AND :dataFinePrestitoPrevistaA
-    AND Libri.IdGenere = :idGenere)";
+    AND Libri.IdGenere = :idGenere";
+
+    $autori = json_decode($arrayAutori,true);
+
+    for($i =0; $i< count($autori); $i++)
+    {
+
+        $query." AND LibriAutori.Id = :idAutore".$i;
+
+    }
+    $query.")";
+
 
     $stmt = $connector->prepare($query);
 
     $stmt->bindParam(':id',$id,PDO::PARAM_INT);
-    $stmt->bindParam(':titolo',$id,PDO::PARAM_STR);
-    $stmt->bindParam(':isbn',$id,PDO::PARAM_STR);
-    $stmt->bindParam(':codice',$id,PDO::PARAM_INT);
-    $stmt->bindParam(':idCasaEditrice',$id,PDO::PARAM_STR);
-    $stmt->bindParam(':annoDa',$id,PDO::PARAM_INT);
-    $stmt->bindParam(':annoA',$id,PDO::PARAM_INT);
-    $stmt->bindParam(':collocazioneLuogo',$id,PDO::PARAM_INT);
-    $stmt->bindParam(':collocazioneArmadio',$id,PDO::PARAM_INT);
-    $stmt->bindParam(':collocazioneScaffale',$id,PDO::PARAM_INT);
-    $stmt->bindParam(':stato',$id,PDO::PARAM_STR);
-    $stmt->bindParam(':idUtentePrestito',$id,PDO::PARAM_INT);
-    $stmt->bindParam(':dataInizioPrestitoDa',$id,PDO::PARAM_STR);
-    $stmt->bindParam(':dataInizioPrestitoA',$id,PDO::PARAM_STR);
-    $stmt->bindParam(':dataFinePrestitoPrevistaDa',$id,PDO::PARAM_STR);
-    $stmt->bindParam(':dataFinePrestitoPrevistaA',$id,PDO::PARAM_STR);
+    $stmt->bindParam(':titolo',$titolo,PDO::PARAM_STR);
+    $stmt->bindParam(':isbn',$isbn,PDO::PARAM_STR);
+    $stmt->bindParam(':codice',$codice,PDO::PARAM_INT);
+    $stmt->bindParam(':idCasaEditrice',$idCasaEditrice,PDO::PARAM_STR);
+    $stmt->bindParam(':annoDa',$annoPubblicazioneDa,PDO::PARAM_INT);
+    $stmt->bindParam(':annoA',$annoPubblicazioneA,PDO::PARAM_INT);
+    $stmt->bindParam(':collocazioneArmadio',$armadio,PDO::PARAM_INT);
+    $stmt->bindParam(':collocazioneScaffale',$scaffale,PDO::PARAM_INT);
     $stmt->bindParam(':idGenere',$id,PDO::PARAM_STR);
+
+    for($i =0; $i< count($autori); $i++)
+    {
+        $bindAutore= ':idAutore'.$i;
+
+        $stmt->bindParam($bindAutore,$autori[$i]->Id,PDO::PARAM_INT);
+
+    }
+
 
     if($stmt->execute()){
 
