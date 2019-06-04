@@ -153,22 +153,12 @@ tr{
 tr:hover{
   background-color: rgba(118, 48, 217, 0.3);
 }
-.modifica, .elimina{
-  border: 0px;
-  outline: none;
-  background: #ececec;
-  display: block;
+.modifica, .elimina , .prestito{
+  background: inherit;
+  display: inline-block;
   width: 100%;
-}
-
-.elimina:hover{
-  transition-duration: 0.1s;
-  background: #B23242;
-}
-
-.modifica:hover{
-  transition-duration: 0.1s;
-  background: #57B56B;
+  line-height: 100%;
+  font-size: 18px;
 }
 
 .fa-user{

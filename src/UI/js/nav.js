@@ -50,7 +50,7 @@ $(document).ready(
                     console.log(data);
                     $("main").html("<table></table>");
                     $.each(data, function(index, element) {
-                      $("table").append("<tr id=\"" + element.Id + "\">" + "<td>" + element.Id + "</td>" + "<td>" + element.Nome + "</td>" + "<td>" + element.Cognome + "</td>" + "<td>" + element.DataNascita + "</td>" + "<td>" + element.DataMorte + "</td>" + "<td>" + "<button class=\"modifica\" numero=\"" + element.Id + "\">Modifica</button>" + "<td>" + "<button class=\"elimina\" numero=\"" + element.Id + "\">Elimina</button>" + "</tr>");
+                      $("table").append("<tr id=\"" + element.Id + "\">" + "<td>" + element.Id + "</td>" + "<td>" + element.Nome + "</td>" + "<td>" + element.Cognome + "</td>" + "<td>" + element.DataNascita + "</td>" + "<td>" + element.DataMorte + "</td>" + "<td>" + "<i class=\"fas fa-hand-holding prestito\" numero=\"" + element.Id + "\"></i>" + "<td>" + "<i class=\"fas fa-edit modifica\" numero=\"" + element.Id + "\"></i>" + "<td>" + "<i class=\"fas fa-times elimina\" numero=\"" + element.Id + "\"></i>" + "</tr>");
                     });
                     $(".modifica").click(
                       function() {
@@ -160,7 +160,7 @@ $(document).ready(
                   success: function(data) {
                     $("main").html("<table></table>");
                     $.each(data, function(index, element) {
-                      $("table").append("<tr>" + "<td>" + element.Id + "</td>" + "<td>" + "<button class=\"elimina\" numero=\"" + element.Id + "\">Elimina</button>" + "</tr>");
+                      $("table").append("<tr>" + "<td>" + element.Id + "</td>" + "<td>" + "<i class=\"fas fa-times elimina\" numero=\"" + element.Id + "\"></i>" + "</tr>");
                     });
                     $(".elimina").click(
                       function() {
@@ -212,7 +212,7 @@ $(document).ready(
                     console.log(data);
                     $("main").html("<table class=\"casetable\"></table>");
                     $.each(data, function(index, element) {
-                      $("table").append("<tr>" + "<td>" + element.Id + "</td>" + "<td>" + element.Nome + "</td>" + "<td>" + element.LuogoSede + "</td>" + "<td>" + "<button class=\"modifica\" numero=\"" + element.Id + "\">Modifica</button>" + "<td>" + "<button class=\"elimina\" numero=\"" + element.Id + "\">Elimina</button>" + "</tr>");
+                      $("table").append("<tr>" + "<td>" + element.Id + "</td>" + "<td>" + element.Nome + "</td>" + "<td>" + element.LuogoSede + "</td>" + "<td>" + "<i class=\"fas fa-edit modifica\" numero=\"" + element.Id + "\"></i>" + "<td>" + "<i class=\"fas fa-times elimina\" numero=\"" + element.Id + "\"></i>" + "</tr>");
                     });
                     $(".modifica").click(
                       function() {
