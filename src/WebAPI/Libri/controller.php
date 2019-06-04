@@ -129,7 +129,7 @@ function Read($id, $isbn,$codice, $titolo,$idGenere,
     $stmt->bindParam(':annoA',$annoPubblicazioneA,PDO::PARAM_INT);
     $stmt->bindParam(':collocazioneArmadio',$armadio,PDO::PARAM_INT);
     $stmt->bindParam(':collocazioneScaffale',$scaffale,PDO::PARAM_INT);
-    $stmt->bindParam(':idGenere',$id,PDO::PARAM_STR);
+    $stmt->bindParam(':idGenere',$idGenere,PDO::PARAM_STR);
 
     for($i =0; $i< count($autori); $i++)
     {
