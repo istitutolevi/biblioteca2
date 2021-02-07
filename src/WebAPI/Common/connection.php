@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mattia John
- * Date: 29/03/2019
- * Time: 09:48
- */
 
-$servername = "localhost";
-$username = "root";
+$servername = "";
+$username = "";
 $password = "";
-$db = "biblioteca";
+$db = "";
 
 // Check connection
 try {
